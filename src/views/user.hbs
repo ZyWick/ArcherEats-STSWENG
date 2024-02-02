@@ -1,0 +1,45 @@
+{{> navbar }}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-5">
+            <div class="card mt-5">
+                <div class="card-img-container">
+                    <img class="card-img-top" id="profile-img-top" src="/{{profilePicture}}" alt="">
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h2 class="card-title username">{{username}}</h2>
+                    </div>
+                    <p id="profile-description" class="card-text">
+                        {{description}}
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col ms-4 mt-5">
+            <div class="row">
+                <p class="fw-light mb-2">All Reviews and Comments</p>
+            </div>
+            {{#if topReviews}}
+            {{#each topReviews}}
+            {{> review this}}
+            {{/each}}
+
+            <!-- Truncated reviews -->
+            {{#if truncatedReviews}}
+                    <div class="row mb-3">
+                        <button class="moreRev moreRevText">see more</button>
+                    </div>
+                    <div class="row moreRev collapse">
+                    {{#each truncatedReviews}}
+                    {{> review this}}
+                    {{/each}}
+                    </div>
+                {{/if}}
+            {{else}}
+                <p class="fw-light flex-center flex-center justify-content-center pt-5 mt-5">No more reviews</p>
+            {{/if}}
+        </div>
+    </div>
+</div>

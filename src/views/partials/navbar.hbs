@@ -1,0 +1,55 @@
+<nav class="navbar navbar-expand-md navbar-custom navbar-light sticky-top">
+    <div class="container pb-1 pt-1">
+        <div>
+        <a href="/" class="navbar-brand h1 mb-0">
+            {{!-- <img src="static\assets\icon.png" alt="">  --}}
+            <span class="nav-name">ArcherEats</span>
+        </a>
+        <a href="/about" class="navbar-brand h1 mb-0">
+            <!-- <img src="../assets/icon.png" alt=""> -->
+            <span class="fw-light fs-6">|&nbsp;&nbsp;about</span>
+        </a>
+        </div>
+        <form class="d-flex position-relative search-container" id="searchForm" action="/search" method="get">
+            <input type="text" class="form-control" name="q" placeholder="Search">
+            <button type="button" class="btn btn-success position-absolute end-0"><i class="fa fa-search"></i></button>
+        </form>
+        <ul class="navbar-nav">
+            {{#if user}}
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle p-0" role="button" data-bs-toggle="dropdown">
+                        <div class="d-inline-block mb-0">
+                            <img src="../{{user.profilePicture}}" alt="" class="pfp">
+                            <span class="fs-6">Hello,<span class="fw-semibold"> {{user.username}}</span> </span>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/users/{{user.username}}" class="dropdown-item profile-view">Profile</a></li>
+                        <li><a href="/logout" class="dropdown-item logout">Logout</a></li>
+                    </ul>
+                </li>
+            {{else}}
+                <li class="nav-item me-2">
+                    <a href="/login">
+                        <button class="btn btn-success rounded-5">Sign in</button>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="/signup">
+                        <button class="btn btn-success rounded-5">Sign up</button>
+                    </a>
+                </li>
+            {{/if}}
+        </ul>
+    </div>
+</nav>
+
+<script>
+    document.addEventListener('scroll', () => {
+        if (window.scrollY > 10) {
+            document.querySelector('.navbar-custom').classList.add('floating-nav');
+        } else {
+            document.querySelector('.navbar-custom').classList.remove('floating-nav');
+        }
+    });
+</script>

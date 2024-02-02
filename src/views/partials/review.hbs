@@ -1,0 +1,138 @@
+{{#if isComment}}
+<div class="card mb-3 REVIEW {{#if @root.isEstab}}estab{{/if}}" id="{{this._id}}">
+    <div class="card-header reviewHeader flex-center">
+        <div class="user-profile flex-center">
+            <a href="/users/{{user.username}}" class="flex-center"><img class="pfpRev img-fluid" src="/{{user.profilePicture}}"
+                    alt=""></a>
+            <div class="postDeats">
+                <a class="user-link" href="/users/{{user.username}}">{{user.username}}</a>
+                <div class=" status">{{formatDate datePosted}} {{#if edited}} • edited {{/if}} </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body reviewBody">
+        <p class="reviewtext truncate card-text">
+            {{content}}
+        </p>
+        <p class="fw-light fst-italic">Commented on: </p>
+        {{#with review}}
+        <div class="card REVIEW">
+            <div class="card mb-3 REVIEW {{#if @root.isEstab}}estab{{/if}}" id="{{this._id}}">
+                <div class="card-header reviewHeader flex-center">
+                    <div class="user-profile flex-center">
+                        <a href="/users/{{user.username}}" class="flex-center"><img class="pfpRev img-fluid"
+                                src="/{{user.profilePicture}}" alt=""></a>
+                        <div class="postDeats">
+                            <a class="user-link" href="/users/{{user.username}}">{{user.username}}</a>
+                            <div class=" status">{{formatDate datePosted}} {{#if edited}} • edited {{/if}} </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h5 class="d-inline-block">
+                            <span class="ratingz">{{rating}}.0</span>
+                            <meter class="average-rating mang-inasal d-inline-block" min="0"
+                                style="--percent: {{starr rating}}%" max="5"></meter>
+                        </h5>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="card-body reviewBody">
+                <h6 class="card-title reviewTitle">{{title}}</h6>
+                <p class=" reviewtext truncate card-text">
+                    {{content}}
+                </p>
+
+                <!-- media  -->
+                {{#if nMedia}}
+                {{> revMedia this}}
+                {{/if}}
+
+            </div>
+        </div>
+        {{/with}}
+    </div>
+</div>
+
+{{else}}
+<div class="card mb-3 REVIEW {{#if @root.isEstab}}estab{{/if}}" id="{{this._id}}">
+    <!-- profile (req)-->
+    <div class="card-header reviewHeader flex-center">
+        <div class="user-profile flex-center">
+            <a href="{{user.link}}" class="flex-center"><img class="pfpRev img-fluid" src="{{user.profilePicture}}"
+                    alt=""></a>
+            <div class="postDeats">
+                <a class="user-link" href="{{user.link}}">{{user.username}}</a>
+                <div class=" status">{{formatDate datePosted}} {{#if edited}} • edited {{/if}} </div>
+            </div>
+        </div>
+        <div>
+            <h5 class="d-inline-block">
+                <span class="ratingz">{{rating}}.0</span>
+                <meter class="average-rating mang-inasal d-inline-block" min="0" style="--percent: {{starr rating}}%"
+                    max="5"></meter>
+            </h5>
+        </div>
+    </div>
+
+    <!-- review text (req)-->
+    <div class="card-body reviewBody">
+        <!-- UNIQUE ID PER REVIEW -->
+        <h6 class="card-title reviewTitle">{{title}}</h6>
+        <p class=" reviewtext truncate card-text">
+            {{content}}
+        </p>
+
+        <!-- media  -->
+        {{#if nMedia}}
+        {{> revMedia this}}
+        {{/if}}
+
+        <!-- icons -->
+        <div class="flex-center iconBox">
+            <span class=" chat chatbg "></span>
+            <span class=" cNum card-text">{{length children}}</span>
+            <span class=" up {{#if (idIn  @root.user._id likes)}}upbgfill{{else}}upbg{{/if}}"> </span>
+            <span class="uvote card-text">{{length likes}}</span>
+            <span class=" down {{#if (idIn  @root.user._id dislikes)}}downbgfill{{else}}downbg{{/if}}"></span>
+            <span class="dvote card-text">{{length dislikes}}</span>
+            {{#if @root.isEstab}}
+            {{#unless estabResponse}}
+            <span class="reply replybg"></span>
+            {{/unless}}
+            {{else}}
+            {{#if edit}}
+            <span class="c00000xx editRev edit-review editbg ms-3"></span>
+            <span class="del-review delbg"></span>
+            {{else}}
+            {{#if @root.THEEEUSERR}}
+            <span onclick="window.location.replace('{{user.link}}')" class="  edit-review editbg ms-3"></span>
+            <span class="del-review delbg"></span>
+            {{else}}
+            <span class="reply replybg"></span>
+            {{/if}}{{/if}}{{/if}}
+        </div>
+    </div>
+
+    <!-- reply area (req)-->
+    <div class=" wReply card-footer collapse">
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="text" class="form-label writeReply">Write a Reply</label>
+                <textarea class="form-control refly" required id="{{this._id}}text" name="text" rows="3"></textarea>
+                <button type="submit" class="{{#if @root.isEstab}}estab{{/if}} postReply btn btn-success">Post</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- establishment response (opt) -->
+    {{#if estabResponse}}
+    {{> EstabRespo estabResponse}}
+    {{/if}}
+
+    <!--  comment section list of review-->
+    <!-- UL ID is for review // the reply will have a unique ID -->
+    {{> comment }}
+</div>
+{{/if}}

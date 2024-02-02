@@ -1,0 +1,57 @@
+{{> navbar }}
+
+<div class="container">
+     <div class="row">
+            <div class="col-lg-5">
+                <div class="card mt-5">
+                    <div class="card-img-container">
+                        <img class="card-img-top" id="profile-img-top" src="/{{profilePicture}}" alt="">
+                        <form method="post" name="ImgChange" id="ImgChange"><label class="card-img-caption" for="profile-img-caption">Click to change</label>
+                        <input type="file" accept="media_type" class="form-control d-none" id="profile-img-caption" name="media" />
+                        </form>
+                    </div>
+                        
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h2 class="card-title username">{{username}}</h2>
+                            <div class="card-text">
+                                <h5 class="d-inline-block">
+                                    <button class="btn btn-success" id="edit-profile-btn">Edit Profile</button>
+                                </h5>
+                            </div>
+                        </div>
+                        <p id="profile-description" class="card-text">
+                            {{description}}
+                        </p><form name="userDescs">
+                        <textarea class="card-text form-control" name="userDesc"id="profile-description-textarea" style="display: none">
+                        </textarea></form>
+                    </div>
+                </div>
+            </div>
+
+        <div class="col ms-4 mt-5">
+            <div class="row">
+                <p class="fw-light mb-2">All Reviews and Comments</p>
+            </div>
+            {{#if topReviews}}
+            {{#each topReviews}}
+            {{> review this}}
+            {{/each}}
+
+            <!-- Truncated reviews -->
+            {{#if truncatedReviews}}
+                    <div class="row mb-3">
+                        <button class="moreRev moreRevText">see more</button>
+                    </div>
+                    <div class="row moreRev collapse">
+                    {{#each truncatedReviews}}
+                    {{> review this}}
+                    {{/each}}
+                    </div>
+                {{/if}}
+            {{else}}
+                <p class="fw-light flex-center flex-center justify-content-center pt-5 mt-5">No more reviews</p>
+            {{/if}}
+        </div>
+    </div>
+</div>

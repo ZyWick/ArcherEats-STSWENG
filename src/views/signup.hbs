@@ -1,0 +1,74 @@
+
+
+  <body>
+    <div class="auth" id="register" tabindex="-1">
+      <div class="auth-container">
+        <div class="auth-container-signup">
+          <div class="auth-content">
+            <div class="myform">
+              <a href="/"><h1 class="nav-name text-center">ArcherEats</h1></a>
+              <form
+                id ="user-register-form"
+                action="/signup"
+                method="POST"
+                enctype="multipart/form-data"
+              >
+                <div class="d-flex justify-content-between">
+                  <div class="register-intro">
+                    <h2 class="mt-5">Create your account</h2>
+                    <p class="text-start caption">
+                      Write food reviews for your fellow Lasallians!
+                    </p>
+                  </div>
+                  <div class="user-img">
+                    <img src="static/assets/user-pfp-placeholders/unknown.jpg" alt="" id="pfp-input" />
+                    <input type="file" id="file" name="file" />
+                    <label for="file" id="uploadbtn"
+                      ><i class="fas fa-camera"></i
+                    ></label>
+                  </div>
+                </div>
+
+                <div class="mb-3 mt-4 form-floating">
+                  <input
+                    placeholder="username"
+                    type="text"
+                    class="form-control"
+                    name="username"
+                  />
+                  <div class="username error"></div>
+                  <label for="username-reg" class="form-label">Username</label>
+                </div>
+                <div class="mb-3 form-floating">
+                  <input
+                    placeholder="password"
+                    type="password"
+                    class="form-control"
+                    name="password"
+                  />
+                  <div class="password error"></div>
+                  <label for="password-reg" class="form-label">Password</label>
+                  <div id="register-text-login"></div>
+                </div>
+                <div class="mb-3 form-floating">
+                  <input
+                    placeholder="about-you"
+                    type="text"
+                    class="form-control"
+                    name="description"
+                  />
+                  <label for="about-you-reg" class="form-label"
+                    >About You</label
+                  >
+                </div>
+                <button class="btn btn-light mt-4 gy-0 reg-js">SIGN UP</button>
+                <p class="pt-3 subtext">
+                  Already have an account? <a href="/login">Sign in</a>
+                </p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>

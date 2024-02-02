@@ -1,0 +1,36 @@
+<div class="card-body revMedia">
+                            {{#each topVideos}}
+                                <span><video class="img-fluid" src="{{this}}"
+                                    controls /></span>
+                            {{/each}}
+
+                            {{#each topImages}}
+                                <span><img class="img-fluid" src="{{this}}"></span>
+                            {{/each}}
+                            
+                            {{#if nTruncatedMedia}}
+                            <button class="imgBtn" data-bs-toggle="modal" style="background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('{{truncatedImages.[0]}}');"
+                                data-bs-target=".c00000.moreImg">+{{nTruncatedMedia}}</button>
+                            {{/if}}
+                        </div>
+
+   <div class="modal c00000 moreImg">
+                            <div class="modal-dialog modal-xl">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button class="btn-close btn-close-success me-2"
+                                            data-bs-dismiss="modal"></button>
+                                    </div>
+                                    <div class="modal-body moreImgBox">
+                                        {{#each truncatedVideos}}
+                                            <span><video class="img-fluid"
+                                                src="{{this}}" controls /></span>
+                                        {{/each}}
+                                        {{#each truncatedImages}}
+                                        <span><img class="img-fluid"
+                                            src="{{this}}"></span>
+                                        {{/each}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>

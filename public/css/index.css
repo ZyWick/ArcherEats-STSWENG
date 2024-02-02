@@ -1,0 +1,27 @@
+.img-parent {
+  border-radius: 15px;
+  width: 18.5em;
+  height: 17em;
+  overflow: hidden;
+  position: relative;
+  display: inline-block;
+}
+
+.img-parent img {
+  width: 100%;
+  height: 100%;
+  transition: all 0.5s;
+}
+
+.img-parent:hover img {
+  transform: scale(1.05);
+}
+
+.cards i {
+  color: #198754;
+}
+
+a {
+  text-decoration: inherit;
+  color: inherit;
+}
