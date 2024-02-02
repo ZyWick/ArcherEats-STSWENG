@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> {{title}} | ArcherEats </title>
+        
+        <link rel="icon" type="image/x-icon" href="/static/assets/icon.png">
+
+        <link href="/static/css/stylesheet.css" rel="stylesheet">
+        <link rel="stylesheet" href="/static/css/establishment.css">
+        <link rel="stylesheet" href="/static/css/style.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+        
+        <!-- Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+        <script defer src="https://kit.fontawesome.com/f3e84a984d.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous"></script>
+
+        <script src="/static/js/attach-pfp.js" defer></script>
+        <script src="/static/js/navbar.js" defer></script>
+        <script defer src="/static/js/establishment.js"></script>
+        <script src="/static/js/authentication.js" defer></script>
+    </head>
+  <body>
+    <!-- whole screen -->
+    <div class="container">
+        
+        <div class="row">
+
+            <!-- establishment card -->
+            <div class="col-lg-5">
+                <div class="card mt-5">
+                    <img class="card-img-top" src="/static/assets/placeholder.jpg" alt="">
+                    <div class="card-body">
+                        <div class="flex-center justify-content-between">
+                            <div>
+                                <h2 class="card-title estabNamez">{{{EstabName}}}}</h2>
+                                <p class="address">{{{address}}}</p>
+                                </div>
+                            <span class="card-text ratingDiv">
+                                <h5 class="d-inline-block">
+                                    <span class="ratingz">{{{rating}}}</span>
+                                    <meter class="average-rating star-3" min="0" max="5"></meter>
+                                </h5>
+                            </span>
+                        </div>
+                        <p class="card-text">{{{desc}}}</p>
+                    </div>
+                </div>
+            </div> 
+
+            <!-- everything else -->
+            <div class="col ms-4 mt-5">
+
+                <!-- rate form -->
+                <div class="row collapse show revForm">
+                        <form id="reviewForm" method="post">
+                        <div class="form-group">
+                            <p class="rateEstabText">Rate this establishment</p>
+                            <div class="rate">
+                                <input required type="radio" id="star5" name="rate" value="5" /><label for="star5" title="text">5 stars</label>
+                                <input required type="radio" id="star4" name="rate" value="4" /><label for="star4" title="text">4 stars</label>
+                                <input required type="radio" id="star3" name="rate" value="3" /><label for="star3" title="text">3 stars</label>
+                                <input required type="radio" id="star2" name="rate" value="2" /><label for="star2" title="text">2 stars</label>
+                                <input required type="radio" id="star1" name="rate" value="1" /><label for="star1" title="text">1 star</label>
+                            </div>
+                            <label for="c00000xxtext" class="form-label writeRevText">Write a Review</label>
+                            <input placeholder="Title" name="title" type="title" class="form-control fw-light" id="title" required />
+                            <textarea class="form-control fw-light "  id="c00000xxtext" rows="3" name="revDesc" placeholder="Describe your experience (required) " required ></textarea>
+                            <div class="flex-center postRevDiv">
+                                <a data-bs-toggle="modal" data-bs-target=".IMGFILES" class="seeAttach ">see attached files</a>
+                                <label class=" form-label img imgbg" for="customFile1"></label>
+                                <input type="file" accept="media_type" class="form-control d-none" id="customFile1" name="media" multiple />
+                                <button type="submit" class="postReview btn btn-success">Post</button>
+                            </div>
+                        </div>
+                        </form>
+                </div>
+
+                <div class="modal IMGFILES">
+                    <div class="modal-dialog modal-xl">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button class="btn-close btn-close-success me-2" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <ul class="filelist">
+                                {{{filelist}}}
+                            </ul>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+                <!-- form submitted injected here -->
+                <div class ="row yourReview collapse show"></div>
+
+                <p class="fw-light mb-2">Top Reviews</p>
+            
+            <!-- Top Reviews / one row per review-->
+            <div class="row">
+               {{{Top}}}
+            </div>
+
+            <!-- Truncated reviews -->
+            <div class="row mb-3">
+                <button class="moreRev moreRevText">see more</button> 
+            </div>
+            <div class="row moreRev collapse">
+                {{{Truncated}}}
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+  </body>
+</html>

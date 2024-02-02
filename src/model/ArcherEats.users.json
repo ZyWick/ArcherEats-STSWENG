@@ -1,0 +1,61 @@
+[{
+  "_id": {
+    "$oid": "64ad73069c3a43fc64bb44c4"
+  },
+  "username": "___jstn",
+  "password": "$2b$10$EevmRfHYzD.1uaVorPGY3uhKlr/U6F/VPh/NJHJiA3eUCUsU4QB1G",
+  "description": "Business Owner",
+  "profilePicture": "static/assets/user-pfp-placeholders/pfp_sample_1.png",
+  "isAdmin": "false"
+},
+{
+  "_id": {
+    "$oid": "64aed2a8f586db31f5a01230"
+  },
+  "username": "errol09",
+  "password": "$2b$10$EevmRfHYzD.1uaVorPGY3uhKlr/U6F/VPh/NJHJiA3eUCUsU4QB1G",
+  "description": "Chef",
+  "profilePicture": "static/assets/user_pfp/errol09.png",
+  "isAdmin": "false"
+},
+{
+  "_id": {
+    "$oid": "64aed2b2f586db31f5a01233"
+  },
+  "username": "Steviee",
+  "password": "$2b$10$EevmRfHYzD.1uaVorPGY3uhKlr/U6F/VPh/NJHJiA3eUCUsU4QB1G",
+  "description": "Vlogger, Food Enthusiast",
+  "profilePicture": "static/assets/user_pfp/steviee.png",
+  "isAdmin": "false"
+},
+{
+  "_id": {
+    "$oid": "64be903c7c9be92e397fd6e9"
+  },
+  "username": "notMcdo",
+  "password": "$2b$10$EevmRfHYzD.1uaVorPGY3uhKlr/U6F/VPh/NJHJiA3eUCUsU4QB1G",
+  "description": "Lol",
+  "profilePicture": "static/assets/user_pfp/mcdo_alt.png",
+  "establishmentId": {
+    "$oid": "64ad74f29c3a43fc64bb44d5"
+  },
+  "isAdmin": "true"
+},
+{
+  "_id": {
+    "$oid": "64bf9d4b277396a7d5b725a3"
+  },
+  "username": "jomz",
+  "password": "$2b$10$QlDN8YtOnZ04ilk1PRk8susiaYjFyxpKvZzWUXbJzVYDrTvnJxzjm",
+  "description": "frustrated student",
+  "profilePicture": "static/assets/user_pfp/jomarzkii.png"
+},
+{
+  "_id": {
+    "$oid": "64bf9dc0277396a7d5b725a4"
+  },
+  "username": "gaem",
+  "password": "$2b$10$ZHS.01HF8PHMmJQOXEXzw.TIe3HdzfuriIqoTT1DBrIqqfadew6vm",
+  "description": "gaming is my passion",
+  "profilePicture": "static/assets/user_pfp/1690209328861_Screenshot 2023-05-23 230545.png"
+}]

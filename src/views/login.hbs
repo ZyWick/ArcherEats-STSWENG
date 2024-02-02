@@ -1,0 +1,42 @@
+
+<body>
+    <div class="auth" id="signin">
+        <div class="auth-container-login">
+            <div class="auth-content">
+                <div class="myform">
+                    <a href="/"><h1 class="nav-name text-center">ArcherEats</h1></a>
+                    <h1 class="text-center mt-5">Welcome Back!</h1>
+                    <form id="user-login-form" action="/login" method="POST" >
+                        <div class="mb-3 mt-4 form-floating">
+                            <input
+                                placeholder="username"
+                                type="text"
+                                class="form-control"
+                                name="username"
+                            />
+                            <div class="username error"></div>
+                            <label for="username-login" class="form-label">Username</label>
+                        </div>
+                        <div class="mb-3 form-floating">
+                            <input
+                                placeholder="password"
+                                type="password"
+                                class="form-control"
+                                name="password"
+                            />
+                            <div class="password error"></div>
+                            <label for="password-login" class="form-label">Password</label>
+                        </div>
+                        <div id="error-text-login"></div>
+                        <input type="checkbox" id="remember-me" name="rememberMe" />
+                        <label for="remember-me"><p class="subtext">Remember Me</p></label>
+                        <button class="btn btn-light mt-4 gy-0 signin-js" type="submit">SIGN IN</button>
+                        <p class="pt-3 subtext">
+                            Don't have an account? <a href="/signup">Sign up</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>

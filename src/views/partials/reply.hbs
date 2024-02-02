@@ -1,0 +1,34 @@
+<li class="REVIEW list-group-item">
+                            <div class="user-profile  flex-center">
+                                <a href={{{link}}} class="flex-center"><img class="pfpRev img-fluid" src={{{img}}} alt={{{altName}}}></a>
+                                <div class="postDeats">
+                                    <a class="user-link" href={{{link}}}>{{{username}}}</a>
+                                    <div class="status">{{{date}}} </div>
+                                </div>
+                            </div>
+                            <p class="reviewtext truncate card-text">
+                                {{{content}}}
+                                </span> 
+                            </p>
+                            <div class="flex-center iconBox">
+                                <span class="chat chatbg "></span>
+                                <span class="cNum card-text">{{{replyNo}}}</span>
+                                <span class="up upbg"> </span>
+                                <span class="uvote card-text">{{{upNo}}}</span>
+                                <span class="down downbg"></span>
+                                <span class="dvote card-text">{{{downNo}}}</span>
+                                <span class="reply replybg"></span>
+                            </div>
+                            <div class="wReply card-footer collapse">
+                               <form> <div class="form-group">
+                                    <label for="c00001xctext" class="form-label writeReply">Write a Reply</label>
+                                    <textarea class="form-control" required  id="c00001xctext" name="c00001xctext" rows="3"></textarea>
+                                    <button type="submit" class="postReply btn btn-success">Post</button>
+                                  </div></form>
+                            </div>
+
+                            <!-- reply comment section list -->
+                            <ul class="comment list-group list-group-flush collapse">
+                                 {{{replies}}}
+                                </ul>
+</li>

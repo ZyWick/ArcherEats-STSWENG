@@ -1,0 +1,25 @@
+.dropdown-menu {
+    min-width: inherit;
+}
+
+li .card {
+    max-height: 70px;
+    overflow: hidden;
+}
+
+.fa-star {
+    color: #198754;
+  }
+
+.result-image {
+    height: 70px;
+    width: 70px;
+}
+
+.result-info p {
+    text-overflow: ellipsis;
+}
+
+.result-info:hover {
+    color: rgb(9, 142, 40);
+}

@@ -1,0 +1,75 @@
+[{
+  "_id": {
+    "$oid": "64ad74f29c3a43fc64bb44d5"
+  },
+  "username": "mcdonalds",
+  "password": "12345",
+  "description": "McDonald's is a global fast-food giant known for its iconic golden arches, serving up a wide range of classic burgers, fries, and beloved menu items that have become synonymous with convenience and familiarity.",
+  "address": "Taft Ave., Manila",
+  "rating": 4,
+  "displayedName": "McDonalds",
+  "numReviews": 5,
+  "profilePicture": "/static/assets\\restaurants\\Mcdo.jpg",
+  "tag1": "Filipino",
+  "tag2": "Fast Food"
+},
+{
+  "_id": {
+    "$oid": "64aed44af586db31f5a01239"
+  },
+  "username": "24chicken",
+  "password": "12345",
+  "description": "24Chicken is a fast-food haven for chicken enthusiasts, offering a variety of mouthwatering dishes bursting with bold flavors.",
+  "address": "Taft Ave., Manila",
+  "rating": 4.8,
+  "displayedName": "24Chicken",
+  "numReviews": 5,
+  "profilePicture": "/static/assets/restaurants\\24Chicken.jpg",
+  "tag1": "Filipino",
+  "tag2": "Fast Food"
+},
+{
+  "_id": {
+    "$oid": "64aed44bf586db31f5a0123a"
+  },
+  "username": "colcurry",
+  "password": "12345",
+  "description": "Colonel Curry offers a tantalizing array of flavorful curries that take taste buds on a journey with their rich and aromatic blends of spices, ensuring a satisfying and memorable dining experience.",
+  "address": "Taft Ave., Manila",
+  "rating": 4.4,
+  "displayedName": "Colonel's Curry",
+  "numReviews": 5,
+  "profilePicture": "/static/assets/restaurants\\colonelscurry.jpg",
+  "tag1": "Filipino",
+  "tag2": "Fast Food"
+},
+{
+  "_id": {
+    "$oid": "64aed44df586db31f5a0123b"
+  },
+  "username": "atericasbacsilog",
+  "password": "12345",
+  "description": "Ate Rica's Bacsilog serves up a delightful combination of crispy bacon, garlic fried rice, and a perfectly cooked sunny-side-up egg, delivering a delicious and satisfying breakfast experience.",
+  "address": "Taft Ave., Manila",
+  "rating": 4.6,
+  "displayedName": "Ate Rica's Bacsilog",
+  "numReviews": 5,
+  "profilePicture": "/static/assets/restaurants\\atericas_bacsilog.jpg",
+  "tag1": "Filipino",
+  "tag2": "Fast Food"
+},
+{
+  "_id": {
+    "$oid": "64aed44ef586db31f5a0123c"
+  },
+  "username": "jollibee",
+  "password": "12345",
+  "description": "Jollibee is a beloved fast-food chain that captures the hearts of customers with its iconic fried chicken, sweet spaghetti, and a variety of Filipino-inspired dishes, creating a memorable and delightful dining experience.",
+  "address": "Taft Ave., Manila",
+  "rating": 4.4,
+  "displayedName": "Jollibee",
+  "numReviews": 5,
+  "profilePicture": "/static/assets/restaurants\\jollibee.jpg",
+  "tag1": "Filipino",
+  "tag2": "Fast Food"
+}]

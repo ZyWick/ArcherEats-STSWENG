@@ -1,0 +1,101 @@
+[{
+  "_id": {
+    "$oid": "64b564f90eeab98d3855dad9"
+  },
+  "content": "sample b",
+  "likes": [],
+  "dislikes": [],
+  "datePosted": {
+    "$date": "2023-07-10T16:00:00.000Z"
+  },
+  "userId": {
+    "$oid": "64ad73069c3a43fc64bb44c4"
+  },
+  "parent": {
+    "$oid": "64b565440eeab98d3855dada"
+  },
+  "reviewId": {
+    "$oid": "64ad772f9c3a43fc64bb44dd"
+  },
+  "edited": false
+},
+{
+  "_id": {
+    "$oid": "64b565440eeab98d3855dada"
+  },
+  "content": "DIBAAAA?!?! Mapapabili ka nalang talaga! HAHAHA",
+  "likes": [],
+  "dislikes": [],
+  "datePosted": {
+    "$date": "2023-07-10T16:00:00.000Z"
+  },
+  "userId": {
+    "$oid": "64ad73069c3a43fc64bb44c4"
+  },
+  "parent": null,
+  "reviewId": {
+    "$oid": "64ad772f9c3a43fc64bb44dd"
+  },
+  "edited": true
+},
+{
+  "_id": {
+    "$oid": "64b565460eeab98d3855dadb"
+  },
+  "content": "sample a",
+  "likes": [],
+  "dislikes": [],
+  "datePosted": {
+    "$date": "2023-07-10T16:00:00.000Z"
+  },
+  "userId": {
+    "$oid": "64ad73069c3a43fc64bb44c4"
+  },
+  "parent": null,
+  "reviewId": {
+    "$oid": "64ad772f9c3a43fc64bb44dd"
+  },
+  "edited": false
+},
+{
+  "_id": {
+    "$oid": "64b57df80eeab98d3855dae7"
+  },
+  "content": "sample c",
+  "likes": [],
+  "dislikes": [],
+  "datePosted": {
+    "$date": "2023-07-10T16:00:00.000Z"
+  },
+  "userId": {
+    "$oid": "64ad73069c3a43fc64bb44c4"
+  },
+  "parent": {
+    "$oid": "64b565440eeab98d3855dada"
+  },
+  "reviewId": {
+    "$oid": "64ad772f9c3a43fc64bb44dd"
+  },
+  "edited": false
+},
+{
+  "_id": {
+    "$oid": "64b57dfd0eeab98d3855dae8"
+  },
+  "content": "sample d",
+  "likes": [],
+  "dislikes": [],
+  "datePosted": {
+    "$date": "2023-07-10T16:00:00.000Z"
+  },
+  "userId": {
+    "$oid": "64ad73069c3a43fc64bb44c4"
+  },
+  "parent": {
+    "$oid": "64b564f90eeab98d3855dad9"
+  },
+  "reviewId": {
+    "$oid": "64ad772f9c3a43fc64bb44dd"
+  },
+  "edited": true
+}]

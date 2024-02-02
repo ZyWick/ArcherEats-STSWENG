@@ -1,0 +1,30 @@
+<div class="card-footer REVIEW estab estabResponseDiv">
+                        <button class="estabResponse">view establishment's response {{#if edited}} • edited {{/if}}</button>
+                        <div class=" estabResponseText collapse">
+                            <p class="reviewtext truncate mt-1 card-text ">
+                                {{content}}
+                            </p>
+                            <form enctype="multipart/form-data" method="post" class="edit-comment-form">
+        <textarea name='text' class=" card-text yourRevEdit form-control mb-2" style="display: none;"></textarea>
+                  <div class="flex-center iconBox">
+                                 {{#if @root.isEstab}}
+                                <span class="edit-reply editbg ms-3"></span>
+                                <span class="del-reply yellow delbg"></span>
+                                <button type="submit" class="doneEdit btn btn-sm btn-outline-success ms-2" style="display: none;">done</button>    
+                                {{/if}}
+                            </div>
+                            <div class="wReply card-footer collapse">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="a00001xxtext" class="form-label writeReply">Write a
+                                            Reply</label>
+                                        <textarea class="form-control refly" required id="a00001xxtext"
+                                            name="a00001xxtext" rows="3"></textarea>
+                                        <button type="submit" class="postReply btn btn-success">Post</button>
+                                    </div>
+                                </form>
+                            </div>
+                            <!--  comment section list of reply -->
+                            <ul class="comment list-group list-group-flush collapse"></ul>
+                        </div>
+                    </div>

@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Food in Taft</title>
+        <link rel="icon" type="image/x-icon" href="/static/assets/icon.png">
+        <!-- Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+        <link href="/static/css/user-profile.css" rel="stylesheet">
+        <link href="/static/css/stylesheet.css" rel="stylesheet">
+        <!-- Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+        <script defer src="https://kit.fontawesome.com/f3e84a984d.js" crossorigin="anonymous"></script>
+        <script defer src="/static/js/user-profile.js"></script>
+        <script defer src="/static/js/establishment.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link rel="stylesheet" href="/static/css/establishment.css">
+        <script src="/static/js/attach-pfp.js" defer></script>
+        <script src="/static/js/navbar.js" defer></script>
+        <script src="/static/js/authentication.js" defer></script>
+        <link rel="stylesheet" href="/static/css/style.css">
+    </head>
+  <body>
+    <div class="container">
+        
+
+        <div class="row">
+            <div class="col-5">
+                <div class="card mt-5">
+                    <div class="card-img-container">
+                        <img class="card-img-top" id="profile-img-top" src="" alt="">
+                        <label class="card-img-caption" for="profile-img-caption">Click to change</label>
+                        <input type="file" accept="media_type" class="form-control d-none" id="profile-img-caption" name="media" />
+                    </div>
+                    
+
+
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h2 class="card-title username"></h2>
+                            <div class="card-text">
+                                <h5 class="d-inline-block">
+                                    <button class="btn btn-success" id="edit-profile-btn">Edit Profile</button>
+                                </h5>
+                            </div>
+                        </div>
+                        <p id="profile-description" class="card-text">
+                        </p>
+                        <textarea class="card-text form-control" id="profile-description-textarea" style="display: none">
+                        </textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col ms-4 mt-5">
+                <div class="row">
+                    <p class="fw-light mb-2">All Reviews and Comments</p>
+                </div>
+                <div class="card REVIEW mb-3">
+                        <!-- profile (req)-->
+                        <div class="card-header reviewHeader flex-center">
+                                <div class="user-profile flex-center">
+                                    <a href="user-profile-view.html" class="flex-center"><img class="pfpRev img-fluid samplePfp" src="" alt=""></a>
+                                    <div class="postDeats">
+                                        <a class="user-link sampleName" href="user-profile-view.html"></a>
+                                        <div class=" status">1d • edited</div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h5 class="d-inline-block">
+                                        <span class="ratingz">3.2</span>
+                                        <meter class="average-rating star5 mang-inasal d-inline-block" min="0" max="5"></meter>
+                                    </h5>
+                                </div>
+                        </div>
+    
+                        <!-- review text (req)-->
+                        <div class="card-body reviewBody">
+                            <!-- UNIQUE ID PER REVIEW --><a class="user-link" href="../establishments/24chicken.html">
+                                <h6 class="card-title reviewTitle">TRY NYO YANGNEOM & JACKDANIELS!</h6></a>
+                            <p class=" reviewtext truncate card-text">
+                                OGG ChIcken talaga!! paglabas mo lang ng goks maaamoy mo na ang sarap
+                            </p>
+    
+                            <!-- media  -->
+                            <div class="card-body revMedia">
+                                    <span><img class="img-fluid" src="/static/assets/reviewPics\images (1).jpg"></span>
+                                    <span><img class="img-fluid" src="/static/assets/reviewPics\download.jpg"></span>
+                                    <span><img class="img-fluid" src="/static/assets/reviewPics\chiken.jpg"></span>
+                                    <button class="imgBtn" data-bs-toggle="modal" data-bs-target=".c00000.moreImg">+4</button>
+                            </div>
+    
+                            <div class="modal c00000 moreImg">
+                                <div class="modal-dialog modal-xl">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button class="btn-close btn-close-success me-2" data-bs-dismiss="modal"></button>
+                                    </div>
+                                        <div class="modal-body moreImgBox">
+                                        <span><img class="img-fluid" src="/static/assets/reviewPics\24-Chicken-3.jpg"></span>
+                                        <span><img class="img-fluid" src="/static/assets/reviewPics\download.jpg"></span>
+                                        <span><img class="img-fluid" src="/static/assets/reviewPics\chiken.jpg"></span>
+                                        <span><img class="img-fluid" src="/static/assets/reviewPics\images (1).jpg"></span>
+                                        <span><img class="img-fluid" src="/static/assets/reviewPics\images.jpg"></span>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+    
+                            <!-- icons -->
+                            <div class="flex-center iconBox">
+                                <span class=" chat chatbg "></span>
+                                <span class=" cNum card-text">0</span>
+                                <span class=" up upbg"> </span>
+                                <span class=" uvote card-text">0</span>
+                                <span class=" down downbg"></span>
+                                <span class=" dvote card-text">0</span>
+                                <a href="../establishments/24chicken.html" class="c00000xx editRev edit-review editbg ms-3"></a>
+                                <span class="del-review delbg" onclick="event.target.closest('.REVIEW').remove()"></span>
+                            </div>
+                        </div>
+    
+                </div>
+                <div class="card mb-3 REVIEW">
+                    <div class="card-header reviewHeader flex-center">
+                        <div class="user-profile flex-center">
+                            <a href="___jstn.html"><img class="pfpRev img-fluid samplePfp" src="" alt=""></a>
+                            <div class="postDeats">
+                                <a class="user-link sampleName" href=""></a>
+                                <div class=" status">moments ago</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-body reviewBody">
+                        <p class="reviewtext truncate card-text">
+                            DIBAAAA?!?! Mapapabili ka nalang talaga! HAHAHA
+                        </p>
+                        <textarea class=" card-text yourRevEdit form-control mb-2" style="display: none"></textarea>
+                        <p class="fw-light fst-italic">Commented on: </p>
+                         <div class="card REVIEW">
+                            <div class="card-header reviewHeader flex-center">
+                                <div class="user-profile flex-center">
+                                    <a href="qwerty.html">
+                                        <img class="pfpRev img-fluid" src="/static/assets/user_pfp/qwerty.png" alt="">
+                                    </a>
+                                    <div class="postDeats">
+                                        <a class="user-link" href="qwerty.html">anGeLICAA EELIIZaa</a>
+                                        <div class=" status">1d • edited</div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h5 class="d-inline-block"><span class="me-3">4.0</span><meter class="average-rating star-4 mang-inasal d-inline-block" min="0" max="5"></meter></h5>
+                                </div>
+                            </div>
+                            <div class="card-body reviewBody">
+                                <a class="user-link" href="../establishments/ColCurry.html">
+                                    <h6 class="card-title reviewTitle">Savor the Richness: Colonel Curry's Coconut Curry Stew!</h6>
+                                </a>
+                                <p class="reviewtext truncate card-text">
+                                    Colonel Curry's Coconut Curry Stew is a bowl of pure 
+                                    comfort. The fragrant aroma of coconut milk and spices 
+                                    fills the air as you dive into the velvety broth. Tender 
+                                    chunks of meat and an array of vegetables create a harmonious 
+                                    medley of flavors. The curry is well-balanced, with just 
+                                    the right amount of creaminess and a gentle heat that 
+                                    lingers on the palate. Each spoonful is a delight, making 
+                                    this stew a standout choice for curry enthusiasts. However, 
+                                    the service was sluggishly slow it felt like a year til we got our food.
+                                </p>
+                            </div>
+                        </div>
+                        
+                         <div class="flex-center iconBox">
+                                <span class=" chat chatbg "></span>
+                                <span class=" cNum card-text">0</span>
+                                <span class=" up upbg"> </span>
+                                <span class=" uvote card-text">0</span>
+                                <span class=" down downbg"></span>
+                                <span class=" dvote card-text">0</span>
+                                <span class="editRev edit-review editbg ms-3"></span>
+                                <span class="del-review delbg" onclick="event.target.closest('.REVIEW').remove()"></span>
+                                <button class="doneEdit btn btn-sm btn-outline-success ms-2" style="display: none">done</button>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>  
+    </div>
+  </body>
+</html>
