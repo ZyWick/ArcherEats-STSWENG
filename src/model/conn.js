@@ -1,4 +1,6 @@
 import { MongoClient } from "mongodb";
+import dotenv from 'dotenv';
+dotenv.config();
 
 const mongoURI = process.env.MONGODB_URI;
 const client = new MongoClient(mongoURI, { useUnifiedTopology: true}, { useNewUrlParser: true }, { connectTimeoutMS: 30000 }, { keepAlive: 1});
