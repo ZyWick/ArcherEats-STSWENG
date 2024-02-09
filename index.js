@@ -3,11 +3,7 @@ import { fileURLToPath } from 'url';
 
 import express from 'express';
 import exphbs from 'express-handlebars';
-import cookieParser from 'cookie-parser';
-import dotenv from 'dotenv';
-
-// Load environment variables from .env file
-dotenv.config();
+import cookieParser from 'cookie-parser'
 
 import router from './src/routes/index-router.js';
 
@@ -73,7 +69,7 @@ app.use(express.json());
 
 app.use(router);
 
-app.listen(process.env.SERVER_PORT, () => {
+app.listen(process.env.PORT, () => {
     console.log("Express app now listening...");
     connectToMongo();
 });
