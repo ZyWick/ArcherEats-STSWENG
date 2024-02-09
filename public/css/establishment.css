@@ -54,7 +54,7 @@ button.moreRev, .estabResponse, .imgBtn, .JBimgBtn, .ARBimgBtn {
     font-weight: 600;
 }
 
-.chat, .reply, .down, .up, .edit-review, .del-review, .edit-reply, .del-reply, .remove {
+.chat, .reply, .down, .up, .edit-review, .del-review, .edit-reply, .del-reply {
     background-repeat: no-repeat;
     background-size: 1rem 1rem;
     width: 1em;
@@ -150,14 +150,6 @@ copy for icons
 .imgbg {
     background-image: url("data:image/svg+xml,<svg viewBox='0 0 16 16' fill='%23333' xmlns='http://www.w3.org/2000/svg'><path fill-rule='evenodd' d='M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z' clip-rule='evenodd'/></svg>");
 }
-
-/* .removebg {
-    background-image: url("data:image/svg+xml,<svg viewBox='0 0 16 16' fill='%23333' xmlns='http://www.w3.org/2000/svg'><path fill-rule='evenodd' d='M15 8a6.97 6.97 0 0 0-1.71-4.584l-9.874 9.875A7 7 0 0 0 15 8M2.71 12.584l9.874-9.875a7 7 0 0 0-9.874 9.874ZM16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0' clip-rule='evenodd'/></svg>");
-}
-
-.removebgfill, span.remove:hover {
-    background-image: url("data:image/svg+xml,<svg viewBox='0 0 16 16' fill='%23333' xmlns='http://www.w3.org/2000/svg'><path fill-rule='evenodd' d='M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M2.71 12.584q.328.378.706.707l9.875-9.875a7 7 0 0 0-.707-.707l-9.875 9.875Z' clip-rule='evenodd'/></svg>");
-} */
 
 .a {
     background-color: red;
