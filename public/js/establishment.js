@@ -1,6 +1,8 @@
 document.addEventListener("click", event=> {
     classlist = event.target.classList;
-    if (classlist.contains('reply')) {
+    if (classlist.contains('remove')) {
+        remove(event);
+    } else if (classlist.contains('reply')) {
         reply(event);
     } else if (classlist.contains('edit-reply')) {
         editReply(event);
@@ -146,6 +148,11 @@ function reply (event) {
 function showEstabResponse (event) {
     parent = event.target.closest('.REVIEW')
     $(parent.querySelector('.estabResponseText')).collapse('toggle') 
+}
+
+async function remove(event) {
+    deleteCommit (event);
+    let notif = 'the admin has removed your post.'
 }
 
 async function deleteCommit (event) {

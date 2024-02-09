@@ -342,13 +342,17 @@ establishmentRouter.get("/:username", async function (req, res, next) {
           }
         }
       ]).toArray();
+
+      //if user is logged in
       let currUser = null
       let userIsEstab = false;
+      let isAdmin = false;
       if(res.locals.user != null) {
        currUser = res.locals.user._id.toString()
        if (res.locals.user.establishmentId != null && res.locals.user.establishmentId.toString()
         == selectedEstab._id.toString())
         userIsEstab = true;
+        isAdmin = res.locals.user.isAdmin;
       }
 
       let userReview = null;
@@ -386,6 +390,7 @@ establishmentRouter.get("/:username", async function (req, res, next) {
         oneRev: reviews.filter(rev => rev.rating == 1).length / NReviews * 100,
       }
 
+      //remove user's own review on list
       reviews = reviews.filter(function( review ) {
         return review.userId != currUser;
       });
@@ -400,10 +405,10 @@ establishmentRouter.get("/:username", async function (req, res, next) {
           selectedEstab: selectedEstab,
           rateSummary: rateSummary,
           isEstab: userIsEstab,
+          isAdmin: isAdmin,
           userReview: userReview,
           topReviews: topReviews,
           truncatedReviews: truncatedReviews,
-          currentUser: currUser,
           css: '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">'
       })
     } catch (err) {
