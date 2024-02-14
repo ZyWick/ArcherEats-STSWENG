@@ -51,6 +51,14 @@ router.get("/about", (req,res) => {
   })
 })
 
+router.get("/admin", (req,res) => {
+  res.render("admin", {
+    title: "Admin",
+    css: `<link rel="stylesheet" href="/static/css/admin.css">`,
+    js: '<script defer src="static/js/admin.js"></script>',
+  })
+})
+
 
 router.use(userRouter);
 router.use(searchRouter);
