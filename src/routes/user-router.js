@@ -518,7 +518,12 @@ userRouter.get("/users/:username", async (req, res, next) => {
       }
     }
     console.log(userID)
-    
+
+    let isAdmin = false;
+    if(res.locals.user != null) {
+      isAdmin = res.locals.user.isAdmin;
+    }
+
     if (oid.toString() !== userID) {
       res.render("user", {
         title: user.username + " - Profile",
@@ -529,6 +534,7 @@ userRouter.get("/users/:username", async (req, res, next) => {
         description: user.description,
         topReviews: topReviews,
         truncatedReviews: truncatedReviews,
+        isAdmin: isAdmin,
       })
     } else {
       res.render("theUser", {
@@ -541,6 +547,7 @@ userRouter.get("/users/:username", async (req, res, next) => {
         description: user.description,
         topReviews: topReviews,
         truncatedReviews: truncatedReviews,
+        isAdmin: isAdmin,
       })
     }
   } catch (err) {

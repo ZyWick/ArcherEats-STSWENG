@@ -96,6 +96,7 @@ const signup = async (req, res) => {
 }
 
 const getUser = (req, res) => {
+    console.log('user')
     res.render('user')
 }
 
@@ -133,6 +134,6 @@ loginRegisterRouter.post('/login', login)
 loginRegisterRouter.get('/signup', showSignup)
 loginRegisterRouter.post('/signup', signup)
 loginRegisterRouter.get('/logout', logout)
-loginRegisterRouter.get('/:username', getUser)
+loginRegisterRouter.get('/user/:username', getUser)
 
 export default loginRegisterRouter;

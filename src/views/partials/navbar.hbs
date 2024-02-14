@@ -25,6 +25,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a href="/users/{{user.username}}" class="dropdown-item profile-view">Profile</a></li>
+                        {{#if user.isAdmin}}<li><a href="/admin" class="dropdown-item">Admin</a></li>{{/if}}
                         <li><a href="/logout" class="dropdown-item logout">Logout</a></li>
                     </ul>
                 </li>
