@@ -78,6 +78,30 @@ userRouter.patch("/user/changeDesc", async function (req, res) {
   }
 })
 
+userRouter.patch("/user/restrict", async function (req, res) {
+  let userID
+  let token = req.cookies.jwt
+  if (token) {
+    try {
+      const decodedToken = await jwt.verify(token, "secret");
+      userID = decodedToken._id
+    } catch (err) {
+      console.log("Error occurred:", err);
+    }
+  }
+
+  try {
+    let {restrictionEndTime} = req.body
+
+    await user_db.updateOne({ _id: new ObjectId(userID) }, { $set: { restrictionEndTime: new Date(restrictionEndTime) } });
+    res.status(200).send("Restriction time set")
+  }
+  catch (err){
+    console.log("Error updating restriction period: ", err)
+    res.status(500).send("Internal server error")
+  }
+})
+
 
 userRouter.get("/users/:username", async (req, res, next) => {
   try {
