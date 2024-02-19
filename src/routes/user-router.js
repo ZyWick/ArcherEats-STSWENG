@@ -91,8 +91,8 @@ userRouter.patch("/user/restrict", async function (req, res) {
   }
 
   try {
-    let {restrictionEndTime} = req.body
-
+    const {muteDuration} = req.body
+    const restrictionEndTime = new Date(new Date().getTime() + (muteDuration * 24 * 60 * 60 * 1000))
     await user_db.updateOne({ _id: new ObjectId(userID) }, { $set: { restrictionEndTime: new Date(restrictionEndTime) } });
     res.status(200).send("Restriction time set")
   }

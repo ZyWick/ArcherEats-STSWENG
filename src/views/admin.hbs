@@ -83,11 +83,11 @@
 
             {{!-- user Management --}}
             <div class="collapse" id="userManTab">
-                <form>
+                <form id="restrictForm" name="restrictForm" enctype="multipart/form-data" method="post">
                 <div class="mb-3 row">
                     <label for="muteUser" class="form-label">Mute a user</label>
                     <div class=" col">
-                        <input type="text" class="form-control" id="muteUser" >
+                        <input type="text" class="form-control" id="muteUser" name="muteUser" >
                     </div>
                     <div class=" col"></div>
                     <div id="muteUser" class="form-text">select a muser to mute.</div>
@@ -95,7 +95,7 @@
                 <div class="mb-3 row align-items-center">
                     <label for="muteDuration" class="form-label">How long?</label>
                     <div class="input-group mb-3 col">
-                        <input type="number" class="form-control col-auto" id="muteDuration">
+                        <input type="number" class="form-control col-auto" id="muteDuration" name="muteDuration">
                         <select class="form-select">
                             <option value="days" selected>days</option>
                             <option value="months">months</option>
@@ -115,7 +115,7 @@
                 </div>
                 <div class="col"></div>
                 </div>
-                    <button type="submit" class="btn btn-danger">Mute</button>
+                    <button id="restrictButton" type="submit" class="btn btn-danger">Mute</button>
                 </form>
             </div>
         </div>
