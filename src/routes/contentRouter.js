@@ -10,6 +10,7 @@ import { dirname, relative } from "path";
 import { fileURLToPath } from 'url';
 const db = getDb();
 import { getDb } from '../model/conn.js';
+import { checkRestriction } from '../middleware/restrict.js'
 
 const users_db = db.collection("users");
 const reviews_db = db.collection("reviews");
@@ -407,14 +408,14 @@ const deleteEstabRespo = async (req, res) => {
 }
 
   contentRouter.route('/review')
-  .post(upload.array('mediaInput'), postReview)
+  .post(checkRestriction, upload.array('mediaInput'), postReview)
   .patch(upload.array('mediaInput'), patchReview)
   .delete(deleteReview)
 
   contentRouter.patch('/', toggleLikes)
 
   contentRouter.route('/comment')
-  .post(postComment)
+  .post(checkRestriction, postComment)
   .patch(patchComment)
   .delete(deleteComment)
 

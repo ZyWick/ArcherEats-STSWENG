@@ -17,7 +17,7 @@ $('#userManagementButton').on({
          $('#addEstabTab').collapse('hide')
          $('#userManagementButton').addClass('active')
      }
-})   
+})
 
 $('#addEstabButton').on({
     click: function(event){
@@ -31,6 +31,8 @@ $('#addEstabButton').on({
     'hide.bs.collapse': function() {
     }
 })
+
+document.getElementById('restrictButton').addEventListener('click', restrictUser);
 
 document.addEventListener("change", (event) => {
     if (event.target.id == "estabImageInput") {
@@ -46,3 +48,23 @@ document.addEventListener("change", (event) => {
       }
     }
   });
+
+async function restrictUser (event){
+  formData = new FormData(document.forms.restrictForm)
+  event.preventDefault()
+  console.log(formData)
+
+  if(formData.get("muteUser") != "") {
+    console.log("gotIn")
+    await fetch("/user/restrict", {
+      method: "PATCH",
+      body: formData,
+      // headers: {
+      //   'Content-type': 'application/json; charset=UTF-8',
+      // },
+    }).then(res => {console.log(res);
+      if (res.status == 200)
+          location.reload(); 
+    }).catch((err) => console.log(err))
+  }
+}
