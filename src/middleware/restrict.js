@@ -1,20 +1,18 @@
-import jwt from 'jsonwebtoken'
-
-const checkRestriction = async (req, res, next) => {
-    let userID
-    let restrictionEndDay
-    let token = req.cookies.jwt
-    console.log("in")
-    if(token) {
-        try{
-            const decodedToken = await jwt.verify(token, "secret")
-            userID = decodedToken._id
-            restrictionEndDay = decodedToken.restrictionEndTime
-            console.log("token received")
-        } catch (err){
-            console.log("Error occured: ", err)
-        }
-    }
+const checkRestriction = async (req, res) => {
+    const { _id, restrictionEndDay } = req.body
+    // if(token) {
+    //     try{
+    //         const decodedToken = await jwt.verify(token, "secret")
+    //         userID = decodedToken._id
+    //         restrictionEndDay = decodedToken.restrictionEndTime
+    //         console.log("token received")
+    //     } catch (err){
+    //         console.log("Error occured: ", err)
+    //     }
+    // } else {
+    //     console.log("no token i think")
+    // }
+    
     try {
         console.log(restrictionEndDay)
         if (restrictionEndDay){
@@ -23,7 +21,6 @@ const checkRestriction = async (req, res, next) => {
                 return res.status(401).send("User Restricted.")
             }
         }
-        next()
     } catch (err){
         console.log("Error with server: ", err)
         res.status(500).send("Internal server error")
