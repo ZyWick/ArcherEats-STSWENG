@@ -25,6 +25,70 @@
                 </div>
             </div>
         {{/with}}
+            <!--EDIT BOOKMARK START-->
+            <div class="map-container">
+
+                <div id="map" class="map"></div>
+
+                <script type="text/javascript">
+
+                    var baseMapLayer = new ol.layer.Tile({
+                        source: new ol.source.OSM()
+                    });
+
+                    var layer = new ol.layer.Tile({
+                    source: new ol.source.OSM()
+                    });
+
+                    var center = ol.proj.fromLonLat([120.99375, 14.564306]);
+
+                    var view = new ol.View({
+                    center: center,
+                    zoom: 17
+                    });
+
+                    var map = new ol.Map({
+                        target: 'map',
+                        view: view,
+                        layers: [layer]
+                    });
+
+                    var featureMarker = new ol.Feature({
+                        geometry: new ol.geom.Point(
+                        ol.proj.fromLonLat([10.7461, 59.9127])
+                        )  // Cordinates of Netsense Skien
+                    });
+
+                    function flytt() {
+                        featureMarker.getGeometry().translate(0, 100);
+                    };
+
+                    var vectorSource = new ol.source.Vector({
+                        features: [featureMarker]
+                    });
+
+                    var markerVectorLayer = new ol.layer.Vector({
+                        source: vectorSource,
+                    });
+
+                    map.addLayer(markerVectorLayer);
+
+                    //Set custom marker
+
+                    featureMarker.setStyle(new ol.style.Style({
+                        image: new ol.style.Icon(({
+                            scale: 0.5,
+                            opacity: 0.75,
+                            crossOrigin: 'anonymous',
+                            src: 'location.png'
+                        }))
+                    }));
+
+                </script>
+
+                <a href="" class="map-btn">view full map</a> <!--TODO FILL OUT LINK-->
+            </div>
+            <!--EDIT BOOKMARK END-->
             <div class="card mt-3">
             {{#with rateSummary}}
             <div class="card-body">
