@@ -79,21 +79,15 @@ userRouter.patch("/user/changeDesc", async function (req, res) {
 })
 
 userRouter.patch("/user/restrict", async function (req, res) {
-  let userID
-  let token = req.cookies.jwt
-  if (token) {
-    try {
-      const decodedToken = await jwt.verify(token, "secret");
-      userID = decodedToken._id
-    } catch (err) {
-      console.log("Error occurred:", err);
-    }
-  }
-
   try {
-    const {muteDuration} = req.body
-    const restrictionEndTime = new Date(new Date().getTime() + (muteDuration * 24 * 60 * 60 * 1000))
-    await user_db.updateOne({ _id: new ObjectId(userID) }, { $set: { restrictionEndTime: new Date(restrictionEndTime) } });
+    const {username, muteDuration} = req.body
+    console.log(username)
+    console.log(muteDuration)
+    let selectedUser = await user_db.findOne({ username: username});
+    if(selectedUser == null) next();
+    const oid = new ObjectId(selectedUser._id);
+
+    await user_db.updateOne({ _id: new ObjectId(oid) }, { $set: { restrictionEndTime: muteDuration } });
     res.status(200).send("Restriction time set")
   }
   catch (err){

@@ -52,19 +52,38 @@ document.addEventListener("change", (event) => {
 async function restrictUser (event){
   formData = new FormData(document.forms.restrictForm)
   event.preventDefault()
-  console.log(formData)
 
+  const currentDate = new Date()
+
+  console.log(formData.get("muteUser"))
+  console.log(formData.get("dateType"))
+  console.log(formData.get("durationMultiplier"))
+
+  switch (formData.get("dateType")) {
+    case "days": endRestrictionDate = new Date(currentDate.setDate(currentDate.getDate() + formData.get("durationMultiplier"))); console.log("day"); break;
+    case "months": endRestrictionDate = new Date(currentDate.setMonth(currentDate.getMonth() + formData.get("durationMultiplier"))); console.log("month"); break;
+    case "years": endRestrictionDate = new Date(currentDate.setFullYear(currentDate.getFullYear() + formData.get("durationMultiplier"))); console.log("year"); break;
+  }
+  
   if(formData.get("muteUser") != "") {
     console.log("gotIn")
+    console.log(`restrictonTime`)
     await fetch("/user/restrict", {
       method: "PATCH",
-      body: formData,
-      // headers: {
-      //   'Content-type': 'application/json; charset=UTF-8',
-      // },
+      body: JSON.stringify({
+        username: formData.get("muteUser"),
+        muteDuration: endRestrictionDate
+    }),
+    headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+    },
     }).then(res => {console.log(res);
-      if (res.status == 200)
-          location.reload(); 
+      if (res.status == 200){
+        setTimeout(function(){
+          location.reload();
+        }, 10000)
+      }
+          
     }).catch((err) => console.log(err))
   }
 }
