@@ -1,0 +1,25 @@
+/*Additional edits made for establishment-view.hbs*/
+/*Includes: styling for map features*/
+
+.map-container {
+    height: 25%;
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: #198754;
+    border-width: thin;
+    text-align: center;
+}
+
+.map-btn{
+    color: #c02537;
+    text-decoration: none;
+}
+
+.map {
+    height: 90%;
+    width: 99%;
+    padding-left: 1%;
+    padding-top: 1%;
+  }
