@@ -4,121 +4,140 @@
     <div class="row">
         <div class="col-lg-2 me-5 mt-5">
             <ul class="nav nav-underline flex-column nav-fill">
-            <li class="nav-item">
-                <a id="addEstabButton" class="nav-link text-reset active" data-bs-toggle="null" href="#addEstabTab" aria-current="page">Add Establishment</a>
-            </li>
-            <li class="nav-item text-reset">
-                <a id="userManagementButton" class="nav-link text-reset" data-bs-toggle="collapse" href="#userManTab" aria-current="page">User Management</a>
-            </li>
+                <li class="nav-item">
+                    <a id="addEstabButton" class="nav-link text-reset active" data-bs-toggle="null" href="#addEstabTab"
+                        aria-current="page">Add Establishment</a>
+                </li>
+                <li class="nav-item text-reset">
+                    <a id="userManagementButton" class="nav-link text-reset" data-bs-toggle="collapse"
+                        href="#userManTab" aria-current="page">User Management</a>
+                </li>
             </ul>
         </div>
         <div class="col ms-5 mt-5">
 
             {{!-- add Estab --}}
             <div class="collapse show" id="addEstabTab">
-                <form id="establishmentForm" name="establishmentForm" enctype="multipart/form-data" method="post"> 
-                <div class="mb-3 row align-items-center">
-                    <div class="col-5 containHeight">
-                        <label for="estabImageInput">
-                        <img class="estabImageInput img-fluid img-thumbnail" id="estabImageInputDisplay" src="static/assets/user-pfp-placeholders/unknown.jpg" alt="">   
-                        </label>
-                        <input type="file" accept="media_type" class="form-control d-none" id="estabImageInput" name="estabImageInput" />  
-                    </div>
-                    <div class="col">
-                        <div class="mb-3 row">
-                            <label for="estabNameInput" class="form-label">Establishment Name</label>
-                            <div class=" col-9">
-                                <input type="text" class="form-control" id="estabNameInput" name="estabNameInput">
-                            </div>
+                <form action="/addEstab/" id="addEstabForm" name="addEstabForm" enctype="multipart/form-data"
+                    method="post">
+                    <div class="mb-3 row align-items-center">
+                        <div class="col-5 containHeight">
+                            <label for="estabImageInput">
+                                <img class="estabImageInput img-fluid img-thumbnail" id="estabImageInputDisplay"
+                                    src="static/assets/user-pfp-placeholders/unknown.jpg" alt="">
+                            </label>
+                            <input type="file" accept="media_type" class="form-control d-none" id="estabImageInput"
+                                name="estabImageInput" />
                         </div>
-                        <div class="mb-3 row">
-                            <label for="estabDescInput" class="form-label">Description</label>
-                            <div class="col-9">
-                                <textarea class="form-control" id="estabDescInput" name="estabDescInput" rows="3"></textarea>
-                            </div>
-                            <div class="col"></div>
-                        </div>
-                        <div class="mb-3 row">
-                            <div class="col-9"><div class="mb-3 row">
-                            <div class="col">
-                                <label for="tag1Input" class="form-label">Tag 1</label>
-                                <div class="col">
-                                    <input type="text" class="form-control" id="tag1Input" name="tag1Input">
-                                </div></div>
-                            <div class="col">
-                                <label for="tag2Input" class="form-label">Tag 2</label>
-                                <div class="col">
-                                    <input type="text" class="form-control" id="tag2Input" name="tag2Input">
+                        <div class="col">
+                            <div class="mb-3 row">
+                                <label for="estabNameInput" class="form-label">Establishment Name</label>
+                                <div class=" col-9">
+                                    <input type="text" class="form-control" id="estabNameInput" name="estabNameInput"
+                                        required>
                                 </div>
                             </div>
-                            </div></div>
-                        </div>
-                        <div class="mb-3 row">
-                            <label for="displayAddressInput" class="form-label">Display Address</label>
-                            <div class=" col-9">
-                                <input type="text" class="form-control" id="displayAddressInput" name="displayAddressInput">
+                            <div class="mb-3 row">
+                                <label for="estabDescInput" class="form-label">Description</label>
+                                <div class="col-9">
+                                    <textarea class="form-control" id="estabDescInput" name="estabDescInput" rows="3"
+                                        required></textarea>
+                                </div>
+                                <div class="col"></div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-9"><div class="row">
-                            <div class="col">
-                                <label for="longitudeInput" class="form-label">Longitude</label>
-                                <div class="col">
-                                    <input type="number" class="form-control" id="longitudeInput" name="longitudeInput">
-                                </div></div>
-                            <div class="col">
-                                <label for="latitudeInput" class="form-label">Latitude</label>
-                                <div class="col">
-                                    <input type="number" class="form-control" id="latitudeInput" name="latitudeInput">
+                            <div class="mb-3 row">
+                                <div class="col-9">
+                                    <div class="mb-3 row">
+                                        <div class="col">
+                                            <label for="tag1Input" class="form-label">Tag 1</label>
+                                            <div class="col">
+                                                <input type="text" class="form-control" id="tag1Input" name="tag1Input"
+                                                    required>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <label for="tag2Input" class="form-label">Tag 2</label>
+                                            <div class="col">
+                                                <input type="text" class="form-control" id="tag2Input" name="tag2Input"
+                                                    required>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            </div></div>
+                            <div class="mb-3 row">
+                                <label for="displayAddressInput" class="form-label">Display Address</label>
+                                <div class=" col-9">
+                                    <input type="text" class="form-control" id="displayAddressInput"
+                                        name="displayAddressInput" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-9">
+                                    <div class="row">
+                                        <div class="col">
+                                            <label for="longitudeInput" class="form-label">Longitude</label>
+                                            <div class="col">
+                                                <input type="number" class="form-control" step="any" id="longitudeInput"
+                                                    name="longitudeInput" required>
+                                            </div>
+                                        </div>
+                                        <div class="col">
+                                            <label for="latitudeInput" class="form-label">Latitude</label>
+                                            <div class="col">
+                                                <input type="number" class="form-control" step="any" id="latitudeInput"
+                                                    name="latitudeInput" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>                
-                <button id="submitEstabButton" type="submit" class="btn btn-success ms-auto" >add Establishment </button>
+                    <button id="addEstabButtonForm" type="submit" class="btn btn-success ms-auto">add Establishment
+                    </button>
                 </form>
             </div>
 
 
             {{!-- user Management --}}
             <div class="collapse" id="userManTab">
-                <form id="restrictForm" name="restrictForm" enctype="multipart/form-data" method="post">
-                <div class="mb-3 row">
-                    <label for="muteUser" class="form-label">Mute a user</label>
-                    <div class=" col">
-                        <input type="text" class="form-control" id="muteUser" name="muteUser">
+                <form action="/user/restrict/" id="restrictForm" name="restrictForm" method="post">
+                    <div class="mb-3 row">
+                        <label for="muteUser" class="form-label">Mute a user</label>
+                        <div class=" col">
+                            <input type="text" class="form-control" id="muteUser" name="muteUser" required>
+                        </div>
+                        <div class=" col"></div>
+                        <div id="muteUser" class="form-text">select a muser to mute.</div>
                     </div>
-                    <div class=" col"></div>
-                    <div id="muteUser" class="form-text">select a muser to mute.</div>
-                </div>
-                <div class="mb-3 row align-items-center">
-                    <label for="muteDuration" class="form-label">How long?</label>
-                    <div class="input-group mb-3 col">
-                        <input type="number" class="form-control col-auto" id="durationMultiplier" name="durationMultiplier">
-                        <select name="dateType" id="dateType" class="form-select">
-                            <option value="days" selected>days</option>
-                            <option value="months">months</option>
-                            <option value="years">years</option>
-                        </select>
+                    <div class="mb-3 row align-items-center">
+                        <label for="muteDuration" class="form-label">How long?</label>
+                        <div class="input-group mb-3 col">
+                            <input type="number" min="0" class="form-control col-auto" id="durationMultiplier"
+                                name="durationMultiplier" required>
+                            <select name="dateType" id="dateType" class="form-select">
+                                <option value="days" selected>days</option>
+                                <option value="months">months</option>
+                                <option value="years">years</option>
+                            </select>
+                        </div>
+                        <div class="mb-3 col form-check ms-3">
+                            <input type="checkbox" class="form-check-input" id="permaMute">
+                            <label class="form-check-label" for="permaMute">permanent</label>
+                        </div>
+                        <div class="col"></div>
                     </div>
-                    <div class="mb-3 col form-check ms-3">
-                        <input type="checkbox" class="form-check-input" id="permaMute">
-                        <label class="form-check-label" for="permaMute">permanent</label>
+                    <div class="mb-3 row">
+                        <label for="muteReason" class="form-label">Why?</label>
+                        <div class="col">
+                            <textarea class="form-control" id="muteReason" rows="3"></textarea>
+                        </div>
+                        <div class="col"></div>
                     </div>
-                    <div class="col"></div>
-                </div>
-                <div class="mb-3 row">
-                <label for="muteReason" class="form-label">Why?</label>
-                <div class="col">
-                    <textarea class="form-control" id="muteReason" rows="3"></textarea>
-                </div>
-                <div class="col"></div>
-                </div>
                     <button id="restrictButton" type="submit" class="btn btn-danger">Mute</button>
                 </form>
             </div>
         </div>
+    </div>
 </div>
-</div>
-

@@ -2,7 +2,7 @@ import express from 'express';
 import { ObjectId } from "mongodb"
 
 const contentRouter = express.Router();
-import jwt from 'jsonwebtoken'
+
 import multer from 'multer';
 const __dirname = dirname(fileURLToPath(import.meta.url)); // directory URL
 import fs from 'fs';
@@ -10,7 +10,7 @@ import { dirname, relative } from "path";
 import { fileURLToPath } from 'url';
 const db = getDb();
 import { getDb } from '../model/conn.js';
-import { checkRestriction } from '../middleware/restrict.js'
+import { checkUser } from '../middleware/checkUser.js'
 
 const users_db = db.collection("users");
 const reviews_db = db.collection("reviews");
@@ -28,7 +28,8 @@ const upload = multer({ storage: storage })
 
 const postReview = async (req, res) => {
     const { estabID, title, rate, content } = req.body;
-  
+    let userID = req.userID;
+    
     let imageURls = []
     let videoUrls = []
     for (let files of req.files) {
@@ -38,21 +39,8 @@ const postReview = async (req, res) => {
       else
         videoUrls.push("/static/assets/reviewPics/" + files.filename)
     }
-  
-    let userID
-    let token = req.cookies.jwt
-    if (token) {
-      try {
-        const decodedToken = await jwt.verify(token, "secret");
-        userID = decodedToken._id
-      } catch (err) {
-        console.log("Error occurred:", err);
-      }
-    }
     
-    if (userID == null) {
-      res.sendStatus(401);
-    } else if (title && rate && content) {
+  if (title && rate && content) {
       let theUSER = await users_db.findOne({_id : new ObjectId(userID)});
       const newReview = {
         title: title,
@@ -83,17 +71,7 @@ const postReview = async (req, res) => {
 
   const patchReview = async (req, res) => {
     const { title, rate, content, reviewID } = req.body;
-
-    let userID
-    let token = req.cookies.jwt
-    if (token) {
-      try {
-        const decodedToken = await jwt.verify(token, "secret");
-        userID = decodedToken._id
-      } catch (err) {
-        console.log("Error occurred:", err);
-      }
-    }
+    let userID = req.userID;
 
     let imageURls = []
     let videoUrls = []
@@ -118,9 +96,7 @@ const postReview = async (req, res) => {
         })
     }
 
-    if (userID == null) {
-      res.sendStatus(401);
-    } else if (title && rate && content) {
+   if (title && rate && content) {
     let theUSER = await users_db.findOne({_id : new ObjectId(userID)});
 
     try {
@@ -188,20 +164,8 @@ const deleteReview = async (req, res) => {
 }
 
 const toggleLikes = async (req, res) => {
-  let userID
-  let token = req.cookies.jwt
-  if (token) {
-    try {
-      const decodedToken = await jwt.verify(token, "secret");
-      userID = decodedToken._id
-    } catch (err) {
-      console.log("Error occurred:", err);
-    }
-  }
+  let userID = req.userID;
 
-  if (userID == null) {
-    res.sendStatus(401);
-  } else {
     let { reviewId, updateH } = req.body;
     let __iod = new ObjectId(reviewId);
 
@@ -250,20 +214,10 @@ const toggleLikes = async (req, res) => {
   res.status(200)
   res.send("done")
 }
-}
 
 const postComment = async (req, res) => {
   let { revID, parID, text } = req.body;
-  let userID
-  let token = req.cookies.jwt
-  if (token) {
-    try {
-      const decodedToken = await jwt.verify(token, "secret");
-      userID = decodedToken._id
-    } catch (err) {
-      console.log("Error occurred:", err);
-    }
-  }
+  let userID = req.userID;
 
   let par_id = null
   if (parID != "null")
@@ -273,9 +227,7 @@ const postComment = async (req, res) => {
     revID = parComment.reviewId
   }
 
-  if (userID == null) {
-    res.sendStatus(401);
-  } else  if (revID && userID && text) {
+  if (revID && userID && text) {
     let theUSER = await users_db.findOne({_id : new ObjectId(userID)});
     const newComment = {
       content: text,
@@ -307,6 +259,7 @@ const postComment = async (req, res) => {
 
 const patchComment = async (req, res) => {
   const { commID, text } = req.body;
+  let userID = req.userID;
 
   if (commID && text) {
   try {
@@ -408,15 +361,15 @@ const deleteEstabRespo = async (req, res) => {
 }
 
   contentRouter.route('/review')
-  .post(checkRestriction, upload.array('mediaInput'), postReview)
-  .patch(upload.array('mediaInput'), patchReview)
+  .post(checkUser, upload.array('mediaInput'), postReview)
+  .patch(checkUser, upload.array('mediaInput'), patchReview)
   .delete(deleteReview)
 
   contentRouter.patch('/', toggleLikes)
 
   contentRouter.route('/comment')
-  .post(checkRestriction, postComment)
-  .patch(patchComment)
+  .post(checkUser, postComment)
+  .patch(checkUser, patchComment)
   .delete(deleteComment)
 
   contentRouter.route('/estabRespo')
