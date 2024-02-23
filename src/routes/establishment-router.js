@@ -7,11 +7,10 @@ const db = getDb();
 const establishments_db = db.collection("establishments");
 const reviews_db = db.collection("reviews");
 
-establishmentRouter.get("/:username", async function (req, res, next) {
+establishmentRouter.get("/:displayedName", async function (req, res, next) {
     try {
-      let selectedEstab = await establishments_db.findOne({ username: req.params.username });
+      let selectedEstab = await establishments_db.findOne({displayedName: req.params.displayedName });      
       if(selectedEstab == null) next();
-
       const oid = new ObjectId(selectedEstab._id);
       let reviews = await reviews_db.aggregate([
         {
@@ -377,10 +376,11 @@ establishmentRouter.get("/:username", async function (req, res, next) {
       });
 
       let NReviews = reviews.length;
+      if (NReviews > 0) {
       let sum = reviews.reduce((a, b) => a + parseInt(b.rating), 0);
-      await establishments_db.updateOne({ username: req.params.username }, { $set:{rating: (sum / NReviews).toFixed(1) || 0}});
-      selectedEstab = await establishments_db.findOne({ username: req.params.username });
-      
+      await establishments_db.updateOne({ displayedName: req.params.displayedName }, { $set:{rating: (sum / NReviews).toFixed(1) || 0}});
+      }
+
       let rateSummary = {
         nReviews: NReviews,
         fiveRev: reviews.filter(rev => rev.rating == 5).length / NReviews * 100,
@@ -400,6 +400,7 @@ establishmentRouter.get("/:username", async function (req, res, next) {
       const topReviews = reviews.slice(0, 2);
       const truncatedReviews = reviews.slice(2);
       // console.log("Top reviews\n", topReviews, "Truncated Reviews\n", truncatedReviews)
+
       res.render("establishment-view", {
           title: `${selectedEstab.displayedName}`,
           selectedEstab: selectedEstab,

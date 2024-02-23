@@ -32,8 +32,6 @@ $('#addEstabButton').on({
     }
 })
 
-document.getElementById('restrictButton').addEventListener('click', restrictUser);
-
 document.addEventListener("change", (event) => {
     if (event.target.id == "estabImageInput") {
         console.log("wha")
@@ -49,22 +47,23 @@ document.addEventListener("change", (event) => {
     }
   });
 
-async function restrictUser (event){
+const restForm = document.getElementById('restrictForm')
+restForm.addEventListener('submit', async () => {
   formData = new FormData(document.forms.restrictForm)
-  event.preventDefault()
 
-  const currentDate = new Date()
+  let currentDate = new Date();
 
   console.log(formData.get("muteUser"))
   console.log(formData.get("dateType"))
   console.log(formData.get("durationMultiplier"))
+  number = parseInt(formData.get("durationMultiplier"));
 
   switch (formData.get("dateType")) {
-    case "days": endRestrictionDate = new Date(currentDate.setDate(currentDate.getDate() + formData.get("durationMultiplier"))); console.log("day"); break;
-    case "months": endRestrictionDate = new Date(currentDate.setMonth(currentDate.getMonth() + formData.get("durationMultiplier"))); console.log("month"); break;
-    case "years": endRestrictionDate = new Date(currentDate.setFullYear(currentDate.getFullYear() + formData.get("durationMultiplier"))); console.log("year"); break;
+    case "days": endRestrictionDate = new Date(currentDate.setDate(currentDate.getDate() + number)); console.log("day"); break;
+    case "months": endRestrictionDate = new Date(currentDate.setMonth(currentDate.getMonth() + number)); console.log("month"); break;
+    case "years": endRestrictionDate = new Date(currentDate.setFullYear(currentDate.getFullYear() + number)); console.log("year"); break;
   }
-  
+
   if(formData.get("muteUser") != "") {
     console.log("gotIn")
     console.log(`restrictonTime`)
@@ -83,7 +82,67 @@ async function restrictUser (event){
           location.reload();
         }, 10000)
       }
+      if (res.status == 501){
+        console.log("no such user")
+      }
           
     }).catch((err) => console.log(err))
   }
-}
+})
+
+const estabForm = document.getElementById('addEstabForm')
+estabForm.addEventListener('submit', async () => {
+  formData = new FormData(document.forms.addEstabForm)
+
+  if (formData.get("estabImageInput").name != '') {
+    console.log("nada");
+    pic = new FormData();
+    pic.append("file", formData.get("estabImageInput"));
+    try {
+      const res = await fetch("/uploadEstab", {
+        method: "POST",
+        body: pic,
+      });
+
+      const data = await res.json();
+      if (data.path) {
+        const filePath = data.path;
+        estabPicture = filePath;
+
+        console.log("Uploaded file path:", filePath);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+
+  estabData = JSON.stringify({ 
+    estabPicture: estabPicture,
+    estabNameInput:formData.get("estabNameInput"), 
+    estabDescInput:formData.get("estabDescInput"), 
+    tag1Input:formData.get("tag1Input"), 
+    tag2Input:formData.get("tag2Input"),
+    displayAddressInput:formData.get("displayAddressInput"),
+    longitudeInput:formData.get("longitudeInput"),
+    latitudeInput:formData.get("latitudeInput"),
+   })
+ 
+  try {
+    await fetch("/addEstab", {
+      method: "POST",
+      body: estabData,
+      headers: { "Content-Type": "application/json" },
+    }).then(res => {console.log(res);
+      switch (res.status) {
+          case 200: console.log("Yey"); setTimeout(function(){
+            location.reload();
+          }, 1000);  break;
+          case 400: console.log("400: Bad Request");break;
+          case 500: console.log("500: Internal Server Error");break;
+      }
+  }).catch((err) => console.log(err))
+
+  } catch (err) {
+    console.log(err);
+  }
+  } else console.log("no file input")
+})

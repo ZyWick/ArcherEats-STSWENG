@@ -290,6 +290,7 @@ async function deleteRespoEstab (event) {
 function statusResp (status) {
     switch (status) {
         case 401: console.log("401: no user credentials");window.location.replace("/login"); break;
+        case 402: console.log("402: user banned"); break;
         case 400: console.log("400: Bad Request");break;
         case 500: console.log("500: Internal Server Error");break;
     }
@@ -393,7 +394,6 @@ function updateCommentCount (list) {
 async function insertReview (event) {
     formDat = new FormData(document.forms.reviewForm)
     event.preventDefault();
-
     if (formDat.get("reviewID") != "") {
         yo = await fetch("/review", {
             method: "PATCH",

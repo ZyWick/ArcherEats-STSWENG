@@ -60,7 +60,7 @@
              {{#unless isEstab}}
              {{#if @root.user}}
             <div class="row collapse {{#unless userReview}}show{{/unless}} revForm">
-                <form action="/{{selectedEstab.username}}/" id="reviewForm" name="reviewForm" enctype="multipart/form-data" name="reviewForm" method="post">
+                <form action="/{{selectedEstab.displayedName}}/" id="reviewForm" name="reviewForm" enctype="multipart/form-data" name="reviewForm" method="post">
                     <div class="form-group">
                         <p class="rateEstabText">Rate this establishment</p>
                         <div class="rate">
@@ -80,7 +80,7 @@
                         <input type="hidden" name="reviewID" value="{{userReview._id}}" />
                         <input placeholder="Title" name="title" type="title" class="form-control fw-light" id="title"
                             required value="{{userReview.title}}"/>
-                        <textarea class="form-control fw-light " id="{{selectedEstab.username}}text" rows="3" name="content"
+                        <textarea class="form-control fw-light " id="{{selectedEstab.displayedName}}text" rows="3" name="content"
                             placeholder="Describe your experience (required) " required>{{userReview.content}}</textarea>
                         <div class="flex-center postRevDiv">
                             <a data-bs-toggle="modal" data-bs-target=".IMGFILES" class="seeAttach ">see attached

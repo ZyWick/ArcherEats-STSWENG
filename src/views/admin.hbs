@@ -16,25 +16,25 @@
 
             {{!-- add Estab --}}
             <div class="collapse show" id="addEstabTab">
-                <form>
+                <form action="/addEstab/" id="addEstabForm" name="addEstabForm" enctype="multipart/form-data" method="post">
                 <div class="mb-3 row align-items-center">
                     <div class="col-5 containHeight">
                         <label for="estabImageInput">
                         <img class="estabImageInput img-fluid img-thumbnail" id="estabImageInputDisplay" src="static/assets/user-pfp-placeholders/unknown.jpg" alt="">   
                         </label>
-                        <input type="file" accept="media_type" class="form-control d-none" id="estabImageInput" name="estabImageInput" />  
+                        <input type="file" accept="media_type" class="form-control d-none" id="estabImageInput" name="estabImageInput"  />  
                     </div>
                     <div class="col">
                         <div class="mb-3 row">
                             <label for="estabNameInput" class="form-label">Establishment Name</label>
                             <div class=" col-9">
-                                <input type="text" class="form-control" id="estabNameInput" >
+                                <input type="text" class="form-control" id="estabNameInput" name="estabNameInput"  required>
                             </div>
                         </div>
                         <div class="mb-3 row">
                             <label for="estabDescInput" class="form-label">Description</label>
                             <div class="col-9">
-                                <textarea class="form-control" id="estabDescInput" rows="3"></textarea>
+                                <textarea class="form-control" id="estabDescInput" name="estabDescInput" rows="3" required></textarea>
                             </div>
                             <div class="col"></div>
                         </div>
@@ -43,12 +43,12 @@
                             <div class="col">
                                 <label for="tag1Input" class="form-label">Tag 1</label>
                                 <div class="col">
-                                    <input type="text" class="form-control" id="tag1Input" >
+                                    <input type="text" class="form-control" id="tag1Input" name="tag1Input" required>
                                 </div></div>
                             <div class="col">
                                 <label for="tag2Input" class="form-label">Tag 2</label>
                                 <div class="col">
-                                    <input type="text" class="form-control" id="tag2Input" >
+                                    <input type="text" class="form-control" id="tag2Input" name="tag2Input" required>
                                 </div>
                             </div>
                             </div></div>
@@ -56,7 +56,7 @@
                         <div class="mb-3 row">
                             <label for="displayAddressInput" class="form-label">Display Address</label>
                             <div class=" col-9">
-                                <input type="text" class="form-control" id="displayAddressInput" >
+                                <input type="text" class="form-control" id="displayAddressInput" name="displayAddressInput" required>
                             </div>
                         </div>
                         <div class="row">
@@ -64,30 +64,30 @@
                             <div class="col">
                                 <label for="longitudeInput" class="form-label">Longitude</label>
                                 <div class="col">
-                                    <input type="number" class="form-control" id="longitudeInput" >
+                                    <input type="number" class="form-control" step="any" id="longitudeInput" name="longitudeInput" required>
                                 </div></div>
                             <div class="col">
                                 <label for="latitudeInput" class="form-label">Latitude</label>
                                 <div class="col">
-                                    <input type="number" class="form-control" id="latitudeInput" >
+                                    <input type="number" class="form-control" step="any" id="latitudeInput" name="latitudeInput" required>
                                 </div>
                             </div>
                             </div></div>
                         </div>
                     </div>
                 </div>                
-                <button type="submit" class="btn btn-success ms-auto">add Establishment </button>
+                <button id="addEstabButtonForm" type="submit" class="btn btn-success ms-auto">add Establishment </button>
                 </form>
             </div>
 
 
             {{!-- user Management --}}
             <div class="collapse" id="userManTab">
-                <form id="restrictForm" name="restrictForm" enctype="multipart/form-data" method="post">
+                <form action="/user/restrict/" id="restrictForm" name="restrictForm" method="post">
                 <div class="mb-3 row">
                     <label for="muteUser" class="form-label">Mute a user</label>
                     <div class=" col">
-                        <input type="text" class="form-control" id="muteUser" name="muteUser">
+                        <input type="text" class="form-control" id="muteUser" name="muteUser" required>
                     </div>
                     <div class=" col"></div>
                     <div id="muteUser" class="form-text">select a muser to mute.</div>
@@ -95,7 +95,7 @@
                 <div class="mb-3 row align-items-center">
                     <label for="muteDuration" class="form-label">How long?</label>
                     <div class="input-group mb-3 col">
-                        <input type="number" class="form-control col-auto" id="durationMultiplier" name="durationMultiplier">
+                        <input type="number" min="0" class="form-control col-auto" id="durationMultiplier" name="durationMultiplier" required>
                         <select name="dateType" id="dateType" class="form-select">
                             <option value="days" selected>days</option>
                             <option value="months">months</option>
