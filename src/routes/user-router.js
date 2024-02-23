@@ -84,7 +84,7 @@ userRouter.patch("/user/restrict", async function (req, res) {
     console.log(username)
     console.log(muteDuration)
     let selectedUser = await user_db.findOne({ username: username});
-    if(selectedUser == null) next();
+    if(selectedUser == null) res.status(501).send("no such user");
     const oid = new ObjectId(selectedUser._id);
 
     await user_db.updateOne({ _id: new ObjectId(oid) }, { $set: { restrictionEndTime: muteDuration } });

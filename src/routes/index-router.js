@@ -1,29 +1,20 @@
 import { ObjectId } from "mongodb"
+import multer from "multer"
 
 import { Router } from 'express'
-import jwt from 'jsonwebtoken'
-import multer from 'multer';
 import searchRouter from './search-router.js';
 import userRouter from './user-router.js';
 import establishmentRouter from "./establishment-router.js";
 import contentRouter from "./contentRouter.js";
 
 import { getDb } from '../model/conn.js';
-import fs from 'fs';
-import { dirname, relative } from "path";
-import { fileURLToPath } from 'url';
 import loginRegisterRouter from '../routes/login-register-router.js'
 import uploadPfp from '../middleware/upload.js'
+import uploadEstabPfp from '../middleware/uploadEstab.js'
 
-const __dirname = dirname(fileURLToPath(import.meta.url)); // directory URL
 const router = Router();
 const db = getDb();
 const establishments_db = db.collection("establishments");
-const users_db = db.collection("users");
-const reviews_db = db.collection("reviews");
-const comments_db = db.collection("comments");
-
-
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -69,13 +60,58 @@ router.use(establishmentRouter);
 router.use(loginRegisterRouter);
 router.use(contentRouter);
 
+router.post("/addEstab", async (req, res) => {
+  let { estabPicture, estabNameInput, estabDescInput, tag1Input, 
+    tag2Input, displayAddressInput, longitudeInput, latitudeInput} = req.body;
 
+  if (estabPicture && estabNameInput && estabDescInput
+      && tag1Input && tag2Input && displayAddressInput && longitudeInput && 
+      longitudeInput && latitudeInput) {
+    const newEstab = {
+      displayedName: estabNameInput,
+      description: estabDescInput,
+      address: displayAddressInput,
+      rating: 0,
+      profilePicture: estabPicture,
+      tag1: tag1Input,
+      tag2: tag2Input,
+      long: longitudeInput,
+      lat: latitudeInput
+    };
+    try {
+    let resp = await establishments_db.insertOne(newEstab);
+    console.log(resp)
+  } catch (err) {
+    console.log("Error occurred:", err);
+    res.sendStatus(500)
+  }
+    res.status(200);
+    res.send({content: newEstab.content,
+      _id: newEstab._id
+})
+  } else {
+    res.sendStatus(400);
+  }
+})
 
 router.post("/upload", uploadPfp.single("file"), (req, res) => {
   let filePath;
   try {
     filePath = req.file.path;
+    const updatedPath = filePath.replace("public", "static");
+    console.log(updatedPath)
+    console.log("File uploaded successfully:", req.file);
+    res.json({ path: updatedPath });
+  } catch (error) {
+    console.log("No file was uploaded.");
+    res.status(400).json({ error: 'No file was uploaded.' });
+  } 
+})
 
+router.post("/uploadEstab", uploadEstabPfp.single("file"), (req, res) => {
+  let filePath;
+  try {
+    filePath = req.file.path;
     const updatedPath = filePath.replace("public", "static");
     console.log(updatedPath)
     console.log("File uploaded successfully:", req.file);
