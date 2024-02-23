@@ -32,6 +32,8 @@ $('#addEstabButton').on({
     }
 })
 
+document.getElementById('submitEstabButton').addEventListener('click', addEstablishment);
+
 document.getElementById('restrictButton').addEventListener('click', restrictUser);
 
 document.addEventListener("change", (event) => {
@@ -48,6 +50,20 @@ document.addEventListener("change", (event) => {
       }
     }
   });
+
+async function addEstablishment (event) {
+  console.log("ok kuha")
+  fData = new FormData(document.forms.establishmentForm)
+  event.preventDefault()
+
+  console.log(fData.get("estabNameInput"))
+  console.log(fData.get("estabDescInput"))
+  console.log(fData.get("tag1Input"))
+  console.log(fData.get("tag2Input"))
+  console.log(fData.get("displayAddressInput"))
+  console.log(fData.get("longitudeInput"))
+  console.log(fData.get("latitudeInput"))
+}
 
 async function restrictUser (event){
   formData = new FormData(document.forms.restrictForm)

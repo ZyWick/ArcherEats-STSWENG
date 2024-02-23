@@ -7,6 +7,32 @@ const db = getDb();
 const establishments_db = db.collection("establishments");
 const reviews_db = db.collection("reviews");
 
+const postEstablishment = async (req, res) => {
+  const {estabName, estabDesc, tag1, tag2, displayAddress, longitude, latitude} = req.body
+
+  if (estabName && displayAddress && longitude && latitude){
+    const newEstab = {
+      name: estabName,
+      desc: estabDesc,
+      tag1: tag1,
+      tag2: tag2,
+      displayAddress: displayAddress,
+      longitude: longitude,
+      latitude: latitude,
+    }
+    try{
+      let resp = await establishments_db.insertOne(newEstab)
+      console.log(resp)
+    } catch (err){
+      console.log("ERROR: ", err)
+      res.sendStatus(500)
+    }
+    res.sendStatus(200).send({estab: newEstab})
+  } else {
+    res.sendStatus(400)
+  }
+}
+
 establishmentRouter.get("/:username", async function (req, res, next) {
     try {
       let selectedEstab = await establishments_db.findOne({ username: req.params.username });
