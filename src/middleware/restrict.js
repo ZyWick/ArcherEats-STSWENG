@@ -1,22 +1,27 @@
+
+
 const checkRestriction = async (req, res) => {
-    const { _id, restrictionEndDay } = req.body
+    const {username, muteDuration} = req.body
+
+    console.log(username)
+    console.log(muteDuration)
+
     // if(token) {
     //     try{
     //         const decodedToken = await jwt.verify(token, "secret")
     //         userID = decodedToken._id
-    //         restrictionEndDay = decodedToken.restrictionEndTime
-    //         console.log("token received")
     //     } catch (err){
     //         console.log("Error occured: ", err)
     //     }
-    // } else {
-    //     console.log("no token i think")
+
+    //     user = await user_db.findOne({ _id: userID })
     // }
     
     try {
-        console.log(restrictionEndDay)
-        if (restrictionEndDay){
-            if(userID && Date() < restrictionEndDay){
+        console.log("try muna")
+        console.log(selectedUser.restrictionEndDay)
+        if (selectedUser.restrictionEndDay){
+            if(userID && Date() < selectedUser.restrictionEndDay){
                 console.log("ban")
                 return res.status(401).send("User Restricted.")
             }
