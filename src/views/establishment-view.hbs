@@ -32,6 +32,7 @@
 
                 <script type="text/javascript">
 
+
                     var baseMapLayer = new ol.layer.Tile({
                         source: new ol.source.OSM()
                     });
@@ -40,8 +41,9 @@
                     source: new ol.source.OSM()
                     });
 
+                    //var center = ol.proj.fromLonLat([120.99375, 14.564306]);
                     var center = ol.proj.fromLonLat([120.99375, 14.564306]);
-
+                    
                     var view = new ol.View({
                     center: center,
                     zoom: 17
@@ -55,8 +57,8 @@
 
                     var featureMarker = new ol.Feature({
                         geometry: new ol.geom.Point(
-                        ol.proj.fromLonLat([10.7461, 59.9127])
-                        )  // Cordinates of Netsense Skien
+                        ol.proj.fromLonLat([120.99375, 14.564306])
+                        )  // Coordinates of Marker
                     });
 
                     function flytt() {
@@ -77,16 +79,20 @@
 
                     featureMarker.setStyle(new ol.style.Style({
                         image: new ol.style.Icon(({
-                            scale: 0.5,
+                            scale: 0.09,
                             opacity: 0.75,
                             crossOrigin: 'anonymous',
-                            src: 'location.png'
+                            src: 'static/assets/marker.png',
+                            anchor: [0.5,1]
                         }))
                     }));
 
                 </script>
 
-                <a href="" class="map-btn">view full map</a> <!--TODO FILL OUT LINK-->
+                <!--TO BE IMPLEMENTED AS AN EXTRA FEATURE-->
+                <!--
+                    <a href="" class="map-btn">view full map</a>
+                -->
             </div>
             <!--EDIT BOOKMARK END-->
             <div class="card mt-3">
