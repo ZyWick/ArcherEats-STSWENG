@@ -24,7 +24,107 @@
                     <p class="card-text">{{{description}}}</p>
                 </div>
             </div>
+            <!--EDIT BOOKMARK START-->
+            <div class="map-container">
+
+                <div id="map" class="map"></div>
+
+                <p id="demo"></p>
+
+                <script type="text/javascript">
+                
+                    var baseMapLayer = new ol.layer.Tile({
+                        source: new ol.source.OSM()
+                    });
+
+                    var layer = new ol.layer.Tile({
+                    source: new ol.source.OSM()
+                    });
+
+                    var lon = {{{long}}};
+                    var lat = {{{lat}}};
+
+                    var center = ol.proj.fromLonLat([lon, lat]);
+                    
+                    var view = new ol.View({
+                    center: center,
+                    zoom: 18
+                    });
+
+                    var map = new ol.Map({
+                        target: 'map',
+                        view: view,
+                        layers: [layer]
+                    });
+
+                    //RESTAURANT MARKER
+                    var featureMarkerRes = new ol.Feature({
+                        geometry: new ol.geom.Point(
+                        ol.proj.fromLonLat([lon, lat])
+                        )
+                    });
+
+                    function flytt() {
+                        featureMarkerRes.getGeometry().translate(0, 100);
+                    };
+
+                    var vectorSource = new ol.source.Vector({
+                        features: [featureMarkerRes]
+                    });
+
+                    var markerVectorLayer = new ol.layer.Vector({
+                        source: vectorSource,
+                    });
+
+                    map.addLayer(markerVectorLayer);
+
+                    featureMarkerRes.setStyle(new ol.style.Style({
+                        image: new ol.style.Icon(({
+                            scale: 0.09,
+                            opacity: 0.75,
+                            crossOrigin: 'anonymous',
+                            src: 'static/assets/marker.png',
+                            anchor: [0.5,1]
+                        }))
+                    }));
+
+                    //DLSU MARKER
+                    var featureMarkerDLSU = new ol.Feature({
+                        geometry: new ol.geom.Point(
+                        ol.proj.fromLonLat([120.99314373679151, 14.564795338088128])
+                        )
+                    });
+
+                    function flytt() {
+                        featureMarkerDLSU.getGeometry().translate(0, 100);
+                    };
+
+                    var vectorSource = new ol.source.Vector({
+                        features: [featureMarkerDLSU]
+                    });
+
+                    var markerVectorLayer = new ol.layer.Vector({
+                        source: vectorSource,
+                    });
+
+                    map.addLayer(markerVectorLayer);
+
+                    featureMarkerDLSU.setStyle(new ol.style.Style({
+                        image: new ol.style.Icon(({
+                            scale: 0.09,
+                            opacity: 0.75,
+                            crossOrigin: 'anonymous',
+                            src: 'static/assets/dlsu_marker.png',
+                            anchor: [0.5,1]
+                        }))
+                    }));
+                </script>
+
+                <a class="legend"><img src='static/assets/dlsu_marker.png' class="legend_dlsu"> = YOU</a>
+                <a class="legend"><img src='static/assets/marker.png' class="legend_restuarant"> = RESTAURANT</a>
+            </div>
         {{/with}}
+            <!--EDIT BOOKMARK END-->
             <div class="card mt-3">
             {{#with rateSummary}}
             <div class="card-body">
