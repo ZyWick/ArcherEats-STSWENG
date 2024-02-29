@@ -113,9 +113,8 @@ estabForm.addEventListener('submit', async () => {
   formData = new FormData(document.forms.addEstabForm)
 
   if (formData.get("estabImageInput").name != '') {
-    console.log("nada");
     pic = new FormData();
-    pic.append("file", formData.get("estabImageInput"));
+    pic.append("estabImageInput", formData.get("estabImageInput"));
     try {
       const res = await fetch("/uploadEstab", {
         method: "POST",
@@ -123,11 +122,10 @@ estabForm.addEventListener('submit', async () => {
       });
 
       const data = await res.json();
-      if (data.path) {
-        const filePath = data.path;
+      if (data.imageName) {
+        const filePath = data.imageName;
         estabPicture = filePath;
-
-        console.log("Uploaded file path:", filePath);
+        console.log("Uploaded file:", filePath);
       }
     } catch (err) {
       console.error(err);
