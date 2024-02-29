@@ -14,6 +14,25 @@ const establishments_db = db.collection("establishments");
 const reviews_db = db.collection("reviews");
 const comments_db = db.collection("comments");
 
+import {S3Client, GetObjectCommand} from "@aws-sdk/client-s3"
+import  { getSignedUrl } from  "@aws-sdk/s3-request-presigner"
+import dotenv from 'dotenv';
+dotenv.config();
+
+const bucketName = process.env.BUCKET_NAME
+const bucketRegion = process.env.BUCKET_REGION
+const accessKey = process.env.ACCESS_KEY
+const secretAccessKey = process.env.SECRET_ACCESS_KEY
+
+const s3 = new S3Client({
+  credentials: {
+    accessKeyId: accessKey,
+    secretAccessKey: secretAccessKey
+  },
+  region: bucketRegion
+})
+
+
 import multer from 'multer';
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -485,9 +504,17 @@ userRouter.get("/users/:username", async (req, res, next) => {
     // (review partial is made assuming it will only be used in establishment page)
     const promises = reviews.map(async (review) => {
       const establishment = await establishments_db.findOne({ '_id': review.establishmentId });
+    
+      let getObjectParams = {
+        Bucket: bucketName,
+        Key: establishment.imageName
+      }
+      const command = new GetObjectCommand(getObjectParams);
+      const url = await getSignedUrl(s3, command, { expiresIn: 3600 });
+
       review.user = {
         username: establishment.displayedName,
-        profilePicture: establishment.profilePicture,
+        profilePicture: url,
         link: "/" + establishment.username
       };
     });
