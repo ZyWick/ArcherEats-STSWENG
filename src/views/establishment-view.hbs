@@ -17,7 +17,8 @@
                         <span class="card-text ratingDiv">
                             <h5 class="d-inline-block">
                                 <span class="ratingz">{{{rating}}}</span>
-                                <meter class="average-rating" min="0" max="5" style="--percent: {{starr rating}}%"></meter>
+                                <meter class="average-rating" min="0" max="5"
+                                    style="--percent: {{starr rating}}%"></meter>
                             </h5>
                         </span>
                     </div>
@@ -32,23 +33,23 @@
                 <p id="demo"></p>
 
                 <script type="text/javascript">
-                
+
                     var baseMapLayer = new ol.layer.Tile({
                         source: new ol.source.OSM()
                     });
 
                     var layer = new ol.layer.Tile({
-                    source: new ol.source.OSM()
+                        source: new ol.source.OSM()
                     });
 
-                    var lon = {{{long}}};
-                    var lat = {{{lat}}};
+                    var lon = {{{ long }}};
+                    var lat = {{{ lat }}};
 
                     var center = ol.proj.fromLonLat([lon, lat]);
-                    
+
                     var view = new ol.View({
-                    center: center,
-                    zoom: 18
+                        center: center,
+                        zoom: 18
                     });
 
                     var map = new ol.Map({
@@ -60,7 +61,7 @@
                     //RESTAURANT MARKER
                     var featureMarkerRes = new ol.Feature({
                         geometry: new ol.geom.Point(
-                        ol.proj.fromLonLat([lon, lat])
+                            ol.proj.fromLonLat([lon, lat])
                         )
                     });
 
@@ -84,14 +85,14 @@
                             opacity: 0.75,
                             crossOrigin: 'anonymous',
                             src: 'static/assets/marker.png',
-                            anchor: [0.5,1]
+                            anchor: [0.5, 1]
                         }))
                     }));
 
                     //DLSU MARKER
                     var featureMarkerDLSU = new ol.Feature({
                         geometry: new ol.geom.Point(
-                        ol.proj.fromLonLat([120.99314373679151, 14.564795338088128])
+                            ol.proj.fromLonLat([120.99314373679151, 14.564795338088128])
                         )
                     });
 
@@ -115,7 +116,7 @@
                             opacity: 0.75,
                             crossOrigin: 'anonymous',
                             src: 'static/assets/dlsu_marker.png',
-                            anchor: [0.5,1]
+                            anchor: [0.5, 1]
                         }))
                     }));
                 </script>
@@ -123,71 +124,89 @@
                 <a class="legend"><img src='static/assets/dlsu_marker.png' class="legend_dlsu"> = YOU</a>
                 <a class="legend"><img src='static/assets/marker.png' class="legend_restuarant"> = RESTAURANT</a>
             </div>
-        {{/with}}
+            {{/with}}
             <!--EDIT BOOKMARK END-->
             <div class="card mt-3">
-            {{#with rateSummary}}
-            <div class="card-body">
-                <h6 class="card-title reviewTitle ms-3 mb-2">Rating Summary <span class="fw-light">&nbsp;&nbsp;|&nbsp;&nbsp;{{{nReviews}}} reviews</span></h6> 
+                {{#with rateSummary}}
+                <div class="card-body">
+                    <h6 class="card-title reviewTitle ms-3 mb-2">Rating Summary <span
+                            class="fw-light">&nbsp;&nbsp;|&nbsp;&nbsp;{{{nReviews}}} reviews</span></h6>
                     <div class="flex-center justify-content-between mx-3">
-                    <div class="card-text fw-2">5</div>
-                    <div class="progress">
-                    <div style="width: {{fiveRev}}%" class="progress-bar bg-success" role="progressbar"  aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div></div><div class="flex-center justify-content-between mx-3">
-                    <div class="card-text fw-2">4</div>
-                    <div class="progress">
-                    <div style="width: {{fourRev}}%" class="progress-bar bg-success" role="progressbar"  aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div></div><div class="flex-center justify-content-between mx-3">
-                    <div class="card-text fw-2">3</div>
-                    <div class="progress">
-                    <div style="width: {{threeRev}}%" class="progress-bar bg-success" role="progressbar"  aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div></div><div class="flex-center justify-content-between mx-3">
-                    <div class="card-text fw-2">2</div>
-                    <div class="progress">
-                    <div style="width: {{twoRev}}%" class="progress-bar bg-success" role="progressbar"  aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div></div><div class="flex-center justify-content-between mx-3">
-                    <div class="card-text fw-2">1</div>
-                    <div class="progress">
-                    <div style="width: {{oneRev}}%" class="progress-bar bg-success" role="progressbar"  aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div></div>
-            </div></div> {{/with}}
+                        <div class="card-text fw-2">5</div>
+                        <div class="progress">
+                            <div style="width: {{fiveRev}}%" class="progress-bar bg-success" role="progressbar"
+                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <div class="flex-center justify-content-between mx-3">
+                        <div class="card-text fw-2">4</div>
+                        <div class="progress">
+                            <div style="width: {{fourRev}}%" class="progress-bar bg-success" role="progressbar"
+                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <div class="flex-center justify-content-between mx-3">
+                        <div class="card-text fw-2">3</div>
+                        <div class="progress">
+                            <div style="width: {{threeRev}}%" class="progress-bar bg-success" role="progressbar"
+                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <div class="flex-center justify-content-between mx-3">
+                        <div class="card-text fw-2">2</div>
+                        <div class="progress">
+                            <div style="width: {{twoRev}}%" class="progress-bar bg-success" role="progressbar"
+                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                    <div class="flex-center justify-content-between mx-3">
+                        <div class="card-text fw-2">1</div>
+                        <div class="progress">
+                            <div style="width: {{oneRev}}%" class="progress-bar bg-success" role="progressbar"
+                                aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div> {{/with}}
         </div>
 
         <!-- everything else -->
         <div class="col ms-4 mt-5">
-                {{hey @root.user._id}}
+            {{hey @root.user._id}}
             <!-- rate form -->
-             {{#unless isEstab}}
-             {{#if @root.user}}
+            {{#unless isEstab}}
+            {{#if @root.user}}
             <div class="row collapse {{#unless userReview}}show{{/unless}} revForm">
-                <form action="/{{selectedEstab.displayedName}}/" id="reviewForm" name="reviewForm" enctype="multipart/form-data" name="reviewForm" method="post">
+                <form action="/{{selectedEstab.displayedName}}/" id="reviewForm" name="reviewForm"
+                    enctype="multipart/form-data" name="reviewForm" method="post">
                     <div class="form-group">
                         <p class="rateEstabText">Rate this establishment</p>
                         <div class="rate">
-                            <input {{check userReview.rating 5}} required type="radio" id="star5" name="rate" value="5" /><label for="star5"
-                                title="text" >5 stars</label>
-                            <input {{check userReview.rating 4}} required type="radio" id="star4" name="rate" value="4" /><label for="star4"
-                                title="text">4 stars</label>
-                            <input {{check userReview.rating 3}} required type="radio" id="star3" name="rate" value="3" /><label for="star3"
-                                title="text">3 stars</label>
-                            <input {{check userReview.rating 2}} required type="radio" id="star2" name="rate" value="2" /><label for="star2"
-                                title="text">2 stars</label>
-                            <input {{check userReview.rating 1}} required type="radio" id="star1" name="rate" value="1" /><label for="star1"
-                                title="text">1 star</label>
+                            <input {{check userReview.rating 5}} required type="radio" id="star5" name="rate"
+                                value="5" /><label for="star5" title="text">5 stars</label>
+                            <input {{check userReview.rating 4}} required type="radio" id="star4" name="rate"
+                                value="4" /><label for="star4" title="text">4 stars</label>
+                            <input {{check userReview.rating 3}} required type="radio" id="star3" name="rate"
+                                value="3" /><label for="star3" title="text">3 stars</label>
+                            <input {{check userReview.rating 2}} required type="radio" id="star2" name="rate"
+                                value="2" /><label for="star2" title="text">2 stars</label>
+                            <input {{check userReview.rating 1}} required type="radio" id="star1" name="rate"
+                                value="1" /><label for="star1" title="text">1 star</label>
                         </div>
                         <label for="c00000xxtext" class="form-label writeRevText">Write a Review</label>
                         <input type="hidden" name="estabID" value="{{selectedEstab._id}}" />
                         <input type="hidden" name="reviewID" value="{{userReview._id}}" />
                         <input placeholder="Title" name="title" type="title" class="form-control fw-light" id="title"
-                            required value="{{userReview.title}}"/>
-                        <textarea class="form-control fw-light " id="{{selectedEstab.displayedName}}text" rows="3" name="content"
-                            placeholder="Describe your experience (required) " required>{{userReview.content}}</textarea>
+                            maxlength="20" required value="{{userReview.title}}" />
+                        <textarea class="form-control fw-light " id="{{selectedEstab.displayedName}}text" rows="3"
+                            name="content" placeholder="Describe your experience (required) "
+                            maxlength="200">{{userReview.content}}</textarea>
                         <div class="flex-center postRevDiv">
                             <a data-bs-toggle="modal" data-bs-target=".IMGFILES" class="seeAttach ">see attached
                                 files</a>
                             <label class=" form-label img imgbg" for="mediaInput"></label>
-                            <input type="file" accept="media_type" class="form-control d-none" name="mediaInput" id="mediaInput"
-                                name="media" multiple />
+                            <input type="file" accept="media_type" class="form-control d-none" name="mediaInput"
+                                id="mediaInput" name="media" multiple />
                             <button type="submit" class="postReview btn btn-success">Post</button>
                         </div>
                     </div>
@@ -204,10 +223,16 @@
                         <div class="modal-body">
                             <ul class="filelist">
                                 {{#each userReview.videos}}
-                                <li><p>{{filename this}}</p><p></p></li>
+                                <li>
+                                    <p>{{filename this}}</p>
+                                    <p></p>
+                                </li>
                                 {{/each}}
                                 {{#each userReview.images}}
-                                <li><p>{{filename this}}</p><p></p></li>
+                                <li>
+                                    <p>{{filename this}}</p>
+                                    <p></p>
+                                </li>
                                 {{/each}}
                             </ul>
                         </div>
@@ -217,7 +242,7 @@
 
             <!-- form submitted injected here -->
             <div class="row yourReview collapse show">{{#if userReview}}{{> review userReview}}{{/if}}</div>
-             {{/unless}}
+            {{/unless}}
             <p class="fw-light mb-2">Top Reviews</p>
 
             <!-- Top Reviews / one row per review-->
@@ -228,17 +253,18 @@
 
             <!-- Truncated reviews -->
             {{#if truncatedReviews}}
-                    <div class="row mb-3">
-                        <button class="moreRev moreRevText">see more</button>
-                    </div>
-                    <div class="row moreRev collapse">
-                    {{#each truncatedReviews}}
-                    {{> review this}}
-                    {{/each}}
-                    </div>
-                {{/if}}
+            <div class="row mb-3">
+                <button class="moreRev moreRevText">see more</button>
+            </div>
+            <div class="row moreRev collapse">
+                {{#each truncatedReviews}}
+                {{> review this}}
+                {{/each}}
+            </div>
+            {{/if}}
             {{else}}
-                <p class="fw-light flex-center flex-center justify-content-center pt-5 mt-5">. . . . . . . . . . . . . . . . .. .. ...WOah! such Empy... .. .. . . . . . . . . . . . . . . . .</p>
+            <p class="fw-light flex-center flex-center justify-content-center pt-5 mt-5">. . . . . . . . . . . . . . . .
+                .. .. ...WOah! such Empy... .. .. . . . . . . . . . . . . . . . .</p>
             {{/if}}
         </div>
     </div>

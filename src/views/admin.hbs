@@ -27,21 +27,21 @@
                                     src="static/assets/user-pfp-placeholders/unknown.jpg" alt="">
                             </label>
                             <input type="file" accept="media_type" class="form-control d-none" id="estabImageInput"
-                                name="estabImageInput" />
+                                name="estabImageInput" accept="image/x-png,image/gif,image/jpeg" />
                         </div>
                         <div class="col">
                             <div class="mb-3 row">
                                 <label for="estabNameInput" class="form-label">Establishment Name</label>
                                 <div class=" col-9">
                                     <input type="text" class="form-control" id="estabNameInput" name="estabNameInput"
-                                        required>
+                                        maxlength="30" required>
                                 </div>
                             </div>
                             <div class="mb-3 row">
                                 <label for="estabDescInput" class="form-label">Description</label>
                                 <div class="col-9">
                                     <textarea class="form-control" id="estabDescInput" name="estabDescInput" rows="3"
-                                        required></textarea>
+                                        maxlength="100" required></textarea>
                                 </div>
                                 <div class="col"></div>
                             </div>
@@ -52,14 +52,14 @@
                                             <label for="tag1Input" class="form-label">Tag 1</label>
                                             <div class="col">
                                                 <input type="text" class="form-control" id="tag1Input" name="tag1Input"
-                                                    required>
+                                                    maxlength="20" required>
                                             </div>
                                         </div>
                                         <div class="col">
                                             <label for="tag2Input" class="form-label">Tag 2</label>
                                             <div class="col">
                                                 <input type="text" class="form-control" id="tag2Input" name="tag2Input"
-                                                    required>
+                                                    maxlength="20" required>
                                             </div>
                                         </div>
                                     </div>
@@ -69,7 +69,7 @@
                                 <label for="displayAddressInput" class="form-label">Display Address</label>
                                 <div class=" col-9">
                                     <input type="text" class="form-control" id="displayAddressInput"
-                                        name="displayAddressInput" required>
+                                        name="displayAddressInput" maxlength="50" required>
                                 </div>
                             </div>
                             <div class="row">
@@ -79,14 +79,14 @@
                                             <label for="longitudeInput" class="form-label">Longitude</label>
                                             <div class="col">
                                                 <input type="number" class="form-control" step="any" id="longitudeInput"
-                                                    name="longitudeInput" required>
+                                                    name="longitudeInput" maxlength="15" required>
                                             </div>
                                         </div>
                                         <div class="col">
                                             <label for="latitudeInput" class="form-label">Latitude</label>
                                             <div class="col">
                                                 <input type="number" class="form-control" step="any" id="latitudeInput"
-                                                    name="latitudeInput" required>
+                                                    name="latitudeInput" maxlength="15" required>
                                             </div>
                                         </div>
                                     </div>
@@ -114,7 +114,7 @@
                     <div class="mb-3 row align-items-center">
                         <label for="muteDuration" class="form-label">How long?</label>
                         <div class="input-group mb-3 col">
-                            <input type="number" min="0" class="form-control col-auto" id="durationMultiplier"
+                            <input type="number" min="1" class="form-control col-auto" id="durationMultiplier"
                                 name="durationMultiplier" required>
                             <select name="dateType" id="dateType" class="form-select">
                                 <option value="days" selected>days</option>
