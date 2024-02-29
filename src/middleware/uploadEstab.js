@@ -1,19 +1,15 @@
 import multer from "multer"
 import path from "path"
 
-const storage = multer.memoryStorage()
-const uploadEstabPfp = multer({ //multer settings
-  storage: storage,
-  fileFilter: function (req, file, callback) {
-    var ext = path.extname(file.originalname);
-    if (ext !== '.png' && ext !== '.jpg' && ext !== '.gif' && ext !== '.jpeg') {
-      return callback(new Error('Only images are allowed'))
-    }
-    callback(null, true)
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "public/assets/restaurants/");
   },
-  limits: {
-    fileSize: 1024 * 1024
-  }
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname));
+  },
 });
+
+const uploadEstabPfp = multer({ storage: storage });
 
 export default uploadEstabPfp

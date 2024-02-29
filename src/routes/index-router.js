@@ -1,3 +1,6 @@
+import { ObjectId } from "mongodb"
+import multer from "multer"
+
 import { Router } from 'express'
 import searchRouter from './search-router.js';
 import userRouter from './user-router.js';
@@ -13,39 +16,19 @@ const router = Router();
 const db = getDb();
 const establishments_db = db.collection("establishments");
 
-import {S3Client, PutObjectCommand, GetObjectCommand} from "@aws-sdk/client-s3"
-import  { getSignedUrl } from  "@aws-sdk/s3-request-presigner"
-import dotenv from 'dotenv';
-import crypto from 'crypto';
-dotenv.config();
-
-const randImgName = (bytes = 32) => crypto.randomBytes(bytes).toString('hex')
-const bucketName = process.env.BUCKET_NAME
-const bucketRegion = process.env.BUCKET_REGION
-const accessKey = process.env.ACCESS_KEY
-const secretAccessKey = process.env.SECRET_ACCESS_KEY
-
-const s3 = new S3Client({
-  credentials: {
-    accessKeyId: accessKey,
-    secretAccessKey: secretAccessKey
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'public/assets/reviewPics/')
   },
-  region: bucketRegion
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + "_" + file.originalname)
+  },
 })
+const upload = multer({ storage: storage })
 
 router.get("/", async function (req, res) {
   const establishments = await establishments_db.find({}).toArray();
-  
-  for (const estab of establishments) {
-    const getObjectParams = {
-      Bucket: bucketName,
-      Key: estab.imageName
-    }
-    const command = new GetObjectCommand(getObjectParams);
-    const url = await getSignedUrl(s3, command, { expiresIn: 3600 });
-    estab.imageUrl = url;
-  }
-  
+
   res.render("index", {
     title: "Home",
     establishments: establishments,
@@ -70,6 +53,7 @@ router.get("/admin", async (req,res,next) => {
   else {console.log("user is not an administratior"); next()}
 })
 
+
 router.use(userRouter);
 router.use(searchRouter);
 router.use(establishmentRouter);
@@ -88,7 +72,7 @@ router.post("/addEstab", async (req, res) => {
       description: estabDescInput,
       address: displayAddressInput,
       rating: 0,
-      imageName: estabPicture,
+      profilePicture: estabPicture,
       tag1: tag1Input,
       tag2: tag2Input,
       long: longitudeInput,
@@ -124,24 +108,18 @@ router.post("/upload", uploadPfp.single("file"), (req, res) => {
   } 
 })
 
-router.post("/uploadEstab", uploadEstabPfp.single("estabImageInput"), async (req, res) => {
-    let ImgName = randImgName()
-    const params = {
-      Bucket: bucketName,
-      Key: ImgName,
-      Body: req.file.buffer,
-      ContentType: req.file.mimetype
-    }
-    
-    try {
-      const command = new PutObjectCommand(params)
-      await s3.send(command)
-      console.log(ImgName)
-      res.json({imageName : ImgName});
-    } catch (error) {
-      console.log("No file was uploaded.");
-      res.status(400).json({ error: 'No file was uploaded.' });
-    } 
+router.post("/uploadEstab", uploadEstabPfp.single("file"), (req, res) => {
+  let filePath;
+  try {
+    filePath = req.file.path;
+    const updatedPath = filePath.replace("public", "static");
+    console.log(updatedPath)
+    console.log("File uploaded successfully:", req.file);
+    res.json({ path: updatedPath });
+  } catch (error) {
+    console.log("No file was uploaded.");
+    res.status(400).json({ error: 'No file was uploaded.' });
+  } 
 })
 
 router.use((req, res) => {
