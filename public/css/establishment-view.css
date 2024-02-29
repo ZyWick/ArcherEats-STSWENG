@@ -1,0 +1,36 @@
+/*Additional edits made for establishment-view.hbs*/
+/*Includes: styling for map features*/
+
+.map-container {
+    height: 500px;
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 10px;
+    border-style: solid;
+    border-color: #198754;
+    border-width: thin;
+    text-align: center;
+}
+
+.legend{
+    color:black;
+    text-decoration: none;
+}
+
+.map {
+    height: 440px;
+    width: 99%;
+    padding-left: 1%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+  }
+
+.legend_dlsu {
+    height: 6.5%;
+    width: 5%;
+}
+
+.legend_restuarant {
+    height: 6.5%;
+    width: 5%;
+}

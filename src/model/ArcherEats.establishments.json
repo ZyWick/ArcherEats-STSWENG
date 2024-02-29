@@ -11,7 +11,11 @@
   "numReviews": 5,
   "profilePicture": "/static/assets\\restaurants\\Mcdo.jpg",
   "tag1": "Filipino",
-  "tag2": "Fast Food"
+  "tag2": "Fast Food",
+  //EDIT BOOKMARK START
+  "long": 120.99423369446218,
+  "lat": 14.563421201812377
+  //EDIT BOOKMARK END
 },
 {
   "_id": {
@@ -26,7 +30,11 @@
   "numReviews": 5,
   "profilePicture": "/static/assets/restaurants\\24Chicken.jpg",
   "tag1": "Filipino",
-  "tag2": "Fast Food"
+  "tag2": "Fast Food",
+  //EDIT BOOKMARK START
+  "long": "120.99316243084965",
+  "lat": "14.56592086013418"
+  //EDIT BOOKMARK END
 },
 {
   "_id": {
@@ -41,7 +49,11 @@
   "numReviews": 5,
   "profilePicture": "/static/assets/restaurants\\colonelscurry.jpg",
   "tag1": "Filipino",
-  "tag2": "Fast Food"
+  "tag2": "Fast Food",
+  //EDIT BOOKMARK START
+  "long": "120.9956100944622",
+  "lat": "14.562504632559847"
+  //EDIT BOOKMARK END
 },
 {
   "_id": {
@@ -56,7 +68,11 @@
   "numReviews": 5,
   "profilePicture": "/static/assets/restaurants\\atericas_bacsilog.jpg",
   "tag1": "Filipino",
-  "tag2": "Fast Food"
+  "tag2": "Fast Food",
+  //EDIT BOOKMARK START
+  "long": "120.9934052571155",
+  "lat": "14.566441265525944"
+  //EDIT BOOKMARK END
 },
 {
   "_id": {
@@ -71,5 +87,9 @@
   "numReviews": 5,
   "profilePicture": "/static/assets/restaurants\\jollibee.jpg",
   "tag1": "Filipino",
-  "tag2": "Fast Food"
+  "tag2": "Fast Food",
+  //EDIT BOOKMARK START
+  "long": "120.99537840980373",
+  "lat": "14.56289425421501"
+  //EDIT BOOKMARK END
 }]
