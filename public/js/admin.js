@@ -64,30 +64,47 @@ restForm.addEventListener('submit', async () => {
     case "years": endRestrictionDate = new Date(currentDate.setFullYear(currentDate.getFullYear() + number)); console.log("year"); break;
   }
 
-  if (formData.get("muteUser") != "") {
+  if (formData.get("muteUser") != "" && formData.get("muteUser") != "boss_nik") {
     console.log("gotIn")
     console.log(`restrictonTime`)
-    await fetch("/user/restrict", {
-      method: "PATCH",
-      body: JSON.stringify({
-        username: formData.get("muteUser"),
-        muteDuration: endRestrictionDate
-      }),
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-      },
-    }).then(res => {
-      console.log(res);
-      if (res.status == 200) {
-        setTimeout(function () {
-          location.reload();
-        }, 10000)
-      }
-      if (res.status == 501) {
-        console.log("no such user")
-      }
+    if (formData.get("muteUser") != "boss_nik") {
+      await fetch("/user/restrict", {
+        method: "PATCH",
+        body: JSON.stringify({
+          username: formData.get("muteUser"),
+          muteDuration: endRestrictionDate
+        }),
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+        },
+      }).then(res => {
+        console.log(res);
+        if (res.status == 200) {
+          setTimeout(function () {
+            location.reload();
+            alert("Success!");
+          }, 10000)
+        }
+        if (res.status == 501) {
+          console.log("no such user")
+          alert("No such user.");
+        }
 
-    }).catch((err) => console.log(err))
+      }).catch((err) => console.log(err))
+    }
+    else {
+      console.log("cannot ban admin!");
+    }
+
+  }
+  else {
+    if (formData.get("muteUser") == '') {
+      alert("Please place a user!");
+    }
+    else {
+      alert("Cannot ban an admin.");
+    }
+
   }
 })
 
@@ -137,14 +154,21 @@ estabForm.addEventListener('submit', async () => {
         switch (res.status) {
           case 200: console.log("Yey"); setTimeout(function () {
             location.reload();
+            alert("Success!");
           }, 1000); break;
-          case 400: console.log("400: Bad Request"); break;
-          case 500: console.log("500: Internal Server Error"); break;
+          case 400: alert("400: Bad Request"); break;
+          case 500: alert("500: Internal Server Error"); break;
         }
-      }).catch((err) => console.log(err))
+      }).catch((err) => {
+        console.log(err);
+        alert("error");
+      })
 
     } catch (err) {
       console.log(err);
     }
-  } else console.log("no file input")
+  } else {
+    console.log("no file input");
+    alert("Please insert an image.");
+  }
 })
