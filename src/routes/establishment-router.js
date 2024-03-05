@@ -36,7 +36,7 @@ establishmentRouter.get("/:displayedName", async function (req, res, next) {
     }
     const command = new GetObjectCommand(getObjectParams);
     const url = await getSignedUrl(s3, command, { expiresIn: 3600 });
-    selectedEstab.imageUrl = url;
+    selectedEstab.profilePicture = url;
 
     const oid = new ObjectId(selectedEstab._id);
     let reviews = await reviews_db.aggregate([

@@ -43,7 +43,7 @@ router.get("/", async function (req, res) {
     }
     const command = new GetObjectCommand(getObjectParams);
     const url = await getSignedUrl(s3, command, { expiresIn: 3600 });
-    estab.imageUrl = url;
+    estab.profilePicture = url;
   }
   
   res.render("index", {
