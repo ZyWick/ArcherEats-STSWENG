@@ -240,6 +240,10 @@
                 </div>
             </div>
 
+            <div class="dropdown mb-3">
+                {{> sortFilter}}
+            </div>
+
             <!-- form submitted injected here -->
             <div class="row yourReview collapse show">{{#if userReview}}{{> review userReview}}{{/if}}</div>
             {{/unless}}
