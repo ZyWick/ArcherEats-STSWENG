@@ -212,6 +212,7 @@ copy for icons
       rgba(0, 0, 0, 0.2) var(--yourRev)
     );
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
   }
   
@@ -438,4 +439,15 @@ copy for icons
 .filelist {
     list-style-position: inside;
     padding-left: 0;
+}
+
+.btn-outline-secondary:hover {
+    color: #fff !important;
+    background-color: #6c757d !important;
+    border-color: #6c757d !important;
+}
+
+.switch-success:checked {
+    background-color: #198754;
+    border-color: #198754;
 }

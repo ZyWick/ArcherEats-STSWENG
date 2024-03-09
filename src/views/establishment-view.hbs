@@ -201,6 +201,13 @@
                         <textarea class="form-control fw-light " id="{{selectedEstab.displayedName}}text" rows="3"
                             name="content" placeholder="Describe your experience (required) "
                             maxlength="200">{{userReview.content}}</textarea>
+                        <div class="d-flex justify-content-between">
+                        <span class="d-flex align-items-center">
+                            <label type="button" class="btn btn-sm btn-outline-secondary postAnonymously" data-bs-toggle="button">
+                                <input type="checkbox" class="btn-check" name="postAnonymously"  autocomplete="off">
+                                Post Anonymously
+                            </label>
+                        </span>
                         <div class="flex-center postRevDiv">
                             <a data-bs-toggle="modal" data-bs-target=".IMGFILES" class="seeAttach ">see attached
                                 files</a>
@@ -208,6 +215,7 @@
                             <input type="file" accept="media_type" class="form-control d-none" name="mediaInput"
                                 id="mediaInput" name="media" multiple />
                             <button type="submit" class="postReview btn btn-success">Post</button>
+                        </div>
                         </div>
                     </div>
                 </form>
