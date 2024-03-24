@@ -1,39 +1,63 @@
 <form method="post" name="sortAndFilter" id="sortAndFilter">
-    <button class="btn btn-outline-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <!--EDIT BOOKMARK START-->
+    {{!-- <button id="sortByBtn" class="btn btn-outline-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
         Sort by relevance
     </button>
     <ul class="dropdown-menu">
-        <li><button class="dropdown-item active" type="button">relevance</button></li>
-        <li><button class="dropdown-item" type="button">rating</button></li>
+        <li>
+            <button id="sortByRelevance" class="dropdown-item active" type="button">
+                relevance
+            </button>
+        </li>
+        <li>
+            <button id="sortByRating" class="dropdown-item" type="button">
+                rating
+            </button>
+        </li>
     </ul>
-    <label type="button" class="btn btn-outline-success withMedia" data-bs-toggle="button">
+    <label type="button" id="withMediaBtn" class="btn btn-outline-success withMedia" data-bs-toggle="button">
         <input type="checkbox" class="btn-check" name="withMedia"  autocomplete="off">
             with Media
     </label>
-        <button type="button" class="btn btn-outline-success filter" data-bs-toggle="collapse"
-                        href="#filterMenu" id="idFilterButton">Filter</button>
-        <div class="collapse" id="filterMenu">
-            <div class="mt-2">
-                <label type="button" class="btn btn-outline-warning withMedia" data-bs-toggle="button">
+    <button id="idFilterButton" type="button" class="btn btn-outline-success filter" data-bs-toggle="collapse" href="#filterMenu">
+        Filter
+    </button>
+    <div class="collapse" id="filterMenu">
+        <div class="mt-2">
+            <label type="button" id="filter5Stars" class="btn btn-outline-warning withMedia" data-bs-toggle="button">
                 <input type="checkbox" class="btn-check" name="5starFilter"  autocomplete="off">
                 5 stars
-                </label>
-                <label type="button" class="btn btn-outline-warning withMedia" data-bs-toggle="button">
+            </label>
+            <label type="button" id="filter4Stars" class="btn btn-outline-warning withMedia" data-bs-toggle="button">
                 <input type="checkbox" class="btn-check" name="4starFilter"  autocomplete="off">
                 4 stars
-                </label>
-                <label type="button" class="btn btn-outline-warning withMedia" data-bs-toggle="button">
+            </label>
+            <label type="button" id="filter3Stars" class="btn btn-outline-warning withMedia" data-bs-toggle="button">
                 <input type="checkbox" class="btn-check" name="3starFilter"  autocomplete="off">
                 3 stars
-                </label>
-                <label type="button" class="btn btn-outline-warning withMedia" data-bs-toggle="button">
+            </label>
+            <label type="button" id="filter2Stars" class="btn btn-outline-warning withMedia" data-bs-toggle="button">
                 <input type="checkbox" class="btn-check" name="2starFilter"  autocomplete="off">
                 2 stars
-                </label>
-                <label type="button" class="btn btn-outline-warning withMedia" data-bs-toggle="button">
+            </label>
+            <label type="button" id="filter1Stars" class="btn btn-outline-warning withMedia" data-bs-toggle="button">
                 <input type="checkbox" class="btn-check" name="1starFilter"  autocomplete="off">
                 1 stars
-                </label>
-            </div>
+            </label>
         </div>
+    </div> --}}
+    <!--EDIT BOOKMARK END-->
+    <div class="dropdown m-0">
+        <button id="star-filter-dropdown" class="btn btn-outline-dark btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{starFilter}}
+        </button>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a href="" class="dropdown-item star-filter" type="button">No filter</a>
+            <a href="" class="dropdown-item star-filter" type="button">5 Stars</a>
+            <a href="" class="dropdown-item star-filter" type="button">4 Stars</a>
+            <a href="" class="dropdown-item star-filter" type="button">3 Stars</a>
+            <a href="" class="dropdown-item star-filter" type="button">2 Stars</a>
+            <a href="" class="dropdown-item star-filter" type="button">1 Star</a>
+        </div>
+    </div>
 </form>

@@ -45,12 +45,25 @@ router.get("/", async function (req, res) {
     const url = await getSignedUrl(s3, command, { expiresIn: 3600 });
     estab.profilePicture = url;
   }
+
+  let starFilter
+  if (req.query.filter == 1) {
+      starFilter = req.query.filter + ' Star'
+  } else if (req.query.filter >= 1) {
+      starFilter = req.query.filter + ' Stars'
+  } else {
+      starFilter = 'No filter'
+  }
   
   res.render("index", {
     title: "Home",
     establishments: establishments,
     css: `<link rel="stylesheet" href="/static/css/style.css">
-        <link rel="stylesheet" href="/static/css/index.css">`
+          <link rel="stylesheet" href="/static/css/index.css">`
+    //EDIT BOOKMARK START  
+   ,js: '<script defer src="static/js/home-filter.js"></script>',
+    starFilter
+    //EDIT BOOKMARK END
   });
 })
 
