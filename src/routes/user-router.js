@@ -644,7 +644,7 @@ userRouter.get("/users/:username", async (req, res, next) => {
       review.user = {
         username: establishment.displayedName,
         profilePicture: url,
-        link: "/" + establishment.username
+        link: "/" + establishment.displayedName
       };
     });
   
