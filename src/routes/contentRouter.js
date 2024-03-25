@@ -10,7 +10,7 @@ import { dirname, relative } from "path";
 import { fileURLToPath } from 'url';
 const db = getDb();
 import { getDb } from '../model/conn.js';
-import { checkUser } from '../middleware/checkUser.js'
+import { checkUser, checkValidUser } from '../middleware/checkUser.js'
 
 const users_db = db.collection("users");
 const reviews_db = db.collection("reviews");
@@ -365,7 +365,7 @@ const deleteEstabRespo = async (req, res) => {
   .patch(checkUser, upload.array('mediaInput'), patchReview)
   .delete(deleteReview)
 
-  contentRouter.patch('/', toggleLikes)
+  contentRouter.route('/').patch(checkValidUser, toggleLikes)
 
   contentRouter.route('/comment')
   .post(checkUser, postComment)

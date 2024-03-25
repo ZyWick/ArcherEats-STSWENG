@@ -4,6 +4,26 @@ const db = getDb();
 const users_db = db.collection("users");
 import { ObjectId } from "mongodb"
 
+const checkValidUser = async (req, res, next) => {
+  let userID
+  let token = req.cookies.jwt
+  if (token) {
+    try {
+      const decodedToken = await jwt.verify(token, "secret");
+      userID = decodedToken._id
+    } catch (err) {
+      console.log("Error occurred:", err);
+    }
+  }
+  
+  if (userID == null) {
+    res.sendStatus(401);
+  } else {
+    req.userID = userID;
+    next()
+  }
+}
+
 const checkUser = async (req, res, next) => {
 
     let userID
@@ -41,4 +61,4 @@ const checkUser = async (req, res, next) => {
 }
 }
 
-export {checkUser}
+export {checkUser, checkValidUser}

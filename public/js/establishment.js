@@ -151,9 +151,63 @@ function showEstabResponse (event) {
 }
 
 async function remove(event) {
+    parent = event.target.closest('.REVIEW')
+    let establishment = document.querySelector('.estabNamez').innerHTML;
+    let userId 
+    let deleteReason = ''
+
+    if (!parent.classList.contains('list-group-item')){
+        if (parent.classList.contains('estab')) {
+            //estabresponse
+            userPoster = parent.parentElement.closest(".REVIEW").querySelector(".user-link").innerHTML;
+            deleteReason = `response to <a class="text-secondary"href="/${establishment}#${parent.id}">${userPoster}'s review</a>`
+            
+            estabID = document.querySelector('.estabIDholder').id
+            userId = await findTheUser (estabID, "estabRespo")
+        } else {
+        //review
+        deleteReason = `review to the establishment <a class="text-secondary"href="/${establishment}">${establishment}</a>`
+        userId = await findTheUser (parent.id, "review")
+        }
+    } else {
+        //reply
+        realParent = parent.parentElement.closest('.REVIEW')
+        userPoster = realParent.querySelector(".user-link").innerHTML;
+        deleteReason = `reply to <a class="text-secondary"href="/${establishment}#${realParent.id}">${userPoster}'s review</a> in 
+        <a class="text-secondary" href="/${establishment}">${establishment}</a>`
+        userId = await findTheUser (parent.id, "reply")
+    }
+    
     deleteCommit (event);
-    let notif = 'the admin has removed your post.'
+    sendDeleteNotif (userId, deleteReason)
 }
+
+async function findTheUser (id, type) {
+    let userId
+    await fetch("/findUser", {
+        method: "POST",
+        body: JSON.stringify({postId: id, postType: type}),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+            },
+    }).then(async res => {
+        switch (res.status) {
+            case 200: 
+            let data = await res.json()
+            if (data.userId) userId = data.userId;
+            break;
+            default:  statusResp(res.status); break;
+        }
+    }).catch((err) => console.log(err))
+
+    return userId
+}
+
+function sendDeleteNotif (userId, deleteReason) {
+    const notifTitle = `your post has been removed.`;
+    const notifContent = `An administrator has removed your ${deleteReason} as it violates guidelines. If you wish to appeal, contact our wonderful QA, Carlos Guanzon`
+    sendNotif (userId, notifTitle, notifContent);
+  }
 
 async function deleteCommit (event) {
     parent = event.target.closest('.REVIEW')

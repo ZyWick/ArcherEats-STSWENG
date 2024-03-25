@@ -5,6 +5,7 @@ import fs from 'fs';
 import { dirname } from "path";
 import { fileURLToPath } from 'url';
 
+import { checkValidUser } from '../middleware/checkUser.js'
 const __dirname = dirname(fileURLToPath(import.meta.url)); // directory URL
 import jwt from 'jsonwebtoken'
 const userRouter = Router();
@@ -13,6 +14,7 @@ const user_db = db.collection("users");
 const establishments_db = db.collection("establishments");
 const reviews_db = db.collection("reviews");
 const comments_db = db.collection("comments");
+const notif_db = db.collection("notifications");
 
 import {S3Client, GetObjectCommand} from "@aws-sdk/client-s3"
 import  { getSignedUrl } from  "@aws-sdk/s3-request-presigner"
@@ -31,7 +33,6 @@ const s3 = new S3Client({
   },
   region: bucketRegion
 })
-
 
 import multer from 'multer';
 const storage = multer.diskStorage({
@@ -97,23 +98,151 @@ userRouter.patch("/user/changeDesc", async function (req, res) {
   }
 })
 
-userRouter.patch("/user/restrict", async function (req, res) {
+userRouter.patch("/user/restrict", checkValidUser, async function (req, res) {
   try {
     const {username, muteDuration} = req.body
-    console.log(username)
-    console.log(muteDuration)
-    let selectedUser = await user_db.findOne({ username: username});
-    if(selectedUser == null) res.status(501).send("no such user");
-    const oid = new ObjectId(selectedUser._id);
 
-    await user_db.updateOne({ _id: new ObjectId(oid) }, { $set: { restrictionEndTime: muteDuration } });
-    res.status(200).send("Restriction time set")
-  }
-  catch (err){
+    let selectedUser = await user_db.findOne({ username: username});
+    if(selectedUser) { 
+      const oid = new ObjectId(selectedUser._id);
+      await user_db.updateOne({ _id: new ObjectId(oid) }, { $set: { restrictionEndTime: muteDuration } });
+
+      res.status(200)
+      res.json({userId : oid});
+    } else { res.status(501).send("no such user");}
+  } catch (err){
     console.log("Error updating restriction period: ", err)
     res.status(500).send("Internal server error")
   }
 })
+
+userRouter.post("/findUser", async function (req, res) {
+  try {
+    let {postId, postType} = req.body;
+    let userId = ''
+
+    switch (postType) {
+      case 'review': 
+        let review = await reviews_db.findOne({_id: new ObjectId(postId)});
+        userId = review.userId
+        break;
+      case 'reply': 
+      console.log("fucskak")
+      let reply = await comments_db.findOne({_id: new ObjectId(postId)});
+        userId = reply.userId
+        break;
+      case 'estabRespo': 
+        let estabUser = await user_db.findOne({establishmentId: new ObjectId(postId)});
+        userId = estabUser._id
+        break;
+    }
+    
+    res.status(200)
+    res.json({userId : userId});
+  } catch (err){
+    console.log("Error getting user id: ", err)
+    res.status(500).send("Internal server error")
+  }
+})
+
+
+
+const createNotify = async function (req, res) {
+  let {userId, notifTitle, notifContent} = req.body
+
+  if (userId && notifTitle && notifContent) {
+    const newNotif = {
+      user_id: new ObjectId(userId),
+      notifTitle: notifTitle,
+      notifContent: notifContent,
+      from_id: new ObjectId(req.userID),
+      date: new Date(),
+      read: false
+    };
+    try {
+      let resp = await notif_db.insertOne(newNotif);
+      console.log(resp)
+    } catch (err) {
+      console.log("Error occurred:", err);
+      res.status(500).send("Internal server error")
+    }
+    res.status(200);
+    res.send("sent Notif")
+  } else {
+    console.log("Error sending notification")
+    res.sendStatus(400)
+  }
+}
+
+const readMail = async function (req, res) {
+  const {notifId} = req.body
+  console.log(notifId)
+
+  if (notifId) {
+    try {
+      let readNotif = await notif_db.updateOne(
+        { _id: new ObjectId(notifId) },
+        {
+          $set: {
+            read: true
+          }
+        })
+        console.log(readNotif)
+    } catch (err) {
+      console.log("Error occurred:", err);
+      res.status(500).send("Internal server error")
+    }
+    res.status(200);
+    res.send("read Notif")
+} else {
+  console.log("Error updating read status")
+  res.sendStatus(400)
+}
+}
+
+const deleteMail = async function (req, res) {
+  const {notifId} = req.body;
+
+  if (notifId) {
+  try {
+    let deleteNotif = await notif_db.deleteOne({ _id: new ObjectId(notifId) })
+    console.log(deleteNotif)
+  } catch (err) {
+    console.log("Error occurred:", err);
+    res.status(500).send("Internal server error")
+  }
+  res.status(200);
+  res.send("deleted Notif")
+} else {
+  console.log("Error deleting notif")
+  res.sendStatus(400)
+}
+}
+
+userRouter.post("/notify", checkValidUser, createNotify)
+userRouter.route("/user/notif")
+.patch(checkValidUser, readMail)
+.delete(checkValidUser, deleteMail)
+
+function getMails (oid) {
+  try {
+    return notif_db.aggregate( [
+      {
+        '$match': {
+          user_id: new ObjectId(oid)
+        }
+      }, {
+          '$sort': {
+              'read': 1, 
+              'date': -1
+          }
+      }
+  ] ).toArray()
+  } catch (err) {
+    console.log(err)
+  }
+}
+
 
 
 userRouter.get("/users/:username", async (req, res, next) => {
@@ -568,6 +697,14 @@ userRouter.get("/users/:username", async (req, res, next) => {
     if(res.locals.user != null) {
       isAdmin = res.locals.user.isAdmin;
     }
+    
+    let mailIcon = ""
+    const allNotifs = await getMails (oid)
+    for (let notif of allNotifs) {
+      if (notif.read == false)
+        mailIcon = "-fill";
+      notif.read = notif.read ? "read" : "";
+    }
 
     if (oid.toString() !== userID) {
       res.render("user", {
@@ -584,7 +721,7 @@ userRouter.get("/users/:username", async (req, res, next) => {
     } else {
       res.render("theUser", {
         title: user.username + " - Profile",
-        css: '<link href="/static/css/user-profile.css" rel="stylesheet">',
+        css: '<link href="/static/css/user-profile.css" rel="stylesheet"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">',
         js: '<script defer src="/static/js/user-profile.js"></script>',
         profilePicture: user.profilePicture,
         username: user.username,
@@ -592,6 +729,8 @@ userRouter.get("/users/:username", async (req, res, next) => {
         description: user.description,
         topReviews: topReviews,
         truncatedReviews: truncatedReviews,
+        allNotifs: allNotifs,
+        mailIcon: mailIcon,
         isAdmin: isAdmin,
       })
     }

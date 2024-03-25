@@ -77,13 +77,14 @@ restForm.addEventListener('submit', async () => {
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
         },
-      }).then(res => {
-        console.log(res);
+      }).then(async res => {
         if (res.status == 200) {
+          const data = await res.json()
+          if (data.userId) sendMuteNotif (data.userId, number, formData.get("dateType"), formData.get("muteReason"))
           setTimeout(function () {
             location.reload();
             alert("Success!");
-          }, 10000)
+          }, 1000)
         }
         if (res.status == 501) {
           console.log("no such user")
@@ -170,3 +171,9 @@ estabForm.addEventListener('submit', async () => {
     alert("Please insert an image.");
   }
 })
+
+function sendMuteNotif (userId, duration, date, muteReason) {
+  const notifTitle = `you have been muted.`;
+  const notifContent = `An administrator has muted you for ${duration} ${date} due to the following reasons. ${muteReason} If you wish to appeal, contact our wonderful QA, Carlos Guanzon`
+  sendNotif (userId, notifTitle, notifContent, true);
+}
