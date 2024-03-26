@@ -5,7 +5,7 @@ async function sendNotif (userId, notifTitle, notifContent) {
       await fetch("/notify", {
         method: "POST",
         body: JSON.stringify({
-          userId: userOrContentId,
+          userId: userId,
           notifTitle: notifTitle,
           notifContent: notifContent
         }),

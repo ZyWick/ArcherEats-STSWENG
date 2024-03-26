@@ -175,5 +175,5 @@ estabForm.addEventListener('submit', async () => {
 function sendMuteNotif (userId, duration, date, muteReason) {
   const notifTitle = `you have been muted.`;
   const notifContent = `An administrator has muted you for ${duration} ${date} due to the following reasons. ${muteReason} If you wish to appeal, contact our wonderful QA, Carlos Guanzon`
-  sendNotif (userId, notifTitle, notifContent, true);
+  sendNotif (userId, notifTitle, notifContent);
 }
