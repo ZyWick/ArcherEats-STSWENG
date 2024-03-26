@@ -115,6 +115,33 @@ userRouter.patch("/user/restrict", async function (req, res) {
   }
 })
 
+userRouter.patch("/user/changePrivacy", async function (req, res){
+  console.log("hello how are you doing eugene")
+  let userID
+  let token = req.cookies.jwt
+  if (token) {
+    try {
+      const decodedToken = await jwt.verify(token, "secret");
+      userID = decodedToken._id
+    } catch (err) {
+      console.log("Error occurred:", err);
+    }
+  }
+  console.log(userID)
+
+  try {
+    console.log("ok lets try")
+    let { togglePrivacy } = req.body;
+    console.log(togglePrivacy)
+    // Perform the update operation only if 'user' is not null
+    await user_db.updateOne({ _id: new ObjectId(userID) }, { $set: { isUserPrivate: togglePrivacy } });
+    res.status(200).send("privacy set");
+  } catch (err) {
+    console.log("Error updating user privacy:", err);
+    res.status(500).send("Internal server error");
+  }
+})
+
 
 userRouter.get("/users/:username", async (req, res, next) => {
   try {
@@ -580,6 +607,7 @@ userRouter.get("/users/:username", async (req, res, next) => {
         topReviews: topReviews,
         truncatedReviews: truncatedReviews,
         isAdmin: isAdmin,
+        isUserPrivate: user.isUserPrivate,
       })
     } else {
       res.render("theUser", {
@@ -593,6 +621,7 @@ userRouter.get("/users/:username", async (req, res, next) => {
         topReviews: topReviews,
         truncatedReviews: truncatedReviews,
         isAdmin: isAdmin,
+        isUserPrivate: user.isUserPrivate,
       })
     }
   } catch (err) {
