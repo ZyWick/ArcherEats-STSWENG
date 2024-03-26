@@ -25,7 +25,6 @@
                     <p class="card-text">{{{description}}}</p>
                 </div>
             </div>
-            <!--EDIT BOOKMARK START-->
             <div class="map-container">
 
                 <div id="map" class="map"></div>
@@ -125,7 +124,6 @@
                 <a class="legend"><img src='static/assets/marker.png' class="legend_restuarant"> = RESTAURANT</a>
             </div>
             {{/with}}
-            <!--EDIT BOOKMARK END-->
             <div class="card mt-3">
                 {{#with rateSummary}}
                 <div class="card-body">
@@ -241,7 +239,7 @@
             </div>
 
             <div class="dropdown mb-3">
-                {{> sortFilter}}
+                {{> sortFilterEstablishment}}
             </div>
 
             <!-- form submitted injected here -->

@@ -36,6 +36,8 @@ const s3 = new S3Client({
 router.get("/", async function (req, res) {
   const establishments = await establishments_db.find({}).toArray();
   
+  
+
   for (const estab of establishments) {
     const getObjectParams = {
       Bucket: bucketName,
