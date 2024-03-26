@@ -438,7 +438,10 @@ establishmentRouter.get("/:displayedName", async function (req, res, next) {
           topReviews: topReviews,
           truncatedReviews: truncatedReviews,
           currentUser: currUser,
-          css: '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">'
+          css: '<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">',
+          //EDIT BOOKMARK START
+          js: '<script defer src="static/js/establishment-filter.js"></script>'
+          //EDIT BOOKMARK END
       })
     } catch (err) {
       console.log(err)
