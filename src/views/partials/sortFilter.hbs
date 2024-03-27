@@ -5,12 +5,12 @@
     </button>
     <ul class="dropdown-menu">
         <li>
-            <button id="sortByHighest" value="highest" class="dropdown-item" type="button">
+            <button id="sortByHighest" value="highest" data-filter="highest" class="dropdown-item" type="button">
                 Highest Ratings First
             </button>
         </li>
         <li>
-            <button id="sortByLowest" value="lowest" class="dropdown-item" type="button">
+            <button id="sortByLowest" value="lowest" data-filter="lowest" class="dropdown-item" type="button">
                 Lowest Ratings First
             </button>
         </li>
@@ -20,27 +20,32 @@
     </button>
     <ul class="dropdown-menu">
         <li>
-            <button id="sortBy5S" value="5" class="dropdown-item" type="button">
+            <button id="sortBy5S" value="5" data-filter="any" class="dropdown-item" type="button">
+                All review scores
+            </button>
+        </li>
+        <li>
+            <button id="sortBy5S" value="5" data-filter="5.0" class="dropdown-item" type="button">
                 5 stars only
             </button>
         </li>
         <li>
-            <button id="sortBy4S" value="4" class="dropdown-item" type="button">
+            <button id="sortBy4S" value="4" data-filter="4.0" class="dropdown-item" type="button">
                 4 stars only
             </button>
         </li>
         <li>
-            <button id="sortBy3S" value="3" class="dropdown-item" type="button">
+            <button id="sortBy3S" value="3" data-filter="3.0" class="dropdown-item" type="button">
                 3 Stars only
             </button>
         </li>
         <li>
-            <button id="sortBy2S" value="2" class="dropdown-item" type="button">
+            <button id="sortBy2S" value="2" data-filter="2.0" class="dropdown-item" type="button">
                 2 Stars only
             </button>
         </li>
         <li>
-            <button id="sortBy1S" value="1" class="dropdown-item" type="button">
+            <button id="sortBy1S" value="1" data-filter="1.0" class="dropdown-item" type="button">
                 1 Star only
             </button>
         </li>
@@ -51,27 +56,27 @@
     </button>
     <ul class="dropdown-menu">
         <li>
-            <button id="sortByTag1Any" value="" class="dropdown-item" type="button">
+            <button id="sortByTag1Any" value="" data-filter="any" class="dropdown-item" type="button">
                 Any
             </button>
         </li>
         <li>
-            <button id="sortByTag1Filipino" value="Filipino" class="dropdown-item" type="button">
+            <button id="sortByTag1Filipino" value="Filipino" data-filter="Filipino" class="dropdown-item" type="button">
                 Filipino
             </button>
         </li>
         <li>
-            <button id="sortByTag1FastFood" value="Fast Food" class="dropdown-item" type="button">
+            <button id="sortByTag1FastFood" value="Fast Food" data-filter="Fast-Food" class="dropdown-item" type="button">
                 Fast Food
             </button>
         </li>
         <li>
-            <button id="sortByTag1Bar" value="Bar" class="dropdown-item" type="button">
+            <button id="sortByTag1Bar" value="Bar" data-filter="Bar" class="dropdown-item" type="button">
                 Bar
             </button>
         </li>
         <li>
-            <button id="sortByTag1LoungingArea" value="Lounging Area" class="dropdown-item" type="button">
+            <button id="sortByTag1LoungingArea" value="Lounging Area" data-filter="Lounging Area" class="dropdown-item" type="button">
                 Lounging Area
             </button>
         </li>
@@ -82,27 +87,27 @@
     </button>
     <ul class="dropdown-menu">
         <li>
-            <button id="sortByTag2Any" value="" class="dropdown-item" type="button">
+            <button id="sortByTag2Any" value="" data-filter="any" class="dropdown-item" type="button">
                 Any
             </button>
         </li>
         <li>
-            <button id="sortByTag2Filipino" value="Filipino" class="dropdown-item" type="button">
+            <button id="sortByTag2Filipino" value="Filipino" data-filter="Filipino" class="dropdown-item" type="button">
                 Filipino
             </button>
         </li>
         <li>
-            <button id="sortByTag2FastFood" value="Fast Food" class="dropdown-item" type="button">
+            <button id="sortByTag2FastFood" value="Fast Food" data-filter="Fast-Food" class="dropdown-item" type="button">
                 Fast Food
             </button>
         </li>
         <li>
-            <button id="sortByTag2Bar" value="Bar" class="dropdown-item" type="button">
+            <button id="sortByTag2Bar" value="Bar" data-filter="Bar" class="dropdown-item" type="button">
                 Bar
             </button>
         </li>
         <li>
-            <button id="sortByTag2LoungingArea"value="Lounging Area" class="dropdown-item" type="button">
+            <button id="sortByTag2LoungingArea"value="Lounging Area" data-filter="Lounging Area" class="dropdown-item" type="button">
                 Lounging Area
             </button>
         </li>
@@ -132,19 +137,6 @@
                 <input type="checkbox" class="btn-check" name="1starFilter"  autocomplete="off">
                 1 stars
             </label>
-        </div>
-    </div> --}}
-    {{!-- <div class="dropdown m-0">
-        <button id="star-filter-dropdown" class="btn btn-outline-dark btn-sm dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{starFilter}}
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <a href="" class="dropdown-item star-filter" type="button">No filter</a>
-            <a href="" class="dropdown-item star-filter" type="button">5 Stars</a>
-            <a href="" class="dropdown-item star-filter" type="button">4 Stars</a>
-            <a href="" class="dropdown-item star-filter" type="button">3 Stars</a>
-            <a href="" class="dropdown-item star-filter" type="button">2 Stars</a>
-            <a href="" class="dropdown-item star-filter" type="button">1 Star</a>
         </div>
     </div> --}}
     <!--EDIT BOOKMARK END-->

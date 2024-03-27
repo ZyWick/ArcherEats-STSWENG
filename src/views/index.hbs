@@ -7,7 +7,7 @@
     </div>
     <div class="row gy-5">
         {{#each establishments}}
-            <div class="col-lg-3">
+            <div class="col-lg-3 {{this.rating}} {{this.tag1}} {{this.tag2}}">
                 <a href="/{{this.displayedName}}">
                     <div class="content">
                         <div class="img-parent"><img src="{{this.profilePicture}}" alt=""></div>
