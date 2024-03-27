@@ -55,89 +55,35 @@
         Sort Tag 1
     </button>
     <ul class="dropdown-menu">
-        <li>
-            <button id="sortByTag1Any" value="" data-filter="any" class="dropdown-item" type="button">
-                Any
-            </button>
-        </li>
-        <li>
-            <button id="sortByTag1Filipino" value="Filipino" data-filter="Filipino" class="dropdown-item" type="button">
-                Filipino
-            </button>
-        </li>
-        <li>
-            <button id="sortByTag1FastFood" value="Fast Food" data-filter="Fast-Food" class="dropdown-item" type="button">
-                Fast Food
-            </button>
-        </li>
-        <li>
-            <button id="sortByTag1Bar" value="Bar" data-filter="Bar" class="dropdown-item" type="button">
-                Bar
-            </button>
-        </li>
-        <li>
-            <button id="sortByTag1LoungingArea" value="Lounging Area" data-filter="Lounging Area" class="dropdown-item" type="button">
-                Lounging Area
-            </button>
-        </li>
+            <li>
+                <button id="sortByTag1" value="" data-filter="any" class="dropdown-item drop-tag-1" type="button">
+                    Any
+                </button>
+            </li>
+        {{#each uniqueTag1}}
+            <li>
+                <button id="sortByTag1" value="" data-filter="{{this}}" class="dropdown-item drop-tag-1" type="button">
+                    {{this}}
+                </button>
+            </li>
+        {{/each}}
     </ul>
-
     <button id="sortTag2" class="btn btn-outline-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
         Sort Tag 2
     </button>
     <ul class="dropdown-menu">
         <li>
-            <button id="sortByTag2Any" value="" data-filter="any" class="dropdown-item" type="button">
+            <button id="sortByTag2" value="" data-filter="any" class="dropdown-item drop-tag-2" type="button">
                 Any
             </button>
         </li>
-        <li>
-            <button id="sortByTag2Filipino" value="Filipino" data-filter="Filipino" class="dropdown-item" type="button">
-                Filipino
-            </button>
-        </li>
-        <li>
-            <button id="sortByTag2FastFood" value="Fast Food" data-filter="Fast-Food" class="dropdown-item" type="button">
-                Fast Food
-            </button>
-        </li>
-        <li>
-            <button id="sortByTag2Bar" value="Bar" data-filter="Bar" class="dropdown-item" type="button">
-                Bar
-            </button>
-        </li>
-        <li>
-            <button id="sortByTag2LoungingArea"value="Lounging Area" data-filter="Lounging Area" class="dropdown-item" type="button">
-                Lounging Area
-            </button>
-        </li>
+        {{#each uniqueTag2}}
+            <li>
+                <button id="sortByTag2" value="" data-filter="{{this}}" class="dropdown-item drop-tag-2" type="button">
+                    {{this}}
+                </button>
+            </li>
+        {{/each}}
     </ul>
-    {{!-- <button id="idFilterButton" type="button" class="btn btn-outline-success filter" data-bs-toggle="collapse" href="#filterMenu">
-        Review Score Filter
-    </button> --}}
-    {{!-- <div class="collapse" id="filterMenu">
-        <div class="mt-2">
-            <label type="button" id="filter5Stars" class="btn btn-outline-warning withMedia" data-bs-toggle="button">
-                <input type="checkbox" class="btn-check" name="5starFilter"  autocomplete="off">
-                5 stars
-            </label>
-            <label type="button" id="filter4Stars" class="btn btn-outline-warning withMedia" data-bs-toggle="button">
-                <input type="checkbox" class="btn-check" name="4starFilter"  autocomplete="off">
-                4 stars
-            </label>
-            <label type="button" id="filter3Stars" class="btn btn-outline-warning withMedia" data-bs-toggle="button">
-                <input type="checkbox" class="btn-check" name="3starFilter"  autocomplete="off">
-                3 stars
-            </label>
-            <label type="button" id="filter2Stars" class="btn btn-outline-warning withMedia" data-bs-toggle="button">
-                <input type="checkbox" class="btn-check" name="2starFilter"  autocomplete="off">
-                2 stars
-            </label>
-            <label type="button" id="filter1Stars" class="btn btn-outline-warning withMedia" data-bs-toggle="button">
-                <input type="checkbox" class="btn-check" name="1starFilter"  autocomplete="off">
-                1 stars
-            </label>
-        </div>
-    </div> --}}
     <!--EDIT BOOKMARK END-->
 </form>
