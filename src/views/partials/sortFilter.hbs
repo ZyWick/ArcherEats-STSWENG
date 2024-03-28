@@ -20,32 +20,32 @@
     </button>
     <ul class="dropdown-menu">
         <li>
-            <button id="sortBy5S" value="5" data-filter="any" class="dropdown-item" type="button">
+            <button id="sortBy5S" value="5" data-filter="any" class="dropdown-item drop-score" type="button">
                 All review scores
             </button>
         </li>
         <li>
-            <button id="sortBy5S" value="5" data-filter="5.0" class="dropdown-item" type="button">
+            <button id="sortBy5S" value="5" data-filter="5" class="dropdown-item drop-score" type="button">
                 5 stars only
             </button>
         </li>
         <li>
-            <button id="sortBy4S" value="4" data-filter="4.0" class="dropdown-item" type="button">
+            <button id="sortBy4S" value="4" data-filter="4" class="dropdown-item drop-score" type="button">
                 4 stars only
             </button>
         </li>
         <li>
-            <button id="sortBy3S" value="3" data-filter="3.0" class="dropdown-item" type="button">
+            <button id="sortBy3S" value="3" data-filter="3" class="dropdown-item drop-score" type="button">
                 3 Stars only
             </button>
         </li>
         <li>
-            <button id="sortBy2S" value="2" data-filter="2.0" class="dropdown-item" type="button">
+            <button id="sortBy2S" value="2" data-filter="2" class="dropdown-item drop-score" type="button">
                 2 Stars only
             </button>
         </li>
         <li>
-            <button id="sortBy1S" value="1" data-filter="1.0" class="dropdown-item" type="button">
+            <button id="sortBy1S" value="1" data-filter="1" class="dropdown-item drop-score" type="button">
                 1 Star only
             </button>
         </li>
@@ -62,7 +62,8 @@
             </li>
         {{#each uniqueTag1}}
             <li>
-                <button id="sortByTag1" value="" data-filter="{{this}}" class="dropdown-item drop-tag-1" type="button">
+                <button id="sortByTag1" value="" data-filter="{{this}}" 
+                        class="dropdown-item drop-tag-1" type="button">
                     {{this}}
                 </button>
             </li>

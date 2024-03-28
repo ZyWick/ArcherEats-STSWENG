@@ -25,3 +25,28 @@ a {
   text-decoration: inherit;
   color: inherit;
 }
+
+/*EDIT BOOKMARK START*/
+.radio-button input {
+  display: none;
+}
+
+.radio-button span {
+  padding: 0.1em 0.6em;
+  background-color: rgb(239, 239, 239);
+  border: 2px outset rgb(118, 118, 118);
+  text-align: center;
+}
+
+.radio-button input[name="a"]:checked + span {
+  background-color: green;
+}
+
+.radio-button input[name="b"]:checked + span {
+  background-color: blue;
+}
+
+.radio-button input[name="c"]:checked + span {
+  background-color: red;
+}
+/*EDIT BOOKMARK END*/

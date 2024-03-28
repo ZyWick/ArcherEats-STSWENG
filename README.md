@@ -21,6 +21,7 @@ errol09 \
 gaem \
 jomz \
 Steviee \
+corgi \ corgi
 All user accounts have the password 12345
 
 Database Specifications \
