@@ -5,12 +5,12 @@
     </button>
     <ul class="dropdown-menu">
         <li>
-            <button id="sortByHighest" class="dropdown-item" type="button">
+            <button id="sortByHighest" value="highest" data-filter="highest" class="dropdown-item" type="button">
                 Highest Ratings First
             </button>
         </li>
         <li>
-            <button id="sortByLowest" class="dropdown-item" type="button">
+            <button id="sortByLowest" value="lowest" data-filter="lowest" class="dropdown-item" type="button">
                 Lowest Ratings First
             </button>
         </li>
@@ -20,27 +20,32 @@
     </button>
     <ul class="dropdown-menu">
         <li>
-            <button id="sortBy5S" class="dropdown-item" type="button">
+            <button id="sortBy5S" value="5" data-filter="any" class="dropdown-item drop-score" type="button">
+                All review scores
+            </button>
+        </li>
+        <li>
+            <button id="sortBy5S" value="5" data-filter="5" class="dropdown-item drop-score" type="button">
                 5 stars only
             </button>
         </li>
         <li>
-            <button id="sortBy4S" class="dropdown-item" type="button">
+            <button id="sortBy4S" value="4" data-filter="4" class="dropdown-item drop-score" type="button">
                 4 stars only
             </button>
         </li>
         <li>
-            <button id="sortBy3S" class="dropdown-item" type="button">
+            <button id="sortBy3S" value="3" data-filter="3" class="dropdown-item drop-score" type="button">
                 3 Stars only
             </button>
         </li>
         <li>
-            <button id="sortBy2S" class="dropdown-item" type="button">
+            <button id="sortBy2S" value="2" data-filter="2" class="dropdown-item drop-score" type="button">
                 2 Stars only
             </button>
         </li>
         <li>
-            <button id="sortBy1S" class="dropdown-item" type="button">
+            <button id="sortBy1S" value="1" data-filter="1" class="dropdown-item drop-score" type="button">
                 1 Star only
             </button>
         </li>

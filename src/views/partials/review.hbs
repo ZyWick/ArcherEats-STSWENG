@@ -56,7 +56,7 @@
 </div>
 
 {{else}}
-<div class="card mb-3 REVIEW {{#if @root.isEstab}}estab{{/if}}" id="{{this._id}}">
+<div class="card mb-3 REVIEW {{#if @root.isEstab}}estab{{/if}} reviewCard {{rating}}" id="{{this._id}}">
     <!-- profile (req)-->
     <div class="card-header reviewHeader flex-center">
         <div class="user-profile flex-center">
@@ -68,6 +68,7 @@
             </div>
         </div>
         <div>
+            <!--Review Rating-->
             <h5 class="d-inline-block">
                 <span class="ratingz">{{rating}}.0</span>
                 <meter class="average-rating mang-inasal d-inline-block" min="0" style="--percent: {{starr rating}}%"
@@ -84,12 +85,12 @@
             {{content}}
         </p>
 
-        <!-- media  -->
+        <!-- additional media  -->
         {{#if nMedia}}
         {{> revMedia this}}
         {{/if}}
 
-        <!-- icons -->
+        <!-- review interaction icons (e.g. comment, upvote, downvote etc.)-->
         <div class="flex-center iconBox">
             {{#if @root.isAdmin}}
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-ban text-danger remove" viewBox="0 0 16 16">
