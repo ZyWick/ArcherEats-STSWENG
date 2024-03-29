@@ -5,7 +5,7 @@
     <div class="dropdown mb-3">
         {{> sortFilter}}
     </div>
-        <ul class="row gy-5" id="id01" style="list-style-type: none;">
+        <ul class="row gy-5" style="list-style-type: none;">
         {{#each establishments}}
             <li class="col-lg-3 {{this.rating}} {{this.tag1}} {{this.tag2}}" style="list-style-type: none;">
                     <a class="{{this.rating}}" href="/{{this.displayedName}}">

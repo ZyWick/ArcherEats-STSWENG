@@ -1,6 +1,36 @@
+const reviewOrder = document.querySelectorAll(".review-order");
 const dropScore = document.querySelectorAll(".drop-score");
 const storeReviews = document.querySelectorAll(".reviewCard");
 
+//For Order Filter
+for (i=0; i < reviewOrder.length;i++) {
+    reviewOrder[i].addEventListener("click", (e) => {
+        e.preventDefault()
+        const reviewOrder = e.target.dataset.filter;
+
+        console.log(reviewOrder)
+
+        var languages = [];
+        var items = document.getElementsByClassName("mb-3");
+        
+        for (var i = 0, l = items.length; i < l; i++) {
+            languages.push(items[i].innerHTML)
+        }
+    
+        if (reviewOrder == "highest"){
+            languages.sort();
+            languages.reverse();
+        } else if (reviewOrder == "lowest"){
+            languages.sort();
+        }
+
+        for (var i = 0, l = items.length; i < l; i++) {
+            items[i].innerHTML = languages[i];
+        }
+    })
+}
+
+//For Review Filter
 for (i=0; i < dropScore.length;i++) {
     dropScore[i].addEventListener("click", (e) => {
         e.preventDefault()

@@ -258,11 +258,13 @@
             <div class="row mb-3">
                 <button class="moreRev moreRevText">see more</button>
             </div>
-            <div class="row moreRev collapse">
-                {{#each truncatedReviews}}
-                {{> review this}}
-                {{/each}}
-            </div>
+            <ul>
+                <div class="row moreRev collapse">
+                    {{#each truncatedReviews}}
+                    {{> review this}}
+                    {{/each}}
+                </div>
+            </ul>
             {{/if}}
             {{else}}
             <p class="fw-light flex-center flex-center justify-content-center pt-5 mt-5">. . . . . . . . . . . . . . . .
