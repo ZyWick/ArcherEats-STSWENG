@@ -51,6 +51,25 @@ router.get("/", async function (req, res) {
 
   uniqueTag1 = Array.from(new Set(tag1Holder))
   uniqueTag2 = Array.from(new Set(tag2Holder))
+
+  //Sorting ratings
+  // let defaultRating = []
+  // let high2LowHolder = []
+  // let low2HighHolder = []
+
+  // for (let q=0; q < establishments.length; q++) {
+  //   defaultRating[q] = establishments[q].rating;
+  //   high2LowHolder[q] = establishments[q].rating;
+  //   low2HighHolder[q] = establishments[q].rating;
+  // }
+
+  // let high2LowRating = high2LowHolder.sort()
+  // let low2HighBREAK = low2HighHolder.sort()
+  // let low2HighRating = low2HighBREAK.reverse()
+
+  // console.log(defaultRating)
+  // console.log(high2LowRating)
+  // console.log(low2HighRating)
   //EDIT BOOKMARK END
 
   for (const estab of establishments) {

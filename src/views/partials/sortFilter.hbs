@@ -3,16 +3,14 @@
     <button id="sortRatingsOrder" class="btn btn-outline-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
        Ratings Order
     </button>
-    <ul class="dropdown-menu">
+    <ul class="dropdown-menu" id="select">
         <li>
-            <button id="sortByHighest" value="highest" data-filter="highest" class="dropdown-item" type="button">
-                Highest Ratings First
-            </button>
+            <input id="sortByHighest" value="High to Low" data-filter="highest" class="dropdown-item review-order" type="button">
+            </input>
         </li>
         <li>
-            <button id="sortByLowest" value="lowest" data-filter="lowest" class="dropdown-item" type="button">
-                Lowest Ratings First
-            </button>
+            <input id="sortByLowest" value="Low to High" data-filter="lowest" class="dropdown-item review-order" type="button">
+            </input>
         </li>
     </ul>
     <button id="sortReviewScore" class="btn btn-outline-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">

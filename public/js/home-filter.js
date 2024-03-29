@@ -1,11 +1,36 @@
-const dropScore = document.querySelectorAll(".drop-score"); //
+const reviewOrder = document.querySelectorAll(".review-order");
+const dropScore = document.querySelectorAll(".drop-score");
 const dropTag1 = document.querySelectorAll(".drop-tag-1");
 const dropTag2 = document.querySelectorAll(".drop-tag-2");
 const storeProducts = document.querySelectorAll(".col-lg-3");
 
-//product.style.display = "block" SHOWS the product
-//product.style.display = "none" REMOVES the product
+//For Order Filter
+for (i=0; i < reviewOrder.length;i++) {
+    reviewOrder[i].addEventListener("click", (e) => {
+        e.preventDefault()
+        const reviewOrder = e.target.dataset.filter;
 
+        var languages = [];
+        var items = document.getElementsByClassName("col-lg-3");
+        
+        for (var i = 0, l = items.length; i < l; i++) {
+            languages.push(items[i].innerHTML)
+        }
+    
+        if (reviewOrder == "highest"){
+            languages.sort();
+            languages.reverse();
+        } else if (reviewOrder == "lowest"){
+            languages.sort();
+        }
+
+        for (var i = 0, l = items.length; i < l; i++) {
+            items[i].innerHTML = languages[i];
+        }
+    })
+}
+
+//For Review Filter
 for (i=0; i < dropScore.length;i++) {
     dropScore[i].addEventListener("click", (e) => {
         e.preventDefault()
@@ -15,7 +40,6 @@ for (i=0; i < dropScore.length;i++) {
             if (filterScore == "any"){
                 product.style.display = "block"
             } else {
-                
                 //Creates a usable variable for comparing and checking the condition
                 let reviewScore = 0;
                 for(let j = 0; j < 6; j++){
@@ -37,7 +61,7 @@ for (i=0; i < dropScore.length;i++) {
     })
 }
 
-
+//For Tag 1 Filter
 for (i = 0; i < dropTag1.length; i++) {
     dropTag1[i].addEventListener("click", (e) => {
         e.preventDefault()
@@ -58,6 +82,7 @@ for (i = 0; i < dropTag1.length; i++) {
     })
 }
 
+//For Tag 2 Filter
 for (i = 0; i < dropTag2.length; i++) {
     dropTag2[i].addEventListener("click", (e) => {
         e.preventDefault()
