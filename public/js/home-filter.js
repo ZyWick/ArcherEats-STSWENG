@@ -27,6 +27,8 @@ for (i=0; i < reviewOrder.length;i++) {
         for (var i = 0, l = items.length; i < l; i++) {
             items[i].innerHTML = languages[i];
         }
+
+        console.log(items)
     })
 }
 

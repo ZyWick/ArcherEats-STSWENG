@@ -56,13 +56,13 @@
 </div>
 
 {{else}}
-<li class="mb-3 {{rating}}" style="list-style-type: none;">
     <div class="card mb-3 REVIEW {{#if @root.isEstab}}estab{{/if}} reviewCard {{rating}}" id="{{this._id}}">
         <!-- profile (req)-->
         <div class="card-header reviewHeader flex-center">
             <div class="user-profile flex-center">
-                <a href="{{user.link}}" class="flex-center"><img class="pfpRev img-fluid" src="{{user.profilePicture}}"
-                        alt=""></a>
+                <a href="{{user.link}}" class="flex-center">
+                    <img class="pfpRev img-fluid" src="{{user.profilePicture}}"alt="">
+                </a>
                 <div class="postDeats">
                     <a class="user-link" href="{{user.link}}">{{user.username}}</a>
                     <div class=" status">{{formatDate datePosted}} {{#if edited}} • edited {{/if}} </div>
@@ -142,5 +142,4 @@
         <!-- UL ID is for review // the reply will have a unique ID -->
         {{> comment }}
     </div>
-</li>
 {{/if}}

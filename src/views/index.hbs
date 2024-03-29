@@ -8,20 +8,20 @@
         <ul class="row gy-5" style="list-style-type: none;">
         {{#each establishments}}
             <li class="col-lg-3 {{this.rating}} {{this.tag1}} {{this.tag2}}" style="list-style-type: none;">
-                    <a class="{{this.rating}}" href="/{{this.displayedName}}">
-                        <div class="content">
-                            <div class="img-parent"><img src="{{this.profilePicture}}" alt=""></div>
-                            <div class="mt-3">
-                                <div class="d-flex justify-content-between">
-                                    <span class="bold">{{this.displayedName}}</span>
-                                    <div>
-                                        <i class="fas fa-star me-2"></i><span class="regular">{{this.rating}}</span>
-                                    </div>
+                <a class="{{this.rating}}" href="/{{this.displayedName}}">
+                    <div class="content">
+                        <div class="img-parent"><img src="{{this.profilePicture}}" alt=""></div>
+                        <div class="mt-3">
+                            <div class="d-flex justify-content-between">
+                                <span class="bold">{{this.displayedName}}</span>
+                                <div>
+                                    <i class="fas fa-star me-2"></i><span class="regular">{{this.rating}}</span>
                                 </div>
-                                <span class="subtext">{{this.tag1}}<br>{{this.tag2}}</span>
                             </div>
+                            <span class="subtext">{{this.tag1}}<br>{{this.tag2}}</span>
                         </div>
-                    </a>
+                    </div>
+                </a>
             </li>
         {{/each}}
         </u>

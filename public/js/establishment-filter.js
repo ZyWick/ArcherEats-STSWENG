@@ -8,15 +8,13 @@ for (i=0; i < reviewOrder.length;i++) {
         e.preventDefault()
         const reviewOrder = e.target.dataset.filter;
 
-        console.log(reviewOrder)
-
         var languages = [];
-        var items = document.getElementsByClassName("mb-3");
+        var items = document.getElementsByClassName("revList"); //replace mb-3
         
         for (var i = 0, l = items.length; i < l; i++) {
             languages.push(items[i].innerHTML)
         }
-    
+
         if (reviewOrder == "highest"){
             languages.sort();
             languages.reverse();
@@ -27,6 +25,8 @@ for (i=0; i < reviewOrder.length;i++) {
         for (var i = 0, l = items.length; i < l; i++) {
             items[i].innerHTML = languages[i];
         }
+
+        console.log(items)
     })
 }
 

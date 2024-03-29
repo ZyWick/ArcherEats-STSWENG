@@ -249,22 +249,24 @@
 
             <!-- Top Reviews / one row per review-->
             {{#if topReviews}}
-            {{#each topReviews}}
-            {{> review this}}
-            {{/each}}
+                {{#each topReviews}}
+                        {{> review this}}
+                {{/each}}
 
             <!-- Truncated reviews -->
             {{#if truncatedReviews}}
             <div class="row mb-3">
                 <button class="moreRev moreRevText">see more</button>
             </div>
-            <ul>
-                <div class="row moreRev collapse">
+            <div class="row moreRev collapse">
+                <ul style="list-style-type: none;">
                     {{#each truncatedReviews}}
-                    {{> review this}}
+                        <li class="revList {{rating}}" style="list-style-type: none;">
+                            {{> review this}}
+                        </li>
                     {{/each}}
-                </div>
-            </ul>
+                </ul>
+            </div>
             {{/if}}
             {{else}}
             <p class="fw-light flex-center flex-center justify-content-center pt-5 mt-5">. . . . . . . . . . . . . . . .

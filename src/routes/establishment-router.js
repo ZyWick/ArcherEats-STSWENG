@@ -5,6 +5,7 @@ import { getDb } from '../model/conn.js';
 import {S3Client, GetObjectCommand} from "@aws-sdk/client-s3"
 import  { getSignedUrl } from  "@aws-sdk/s3-request-presigner"
 import dotenv from 'dotenv';
+
 dotenv.config();
 
 const bucketName = process.env.BUCKET_NAME
@@ -427,6 +428,8 @@ establishmentRouter.get("/:displayedName", async function (req, res, next) {
       const topReviews = reviews.slice(0, 2);
       const truncatedReviews = reviews.slice(2);
       // console.log("Top reviews\n", topReviews, "Truncated Reviews\n", truncatedReviews)
+
+      // console.log(truncatedReviews)
 
       res.render("establishment-view", {
           title: `${selectedEstab.displayedName}`,
