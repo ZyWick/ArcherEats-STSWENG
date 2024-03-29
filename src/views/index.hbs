@@ -5,11 +5,9 @@
     <div class="dropdown mb-3">
         {{> sortFilter}}
     </div>
-    {{!-- <div class="row gy-5"> --}}
         <ul class="row gy-5" id="id01" style="list-style-type: none;">
         {{#each establishments}}
             <li class="col-lg-3 {{this.rating}} {{this.tag1}} {{this.tag2}}" style="list-style-type: none;">
-                {{!-- <div class="col-lg-3 {{this.rating}} {{this.tag1}} {{this.tag2}}"> --}}
                     <a class="{{this.rating}}" href="/{{this.displayedName}}">
                         <div class="content">
                             <div class="img-parent"><img src="{{this.profilePicture}}" alt=""></div>
@@ -24,11 +22,9 @@
                             </div>
                         </div>
                     </a>
-                {{!-- </div> --}}
             </li>
         {{/each}}
         </u>
-    {{!-- </div> --}}
 </div>
 <footer>
 </footer>
