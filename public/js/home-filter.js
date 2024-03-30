@@ -68,15 +68,13 @@ for (i = 0; i < dropTag1.length; i++) {
     dropTag1[i].addEventListener("click", (e) => {
         e.preventDefault()
         const filter1 = e.target.dataset.filter;
-
         let element = document.getElementById("sortTag2");
-        let hidden = element.getAttribute("hidden");
 
-        Tag1(filter1,2,element,hidden);
+        Tag1(filter1,2,element);
     })
 }
 
-function Tag1(filter1,index,element,hidden){
+function Tag1(filter1,index,element){
     var storeProducts = document.querySelectorAll(".col-lg-3");
 
     storeProducts.forEach((product) => {
@@ -97,7 +95,7 @@ function Tag1(filter1,index,element,hidden){
                 dropTag2[i].addEventListener("click", (e) => {
                     e.preventDefault()
                     const filter2 = e.target.dataset.filter;
-                    Tag2(filter1,filter2,2,3,element,hidden);
+                    Tag2(filter1,filter2,2,3);
                 })
             }
         }
