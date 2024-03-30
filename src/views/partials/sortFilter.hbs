@@ -5,11 +5,11 @@
     </button>
     <ul class="dropdown-menu" id="select">
         <li>
-            <input id="sortByHighest" value="High to Low" data-filter="highest" class="dropdown-item review-order" type="button">
+            <input id="sortByHighest" value="High to Low" data-filter="highest" class="dropdown-item sfBtn review-order" type="button">
             </input>
         </li>
         <li>
-            <input id="sortByLowest" value="Low to High" data-filter="lowest" class="dropdown-item review-order" type="button">
+            <input id="sortByLowest" value="Low to High" data-filter="lowest" class="dropdown-item sfBtn review-order" type="button">
             </input>
         </li>
     </ul>
@@ -18,53 +18,43 @@
     </button>
     <ul class="dropdown-menu">
         <li>
-            <button id="sortBy5S" value="5" data-filter="any" class="dropdown-item drop-score" type="button">
-                All review scores
-            </button>
+            <input id="sortBy5S" value="All review scores" data-filter="any" class="dropdown-item sfBtn drop-score" type="button">
+            </input>
         </li>
         <li>
-            <button id="sortBy5S" value="5" data-filter="5" class="dropdown-item drop-score" type="button">
-                5 stars only
-            </button>
+            <input id="sortBy5S" value="5 stars only" data-filter="5" class="dropdown-item sfBtn drop-score" type="button">
+            </input>
         </li>
         <li>
-            <button id="sortBy4S" value="4" data-filter="4" class="dropdown-item drop-score" type="button">
-                4 stars only
-            </button>
+            <input id="sortBy4S" value="4 stars only" data-filter="4" class="dropdown-item sfBtn drop-score" type="button">
+            </input>
         </li>
         <li>
-            <button id="sortBy3S" value="3" data-filter="3" class="dropdown-item drop-score" type="button">
-                3 Stars only
-            </button>
+            <input id="sortBy3S" value="3 Stars only" data-filter="3" class="dropdown-item sfBtn drop-score" type="button">
+            </input>
         </li>
         <li>
-            <button id="sortBy2S" value="2" data-filter="2" class="dropdown-item drop-score" type="button">
-                2 Stars only
-            </button>
+            <input id="sortBy2S" value="2 Stars only" data-filter="2" class="dropdown-item sfBtn drop-score" type="button">
+            </input>
         </li>
         <li>
-            <button id="sortBy1S" value="1" data-filter="1" class="dropdown-item drop-score" type="button">
-                1 Star only
-            </button>
+            <input id="sortBy1S" value="1 Star only" data-filter="1" class="dropdown-item sfBtn drop-score" type="button">
+            </input>
         </li>
     </ul>
-
     <button id="sortTag1" class="btn btn-outline-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
         Sort Tag 1
     </button>
     <ul class="dropdown-menu">
-            <li>
-                <button id="sortByTag1" value="" data-filter="any" class="dropdown-item drop-tag-1" type="button">
-                    Any
-                </button>
-            </li>
+        <li>
+            <input id="sortByTag1" value="Any" data-filter="any" class="dropdown-item sfBtn drop-tag-1" type="button">
+            </input>
+        </li>
         {{#each uniqueTag1}}
-            <li>
-                <button id="sortByTag1" value="" data-filter="{{this}}" 
-                        class="dropdown-item drop-tag-1" type="button">
-                    {{this}}
-                </button>
-            </li>
+        <li>
+            <input id="sortByTag1" value="{{this}}" data-filter="{{this}}" class="dropdown-item sfBtn drop-tag-1" type="button">
+            </input>
+        </li>
         {{/each}}
     </ul>
     <button id="sortTag2" class="btn btn-outline-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -72,17 +62,18 @@
     </button>
     <ul class="dropdown-menu">
         <li>
-            <button id="sortByTag2" value="" data-filter="any" class="dropdown-item drop-tag-2" type="button">
-                Any
-            </button>
+            <input id="sortByTag2" value="Any" data-filter="any" class="dropdown-item sfBtn drop-tag-2" type="button">
+            </input>
         </li>
         {{#each uniqueTag2}}
-            <li>
-                <button id="sortByTag2" value="" data-filter="{{this}}" class="dropdown-item drop-tag-2" type="button">
-                    {{this}}
-                </button>
-            </li>
+        <li>
+            <input id="sortByTag2" value="{{this}}" data-filter="{{this}}" class="dropdown-item sfBtn drop-tag-2" type="button">
+            </input>
+        </li>
         {{/each}}
     </ul>
+    <button id="Clear Button" class="btn btn-outline-success" type="button" aria-expanded="false" onClick="window.location.reload();">
+        Clear Sort and Filters
+    </button>
     <!--EDIT BOOKMARK END-->
 </form>
