@@ -63,7 +63,7 @@ for (i=0; i < dropScore.length;i++) {
     })
 }
 
-//For Tag 1 Filter
+//For Tag Filter
 for (i = 0; i < dropTag1.length; i++) {
     dropTag1[i].addEventListener("click", (e) => {
         e.preventDefault()
