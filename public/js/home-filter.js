@@ -5,6 +5,66 @@ const dropTag1 = document.querySelectorAll(".drop-tag-1");
 const dropTag2 = document.querySelectorAll(".drop-tag-2");
 // const storeProducts = document.querySelectorAll(".col-lg-3");
 
+//For Tag 1 Filter
+for (i = 0; i < dropTag1.length; i++) {
+    dropTag1[i].addEventListener("click", (e) => {
+        e.preventDefault()
+        const filter1 = e.target.dataset.filter;
+
+        let element = document.getElementById("sortTag2");
+        let hidden = element.getAttribute("hidden");
+
+        if (hidden && filter1 != "any") {
+            element.removeAttribute("hidden");
+        } else {
+            element.setAttribute("hidden", "hidden");
+        }
+
+        Tag1(filter1,2);
+    })
+}
+
+function Tag1(filter1,index){
+    var storeProducts = document.querySelectorAll(".col-lg-3");
+
+    storeProducts.forEach((product) => {
+        if (filter1 == "any") { //If all filter is selected,
+            product.style.display = "block" //Display all establishments
+        } else {
+            if (product.classList[index] == filter1) { //If a tag is selected,
+                product.style.display = "block" //Display the product with that tag
+            } else {
+                product.style.display = "none"
+            }
+
+            //For Tag 2 Filter
+            for (i = 0; i < dropTag2.length; i++) {
+                dropTag2[i].addEventListener("click", (e) => {
+                    e.preventDefault()
+                    const filter2 = e.target.dataset.filter;
+                    Tag2(filter1,filter2,2,3);
+                })
+            }
+        }
+    })
+}
+
+function Tag2(filter1,filter2,index1,index2){
+    var storeProducts = document.querySelectorAll(".col-lg-3");
+
+    storeProducts.forEach((product) => {
+        if (filter1 == "any" && filter2 == "any") {
+            product.style.display = "block"
+        } else {
+            if (product.classList[index1] == filter1 && product.classList[index2] == filter2) {
+                product.style.display = "block"
+            } else {
+                product.style.display = "none"
+            }
+        }
+    })
+}
+
 //For Order Filter
 for (i=0; i < reviewOrder.length;i++) {
     reviewOrder[i].addEventListener("click", (e) => {
@@ -28,10 +88,6 @@ for (i=0; i < reviewOrder.length;i++) {
         for (var i = 0, l = storeProducts.length; i < l; i++) {
             storeProducts[i].innerHTML = originalArray[i];
         }
-
-        for (var i = 0, l = storeProducts.length; i < l; i++) {
-            storeProducts[i].innerHTML = originalArray[i];
-        }
     })
 }
 
@@ -39,9 +95,9 @@ for (i=0; i < reviewOrder.length;i++) {
 for (i=0; i < dropScore.length;i++) {
     dropScore[i].addEventListener("click", (e) => {
         e.preventDefault()
+        const filterScore = e.target.dataset.filter;
 
         var storeProducts = document.querySelectorAll(".col-lg-3");
-        const filterScore = e.target.dataset.filter;
 
         storeProducts.forEach((product) => {
             if (filterScore == "any"){
@@ -58,51 +114,6 @@ for (i=0; i < dropScore.length;i++) {
 
                 //Filters out reviews with a certain review score range
                 if (product.classList[1] >= reviewScore && product.classList[1] < (reviewScore + 1)) {
-                    product.style.display = "block"
-                } else {
-                    product.style.display = "none"
-                }
-            }
-        })
-    })
-}
-
-//For Tag 1 Filter
-for (i = 0; i < dropTag1.length; i++) {
-    dropTag1[i].addEventListener("click", (e) => {
-        e.preventDefault()
-
-        const filter1 = e.target.dataset.filter;
-        var storeProducts = document.querySelectorAll(".col-lg-3");
-
-        storeProducts.forEach((product) => {
-            if (filter1 == "any") { //If all filter is selected,
-                
-                product.style.display = "block" //Display all establishments
-            } else {
-                if (product.classList.contains(filter1)) { //If a tag is selected,
-                    product.style.display = "block" //Display the product with that tag
-                } else {
-                    product.style.display = "none"
-                }
-            }
-        })
-    })
-}
-
-//For Tag 2 Filter
-for (i = 0; i < dropTag2.length; i++) {
-    dropTag2[i].addEventListener("click", (e) => {
-        e.preventDefault()
-
-        const filter2 = e.target.dataset.filter;
-        var storeProducts = document.querySelectorAll(".col-lg-3");
-
-        storeProducts.forEach((product) => {
-            if (filter2 == "any") {
-                product.style.display = "block"
-            } else {
-                if (product.classList.contains(filter2)) {
                     product.style.display = "block"
                 } else {
                     product.style.display = "none"

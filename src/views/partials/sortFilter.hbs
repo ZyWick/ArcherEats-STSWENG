@@ -43,7 +43,7 @@
         </li>
     </ul>
     <button id="sortTag1" class="btn btn-outline-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Sort Tag 1
+        Primary Tag
     </button>
     <ul class="dropdown-menu">
         <li>
@@ -57,14 +57,10 @@
         </li>
         {{/each}}
     </ul>
-    <button id="sortTag2" class="btn btn-outline-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Sort Tag 2
+    <button hidden="hidden" id="sortTag2" class="btn btn-outline-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Secondary Tag
     </button>
     <ul class="dropdown-menu">
-        <li>
-            <input id="sortByTag2" value="Any" data-filter="any" class="dropdown-item sfBtn drop-tag-2" type="button">
-            </input>
-        </li>
         {{#each uniqueTag2}}
         <li>
             <input id="sortByTag2" value="{{this}}" data-filter="{{this}}" class="dropdown-item sfBtn drop-tag-2" type="button">
