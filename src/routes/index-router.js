@@ -36,6 +36,23 @@ const s3 = new S3Client({
 router.get("/", async function (req, res) {
   const establishments = await establishments_db.find({}).toArray();
   
+  //EDIT BOOKMARK START
+  //This grabs all unique tags for the dropdown filters
+  let tag1Holder = []
+  let tag2Holder = []
+  
+  for (let k=0; k < establishments.length; k++) {
+    tag1Holder[k] = establishments[k].tag1;
+    tag2Holder[k] = establishments[k].tag2;
+  }
+
+  let uniqueTag1 = []
+  let uniqueTag2 = []
+
+  uniqueTag1 = Array.from(new Set(tag1Holder))
+  uniqueTag2 = Array.from(new Set(tag2Holder))
+  //EDIT BOOKMARK END
+
   for (const estab of establishments) {
     const getObjectParams = {
       Bucket: bucketName,
@@ -50,7 +67,12 @@ router.get("/", async function (req, res) {
     title: "Home",
     establishments: establishments,
     css: `<link rel="stylesheet" href="/static/css/style.css">
-        <link rel="stylesheet" href="/static/css/index.css">`
+          <link rel="stylesheet" href="/static/css/index.css">`
+    //EDIT BOOKMARK START  
+   ,js: '<script defer src="static/js/home-filter.js"></script>',
+    uniqueTag1: uniqueTag1,
+    uniqueTag2: uniqueTag2
+    //EDIT BOOKMARK END
   });
 })
 

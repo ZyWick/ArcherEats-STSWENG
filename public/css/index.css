@@ -25,3 +25,10 @@ a {
   text-decoration: inherit;
   color: inherit;
 }
+
+/*EDIT BOOKMARK START*/
+/* ul {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+} */
+/*EDIT BOOKMARK END*/

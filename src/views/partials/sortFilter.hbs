@@ -1,0 +1,75 @@
+<form method="post" name="sortAndFilter" id="sortAndFilter">
+    <!--EDIT BOOKMARK START-->
+    <button id="sortRatingsOrder" class="btn btn-outline-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+       Ratings Order
+    </button>
+    <ul class="dropdown-menu" id="select">
+        <li>
+            <input id="sortByHighest" value="High to Low" data-filter="highest" class="dropdown-item sfBtn review-order" type="button">
+            </input>
+        </li>
+        <li>
+            <input id="sortByLowest" value="Low to High" data-filter="lowest" class="dropdown-item sfBtn review-order" type="button">
+            </input>
+        </li>
+    </ul>
+    <button id="sortReviewScore" class="btn btn-outline-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Review Score
+    </button>
+    <ul class="dropdown-menu">
+        <li>
+            <input id="sortBy5S" value="All review scores" data-filter="any" class="dropdown-item sfBtn drop-score" type="button">
+            </input>
+        </li>
+        <li>
+            <input id="sortBy5S" value="5 stars only" data-filter="5" class="dropdown-item sfBtn drop-score" type="button">
+            </input>
+        </li>
+        <li>
+            <input id="sortBy4S" value="4 stars only" data-filter="4" class="dropdown-item sfBtn drop-score" type="button">
+            </input>
+        </li>
+        <li>
+            <input id="sortBy3S" value="3 Stars only" data-filter="3" class="dropdown-item sfBtn drop-score" type="button">
+            </input>
+        </li>
+        <li>
+            <input id="sortBy2S" value="2 Stars only" data-filter="2" class="dropdown-item sfBtn drop-score" type="button">
+            </input>
+        </li>
+        <li>
+            <input id="sortBy1S" value="1 Star only" data-filter="1" class="dropdown-item sfBtn drop-score" type="button">
+            </input>
+        </li>
+    </ul>
+    <button id="sortTag1" class="btn btn-outline-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Primary Tag
+    </button>
+    <ul class="dropdown-menu">
+        <li>
+            <input id="sortByTag1" value="Any" data-filter="any" class="dropdown-item sfBtn drop-tag-1" type="button">
+            </input>
+        </li>
+        {{#each uniqueTag1}}
+        <li>
+            <input id="sortByTag1" value="{{this}}" data-filter="{{this}}" class="dropdown-item sfBtn drop-tag-1" type="button">
+            </input>
+        </li>
+        {{/each}}
+    </ul>
+    <button hidden="hidden" id="sortTag2" class="btn btn-outline-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Secondary Tag
+    </button>
+    <ul class="dropdown-menu">
+        {{#each uniqueTag2}}
+        <li>
+            <input id="sortByTag2" value="{{this}}" data-filter="{{this}}" class="dropdown-item sfBtn drop-tag-2" type="button">
+            </input>
+        </li>
+        {{/each}}
+    </ul>
+    <button id="Clear Button" class="btn btn-outline-success" type="button" aria-expanded="false" onClick="window.location.reload();">
+        Clear Sort and Filters
+    </button>
+    <!--EDIT BOOKMARK END-->
+</form>
