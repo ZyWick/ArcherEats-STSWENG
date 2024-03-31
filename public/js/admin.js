@@ -166,7 +166,42 @@ estabForm.addEventListener('submit', async () => {
       console.log(err);
     }
   } else {
-    console.log("no file input");
-    alert("Please insert an image.");
+    //console.log("no file input");
+    //alert("Please insert an image.");
+
+    estabData = JSON.stringify({
+      estabPicture: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/2048px-Default_pfp.svg.png',
+      estabNameInput: formData.get("estabNameInput"),
+      estabDescInput: formData.get("estabDescInput"),
+      tag1Input: formData.get("tag1Input"),
+      tag2Input: formData.get("tag2Input"),
+      displayAddressInput: formData.get("displayAddressInput"),
+      longitudeInput: formData.get("longitudeInput"),
+      latitudeInput: formData.get("latitudeInput"),
+    })
+
+    try {
+      await fetch("/addEstab", {
+        method: "POST",
+        body: estabData,
+        headers: { "Content-Type": "application/json" },
+      }).then(res => {
+        console.log(res);
+        switch (res.status) {
+          case 200: console.log("Yey"); setTimeout(function () {
+            location.reload();
+            alert("Success!");
+          }, 1000); break;
+          case 400: alert("400: Bad Request"); break;
+          case 500: alert("500: Internal Server Error"); break;
+        }
+      }).catch((err) => {
+        console.log(err);
+        alert("error");
+      })
+
+    } catch (err) {
+      console.log(err);
+    }
   }
 })
