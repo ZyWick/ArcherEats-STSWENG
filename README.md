@@ -10,6 +10,9 @@ MONGODB_URI=mongodb://127.0.0.1:27017 \
 DB_NAME=ArcherEats \
 SERVER_PORT=3000
 
+Admin account:
+boss_nik | banana
+
 Establishment account credentials: \
 McDonalds - notMcdo \
 Password: 12345
@@ -21,6 +24,7 @@ errol09 \
 gaem \
 jomz \
 Steviee \
+corgi \ corgi
 All user accounts have the password 12345
 
 Database Specifications \

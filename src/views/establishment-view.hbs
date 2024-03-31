@@ -25,7 +25,6 @@
                     <p class="card-text">{{{description}}}</p>
                 </div>
             </div>
-            <!--EDIT BOOKMARK START-->
             <div class="map-container">
 
                 <div id="map" class="map"></div>
@@ -125,7 +124,6 @@
                 <a class="legend"><img src='static/assets/marker.png' class="legend_restuarant"> = RESTAURANT</a>
             </div>
             {{/with}}
-            <!--EDIT BOOKMARK END-->
             <div class="card mt-3">
                 {{#with rateSummary}}
                 <div class="card-body">
@@ -203,12 +201,14 @@
                             maxlength="200">{{userReview.content}}</textarea>
                         <div class="d-flex justify-content-between">
                         <span class="d-flex align-items-center">
+
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="on" id="flexCheckDefault" name="postAnonymously" {{#ifNotEquals postAnonymously "on"}}checked{{/ifNotEquals}}>
                                 <label class="form-check-label" for="flexCheckDefault">
                                     Post Anonymously
                                 </label>
                             </div>
+
                         </span>
                         <div class="flex-center postRevDiv">
                             <a data-bs-toggle="modal" data-bs-target=".IMGFILES" class="seeAttach ">see attached
@@ -250,6 +250,10 @@
                 </div>
             </div>
 
+            <div class="dropdown mb-3">
+                {{> sortFilterEstablishment}}
+            </div>
+
             <!-- form submitted injected here -->
             <div class="row yourReview collapse show">{{#if userReview}}{{> review userReview}}{{/if}}</div>
             {{/unless}}
@@ -257,9 +261,9 @@
 
             <!-- Top Reviews / one row per review-->
             {{#if topReviews}}
-            {{#each topReviews}}
-            {{> review this}}
-            {{/each}}
+                {{#each topReviews}}
+                        {{> review this}}
+                {{/each}}
 
             <!-- Truncated reviews -->
             {{#if truncatedReviews}}
@@ -267,9 +271,13 @@
                 <button class="moreRev moreRevText">see more</button>
             </div>
             <div class="row moreRev collapse">
-                {{#each truncatedReviews}}
-                {{> review this}}
-                {{/each}}
+                <ul style="list-style-type: none;">
+                    {{#each truncatedReviews}}
+                        <li class="revList {{rating}}" style="list-style-type: none;">
+                            {{> review this}}
+                        </li>
+                    {{/each}}
+                </ul>
             </div>
             {{/if}}
             {{else}}

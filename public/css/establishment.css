@@ -450,4 +450,20 @@ copy for icons
 .switch-success:checked {
     background-color: #198754;
     border-color: #198754;
+
+
+.dropdown-item.active {
+    background-color: #198754;
+}
+
+.dropdown-item {
+    --bs-dropdown-link-active-bg: #198754;
+
+}
+
+#idFilterButton[aria-expanded="true"] {
+    color: var(--bs-btn-hover-color);
+    background-color: var(--bs-btn-hover-bg);
+    border-color: var(--bs-btn-hover-border-color);
+
 }

@@ -1,0 +1,55 @@
+<form method="post" name="sortAndFilter" id="sortAndFilter">
+    <!--EDIT BOOKMARK START-->
+    <button id="sortRatingsOrder" class="btn btn-outline-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+       Ratings Order
+    </button>
+    <ul class="dropdown-menu" id="select">
+        <li>
+            <input id="sortByHighest" value="High to Low" data-filter="highest" class="dropdown-item review-order" type="button">
+            </input>
+        </li>
+        <li>
+            <input id="sortByLowest" value="Low to High" data-filter="lowest" class="dropdown-item review-order" type="button">
+            </input>
+        </li>
+    </ul>
+    <button id="sortReviewScore" class="btn btn-outline-success dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Review Score
+    </button>
+    <ul class="dropdown-menu">
+        <li>
+            <button id="sortBy5S" value="5" data-filter="any" class="dropdown-item drop-score" type="button">
+                All review scores
+            </button>
+        </li>
+        <li>
+            <button id="sortBy5S" value="5" data-filter="5" class="dropdown-item drop-score" type="button">
+                5 stars only
+            </button>
+        </li>
+        <li>
+            <button id="sortBy4S" value="4" data-filter="4" class="dropdown-item drop-score" type="button">
+                4 stars only
+            </button>
+        </li>
+        <li>
+            <button id="sortBy3S" value="3" data-filter="3" class="dropdown-item drop-score" type="button">
+                3 Stars only
+            </button>
+        </li>
+        <li>
+            <button id="sortBy2S" value="2" data-filter="2" class="dropdown-item drop-score" type="button">
+                2 Stars only
+            </button>
+        </li>
+        <li>
+            <button id="sortBy1S" value="1" data-filter="1" class="dropdown-item drop-score" type="button">
+                1 Star only
+            </button>
+        </li>
+    </ul>
+    <button id="Clear Button" class="btn btn-outline-success" type="button" aria-expanded="false" onClick="window.location.reload();">
+        Clear Sort and Filters
+    </button>
+    <!--EDIT BOOKMARK END-->
+</form>
