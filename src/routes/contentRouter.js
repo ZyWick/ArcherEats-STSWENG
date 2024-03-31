@@ -27,7 +27,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 
 const postReview = async (req, res) => {
-    const { estabID, title, rate, content } = req.body;
+    const { estabID, title, rate, content, postAnonymously } = req.body;
     let userID = req.userID;
     
     let imageURls = []
@@ -55,6 +55,7 @@ const postReview = async (req, res) => {
         estabResponse: null,
         establishmentId: new ObjectId(estabID),
         userId: new ObjectId(userID),
+        postAnonymously: postAnonymously,
       };
       try {
       let resp = await reviews_db.insertOne(newReview);
@@ -70,7 +71,8 @@ const postReview = async (req, res) => {
   }
 
   const patchReview = async (req, res) => {
-    const { title, rate, content, reviewID } = req.body;
+    const { title, rate, content, reviewID, postAnonymously } = req.body;
+    console.log(postAnonymously)
     let userID = req.userID;
 
     let imageURls = []
@@ -112,6 +114,7 @@ const postReview = async (req, res) => {
           edited: true,
           images: imageURls,
           videos: videoUrls,
+          postAnonymously: postAnonymously,
         }
       })
     console.log(resp)
