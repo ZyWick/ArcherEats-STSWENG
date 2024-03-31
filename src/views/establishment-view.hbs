@@ -203,10 +203,12 @@
                             maxlength="200">{{userReview.content}}</textarea>
                         <div class="d-flex justify-content-between">
                         <span class="d-flex align-items-center">
-                            <label type="button" class="btn btn-sm btn-outline-secondary postAnonymously" data-bs-toggle="button">
-                                <input type="checkbox" class="btn-check" name="postAnonymously"  autocomplete="off">
-                                Post Anonymously
-                            </label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="on" id="flexCheckDefault" name="postAnonymously" {{#ifNotEquals postAnonymously "on"}}checked{{/ifNotEquals}}>
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    Post Anonymously
+                                </label>
+                            </div>
                         </span>
                         <div class="flex-center postRevDiv">
                             <a data-bs-toggle="modal" data-bs-target=".IMGFILES" class="seeAttach ">see attached

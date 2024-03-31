@@ -2,12 +2,19 @@
 <div class="card mb-3 REVIEW {{#if @root.isEstab}}estab{{/if}}" id="{{this._id}}">
     <div class="card-header reviewHeader flex-center">
         <div class="user-profile flex-center">
+            {{#ifNotEquals postAnonymously "on"}}
             <a href="/users/{{user.username}}" class="flex-center"><img class="pfpRev img-fluid" src="/{{user.profilePicture}}"
                     alt=""></a>
             <div class="postDeats">
                 <a class="user-link" href="/users/{{user.username}}">{{user.username}}</a>
                 <div class=" status">{{formatDate datePosted}} {{#if edited}} • edited {{/if}} </div>
             </div>
+            {{else}}
+            <div class="postDeats">
+                Anonymous User
+                <div class=" status">{{formatDate datePosted}} {{#if edited}} • edited {{/if}} </div>
+            </div>
+            {{/ifNotEquals}}
         </div>
     </div>
     <div class="card-body reviewBody">
@@ -60,12 +67,19 @@
     <!-- profile (req)-->
     <div class="card-header reviewHeader flex-center">
         <div class="user-profile flex-center">
+            {{#ifNotEquals postAnonymously "on"}}
             <a href="{{user.link}}" class="flex-center"><img class="pfpRev img-fluid" src="{{user.profilePicture}}"
                     alt=""></a>
             <div class="postDeats">
                 <a class="user-link" href="{{user.link}}">{{user.username}}</a>
                 <div class=" status">{{formatDate datePosted}} {{#if edited}} • edited {{/if}} </div>
             </div>
+            {{else}}
+            <div class="postDeats">
+                Anonymous User
+                <div class=" status">{{formatDate datePosted}} {{#if edited}} • edited {{/if}} </div>
+            </div>
+            {{/ifNotEquals}}
         </div>
         <div>
             <h5 class="d-inline-block">
