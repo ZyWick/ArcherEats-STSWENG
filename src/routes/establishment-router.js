@@ -161,6 +161,9 @@ establishmentRouter.get("/:displayedName", async function (req, res, next) {
           'userId': {
             '$first': '$userId'
           },
+          'postAnonymously': {
+            '$first': '$postAnonymously'
+          },
           'user': {
             '$first': '$user'
           },
@@ -314,6 +317,9 @@ establishmentRouter.get("/:displayedName", async function (req, res, next) {
           },
           'userId': {
             '$first': '$userId'
+          },
+          'postAnonymously': {
+            '$first': '$postAnonymously'
           },
           'user': {
             '$first': '$user'

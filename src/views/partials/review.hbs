@@ -2,12 +2,19 @@
 <div class="card mb-3 REVIEW {{#if @root.isEstab}}estab{{/if}}" id="{{this._id}}">
     <div class="card-header reviewHeader flex-center">
         <div class="user-profile flex-center">
+            {{#ifNotEquals postAnonymously "on"}}
             <a href="/users/{{user.username}}" class="flex-center"><img class="pfpRev img-fluid" src="/{{user.profilePicture}}"
                     alt=""></a>
             <div class="postDeats">
                 <a class="user-link" href="/users/{{user.username}}">{{user.username}}</a>
                 <div class=" status">{{formatDate datePosted}} {{#if edited}} • edited {{/if}} </div>
             </div>
+            {{else}}
+            <div class="postDeats">
+                Anonymous User
+                <div class=" status">{{formatDate datePosted}} {{#if edited}} • edited {{/if}} </div>
+            </div>
+            {{/ifNotEquals}}
         </div>
     </div>
     <div class="card-body reviewBody">
@@ -56,26 +63,35 @@
 </div>
 
 {{else}}
-    <div class="card mb-3 REVIEW {{#if @root.isEstab}}estab{{/if}} reviewCard {{rating}}" id="{{this._id}}">
-        <!-- profile (req)-->
-        <div class="card-header reviewHeader flex-center">
-            <div class="user-profile flex-center">
-                <a href="{{user.link}}" class="flex-center">
-                    <img class="pfpRev img-fluid" src="{{user.profilePicture}}"alt="">
-                </a>
-                <div class="postDeats">
-                    <a class="user-link" href="{{user.link}}">{{user.username}}</a>
-                    <div class=" status">{{formatDate datePosted}} {{#if edited}} • edited {{/if}} </div>
-                </div>
+
+
+<div class="card mb-3 REVIEW {{#if @root.isEstab}}estab{{/if}} reviewCard {{rating}}" id="{{this._id}}">
+    <!-- profile (req)-->
+    <div class="card-header reviewHeader flex-center">
+        <div class="user-profile flex-center">
+            {{#ifNotEquals postAnonymously "on"}}
+            <a href="{{user.link}}" class="flex-center"><img class="pfpRev img-fluid" src="{{user.profilePicture}}"
+                    alt=""></a>
+            <div class="postDeats">
+                <a class="user-link" href="{{user.link}}">{{user.username}}</a>
+                <div class=" status">{{formatDate datePosted}} {{#if edited}} • edited {{/if}} </div>
+
+
+
             </div>
-            <div>
+            {{else}}
+            <div class="postDeats">
+                Anonymous User
+                <div class=" status">{{formatDate datePosted}} {{#if edited}} • edited {{/if}} </div>
+            </div>
+                        <div>
                 <!--Review Rating-->
                 <h5 class="d-inline-block">
                     <span class="ratingz">{{rating}}.0</span>
                     <meter class="average-rating mang-inasal d-inline-block" min="0" style="--percent: {{starr rating}}%"
                         max="5"></meter>
                 </h5>
-            </div>
+            {{/ifNotEquals}}
         </div>
 
         <!-- review text (req)-->
@@ -90,7 +106,6 @@
             {{#if nMedia}}
             {{> revMedia this}}
             {{/if}}
-
             <!-- review interaction icons (e.g. comment, upvote, downvote etc.)-->
             <div class="flex-center iconBox">
                 {{#if @root.isAdmin}}
@@ -122,15 +137,23 @@
             </div>
         </div>
 
-        <!-- reply area (req)-->
-        <div class=" wReply card-footer collapse">
-            <form method="post" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="text" class="form-label writeReply">Write a Reply</label>
-                    <textarea class="form-control refly" required id="{{this._id}}text" name="text" rows="3"></textarea>
+        
+            <!-- reply area (req)-->
+    <div class=" wReply card-footer collapse">
+        <form method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="text" class="form-label writeReply">Write a Reply</label>
+                <textarea class="form-control refly" required id="{{this._id}}text" name="text" rows="3"></textarea>
+                <div class="d-flex justify-content-between">
+                    <span class="d-flex align-items-center">
+                        <label type="button" class="btn btn-sm btn-outline-secondary postAnonymously" data-bs-toggle="button">
+                            <input type="checkbox" class="btn-check" name="postAnonymously"  autocomplete="off">
+                            Post Anonymously
+                        </label>
+                    </span>
                     <button type="submit" class="{{#if @root.isEstab}}estab{{/if}} postReply btn btn-success">Post</button>
                 </div>
-            </form>
+                            </form>
         </div>
 
         <!-- establishment response (opt) -->

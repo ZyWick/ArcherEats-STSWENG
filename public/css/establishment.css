@@ -441,6 +441,17 @@ copy for icons
     padding-left: 0;
 }
 
+
+.btn-outline-secondary:hover {
+    color: #fff !important;
+    background-color: #6c757d !important;
+    border-color: #6c757d !important;
+}
+
+.switch-success:checked {
+    background-color: #198754;
+    border-color: #198754;
+
 .dropdown-item.active {
     background-color: #198754;
 }
@@ -454,4 +465,5 @@ copy for icons
     color: var(--bs-btn-hover-color);
     background-color: var(--bs-btn-hover-bg);
     border-color: var(--bs-btn-hover-border-color);
+
 }
