@@ -1,4 +1,3 @@
-
 var withSort = false;
 
 var currLevel = 1;

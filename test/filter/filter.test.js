@@ -47,4 +47,5 @@ describe('exact rating filter', () => {
         expect(filterFunctions.reviewFilter('any', storeProductsNum)).toEqual(storeProductsNum);
         expect(filterFunctions.reviewFilter('any', storeProductsNum2)).toEqual(storeProductsNum2);
     });
+
 });

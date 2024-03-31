@@ -48,4 +48,5 @@ describe('exact REVIEWS IN ESTAB rating filter', () => {
         expect(results).toEqual([2.5]);
         expect(results1).toEqual([2.3, 2.1]);
     });
+
 });
