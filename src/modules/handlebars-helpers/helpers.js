@@ -22,6 +22,13 @@ const hbsHelpers = {
     },
     'hey': function(a) {
         console.log("check: " + a)
+    },
+    'ifNotEquals': function(a1, a2, opt){
+        if (a1 != a2) {
+            return opt.fn(this); // Render the content inside {{#ifNotEquals}} block
+        } else {
+            return opt.inverse(this); // Render the content inside {{else}} block
+        }
     }
 }
 

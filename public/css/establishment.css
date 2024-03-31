@@ -441,7 +441,6 @@ copy for icons
     padding-left: 0;
 }
 
-
 .btn-outline-secondary:hover {
     color: #fff !important;
     background-color: #6c757d !important;
@@ -451,6 +450,7 @@ copy for icons
 .switch-success:checked {
     background-color: #198754;
     border-color: #198754;
+
 
 .dropdown-item.active {
     background-color: #198754;
