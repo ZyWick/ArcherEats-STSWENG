@@ -4,6 +4,10 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 
+.bold {
+  font-weight: 600;
+}
+
 .floating-nav {
   border-radius: 2px;
   box-shadow: 0px 1px 5px #ededed;
@@ -16,7 +20,25 @@ body {
 }
 
 nav img {
+  height: 30px;
+  width: 30px;
+}
+
+nav img {
   display: inline-block;
+}
+
+.nav-name {
+  font-family: "Belanosima", sans-serif;
+}
+
+.navbar-nav {
+  justify-content: flex-end;
+  width: 15%;
+}
+
+.regular {
+  font-weight: 500;
 }
 
 .search-container {
@@ -38,30 +60,8 @@ nav img {
   height: 37.5px;
 }
 
-.navbar-nav {
-  justify-content: flex-end;
-  width: 15%;
-}
-
-.bold {
-  font-weight: 600;
-}
-
-.regular {
-  font-weight: 500;
-}
-
 .subtext {
   color: #717171;
-}
-
-.nav-name {
-  font-family: "Belanosima", sans-serif;
-}
-
-nav img {
-  height: 30px;
-  width: 30px;
 }
 
 .user-img,
