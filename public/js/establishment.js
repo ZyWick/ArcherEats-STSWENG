@@ -291,13 +291,25 @@ $('button.moreRev').on({
         headers: {
         'Content-type': 'application/json; charset=UTF-8',
         },
-    }).then(res => {console.log(res);
+    }).then(async res => {console.log(res);
         switch (res.status) {
-            case 200: location.reload(); break;
+            case 200: 
+            recipientUserId = await findTheUser (parent.id, "review")
+            sendEstabResponseNotif (recipientUserId, parent.id)
+            location.reload(); 
+            break;
             default:  statusResp(res.status);
         }
     }).catch((err) => console.log(err))
 }
+
+function sendEstabResponseNotif (userId, postId) {
+    let establishment = document.querySelector('.estabNamez').innerHTML;
+    const notifTitle = `an establishment responded to your review.`;
+    const notifContent = `<a class="text-secondary" href="/${establishment}">${establishment}</a> has a new response to your <a class="text-secondary"href="/${establishment}#${postId}">review</a>`
+    sendNotif (userId, notifTitle, notifContent);
+  }
+
 
 async function editRespoEstab (event) {
     parent = event.target.closest('.REVIEW')

@@ -175,7 +175,6 @@ const createNotify = async function (req, res) {
 
 const readMail = async function (req, res) {
   const {notifId} = req.body
-  console.log(notifId)
 
   if (notifId) {
     try {
