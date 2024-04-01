@@ -145,52 +145,6 @@ userRouter.post("/findUser", checkValidUser, async function (req, res) {
   }
 })
 
-userRouter.post('/checkHelpful', async function (req,res) {
-  try {
-    let {postId, number} = req.body;
-    let theNotifStatus = await notifStatus_db.findOne({reviewID: new ObjectId(postId)});
-    
-    if (theNotifStatus) {
-      let achieved = true
-      let mile
-      switch (number) {
-        case 1: achieved = theNotifStatus._1 ; 
-                  if (achieved == false)  
-                  mile = await notifStatus_db.updateOne({ reviewID: new ObjectId(postId) },
-                    {$set: {_1: true}})
-                  break;
-        case 10: achieved = theNotifStatus._10 ;
-                  if (achieved == false)  
-                  mile = await notifStatus_db.updateOne({ reviewID: new ObjectId(postId) },
-                    {$set: {_10: true}})
-                  break;
-        case 100: achieved = theNotifStatus._100 ;
-                    if (achieved == false)  
-                    mile = await notifStatus_db.updateOne({ reviewID: new ObjectId(postId) },
-                      {$set: {_100: true}})
-                    break;
-        case 1000: achieved = theNotifStatus._1000 ;
-                    if (achieved == false)  
-                    mile = await notifStatus_db.updateOne({ reviewID: new ObjectId(postId) },
-                      {$set: {_1000: true}})
-                    break;
-        case 10000: achieved = theNotifStatus._10000 ;
-                    if (achieved == false)  
-                    mile = await notifStatus_db.updateOne({ reviewID: new ObjectId(postId) },
-                      {$set: {_10000: true}})
-                    break;
-      }
-      
-      res.status(200).send(achieved)
-    } else {
-      res.status(200).send(true)
-    }
-  } catch (err) {
-    console.log("error checking milestone: " + err);
-  }
-})
-
-
 const createNotify = async function (req, res) {
   let {userId, notifTitle, notifContent} = req.body
 

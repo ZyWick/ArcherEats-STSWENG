@@ -63,6 +63,8 @@ document.querySelector("#searchForm button").addEventListener("click", (event) =
 })
 
 async function updateHelp (_id, potch) {
+    let achievedMilestone = null
+    try {
     await fetch('/', {
         method: 'PATCH',
         body: JSON.stringify({
@@ -72,12 +74,21 @@ async function updateHelp (_id, potch) {
         headers: {
         'Content-type': 'application/json; charset=UTF-8',
         },
-        }).then(res => {
+        }).then(async res => {
             switch (res.status) {
-                case 200: ; break;
+                case 200: 
+                let data = await res.json()
+                if (data.milestone)
+                    achievedMilestone = data.milestone
+                ; break;
                 default:  statusResp(res.status);
             }
         }).catch((err) => console.log(err))
+    } catch (err) {
+        console.log(err)
+    }
+    
+    return achievedMilestone
 }
 
 async function markUp (event) {
@@ -101,15 +112,13 @@ async function markUp (event) {
         $(upvote).text(votes - 1);
         potch = "up_";
     }
-    updateHelp (parent.id, potch) 
-    switch (votes + 1) {
-        case 1: case 10: case 100: case 1000: case 10000:
-        notifyy = await checkHelpfulMilestone(parent.id, votes + 1)
-        if (notifyy == false) {
-            recipientUserId = await findTheUser (parent.id, "review")
-            sendHelpfulNotif (recipientUserId, parent.id, votes + 1)
-        }
+    
+    res = await updateHelp (parent.id, potch) 
+    if (res) {
+        recipientUserId = await findTheUser (parent.id, "review")
+        sendHelpfulNotif (recipientUserId, parent.id, res)
     }
+    
 }
 
 function sendHelpfulNotif (userId, postId, number) {
@@ -117,27 +126,6 @@ function sendHelpfulNotif (userId, postId, number) {
     const notifTitle = `look who's cooking.`;
     const notifContent = `${number} users has marked your <a class="text-secondary"href="/${establishment}#${postId}">review</a> helpful`
     sendNotif (userId, notifTitle, notifContent);
-}
-
-async function checkHelpfulMilestone (postId, number) {
-    let achieved = true
-    await fetch("/checkHelpful", {
-        method: "POST",
-        body: JSON.stringify({postId: postId,number: number}),
-        headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-        },
-    }).then(async res => {
-        switch (res.status) {
-            case 200: 
-            achieved = await res.json()
-
-            break;
-            default:  statusResp(res.status); break;
-        }
-    }).catch((err) => console.log(err))
-
-    return achieved
 }
 
 function markDown (event) {
