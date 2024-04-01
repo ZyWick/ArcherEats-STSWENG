@@ -404,11 +404,11 @@ async function replyfetch (event) {
                 if (revID) {
                     recipientUserId = await findTheUser (revID, "review")
                     postId = revID
-                    sendReplyNotif (recipientUserId, postId, false)
+                    if (checkLock(postId)) sendReplyNotif (recipientUserId, postId, false)
                 } else{ 
                     recipientUserId = await findTheUser (parID, "reply")
                     postId = parent.parentElement.closest('.REVIEW').id
-                    sendReplyNotif (recipientUserId, postId, true)
+                    if (checkLock(postId)) sendReplyNotif (recipientUserId, postId, true)
                 }
                 
                 break;
@@ -417,9 +417,33 @@ async function replyfetch (event) {
     }).catch((err) => console.log(err))
 }
 
+
+function checkLock (id) {
+    replyNotifLocks = JSON.parse(localStorage.getItem("replyNotifLocks"));
+    // console.log(replyNotifLocks)
+    if (replyNotifLocks[id]) {
+        // console.log(new Date () )
+        // console.log(new Date(replyNotifLocks[id]))
+        if (new Date () > new Date(replyNotifLocks[id]))
+            return lock(id);
+        else {
+            console.log("nono")
+            return false;
+        }
+    } else
+        return lock(id)
+}
+
+function lock(id) {
+    replyNotifLocks = JSON.parse(localStorage.getItem("replyNotifLocks"));
+    replyNotifLocks[id] = new Date().getTime() + (5 * 60 * 1000); // adding  5 minutes in milliseconds
+    localStorage.setItem('replyNotifLocks', JSON.stringify(replyNotifLocks));
+    return true;
+}
+
 function sendReplyNotif (userId, postId, isComment) {
     const notifTitle = `your post has a new reply.`;
-    sender = localStorage.getItem('savedUsername')
+    sender = sessionStorage.getItem('savedUsername')
     let establishment = document.querySelector('.estabNamez').innerHTML;
     let commentNotif = ''
     if (isComment) commentNotif = `comment to a `
