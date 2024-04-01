@@ -32,6 +32,7 @@ form.addEventListener("submit", async (e) => {
             //change
             console.log(data.user.name)
             localStorage.setItem('currentLogin', 'true')
+            localStorage.setItem('savedUsername', username);
             const redirect = "/users/" + username;
             location.assign(redirect);
         }
@@ -45,6 +46,7 @@ document.addEventListener("click", event => {
   if (classlist.contains("logout")) {
     rememberMe = false;
     localStorage.removeItem("rememberMe"); // Clear the value from Local Storage
+    localStorage.removeItem('savedUsername');
   }
 });
 
@@ -82,6 +84,7 @@ function checkJWTOnLoad() {
     } else {
       // JWT has expired, handle the expiration as needed
       console.log('JWT has expired.');
+      localStorage.removeItem('savedUsername');
     }
   } else {
     // JWT cookie does not exist, handle the absence as needed

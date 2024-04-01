@@ -116,7 +116,7 @@ userRouter.patch("/user/restrict", checkValidUser, async function (req, res) {
   }
 })
 
-userRouter.post("/findUser", async function (req, res) {
+userRouter.post("/findUser", checkValidUser, async function (req, res) {
   try {
     let {postId, postType} = req.body;
     let userId = ''
@@ -127,7 +127,6 @@ userRouter.post("/findUser", async function (req, res) {
         userId = review.userId
         break;
       case 'reply': 
-      console.log("fucskak")
       let reply = await comments_db.findOne({_id: new ObjectId(postId)});
         userId = reply.userId
         break;

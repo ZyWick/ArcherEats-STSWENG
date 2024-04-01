@@ -156,6 +156,7 @@ async function remove(event) {
     let userId 
     let deleteReason = ''
 
+    try {
     if (!parent.classList.contains('list-group-item')){
         if (parent.classList.contains('estab')) {
             //estabresponse
@@ -173,9 +174,12 @@ async function remove(event) {
         //reply
         realParent = parent.parentElement.closest('.REVIEW')
         userPoster = realParent.querySelector(".user-link").innerHTML;
-        deleteReason = `reply to <a class="text-secondary"href="/${establishment}#${realParent.id}">${userPoster}'s review</a> in 
+        deleteReason = `reply to <a class="text-secondary"href="/${establishment}#${realParent.id}">${userPoster}'s post</a> in 
         <a class="text-secondary" href="/${establishment}">${establishment}</a>`
         userId = await findTheUser (parent.id, "reply")
+    }
+    } catch (err) {
+        console.log(err)
     }
     
     deleteCommit (event);
@@ -195,6 +199,7 @@ async function findTheUser (id, type) {
             case 200: 
             let data = await res.json()
             if (data.userId) userId = data.userId;
+
             break;
             default:  statusResp(res.status); break;
         }
@@ -351,11 +356,11 @@ function statusResp (status) {
 }
 
 async function replyfetch (event) {
+    event.preventDefault();
     parent = event.target.closest('.REVIEW')
     formm = new FormData(parent.querySelector('form'));
     revID = parent.id;
     parID = null;
-    event.preventDefault();
 
     if (parent.classList.contains('list-group-item')) {
         parID = revID;
@@ -376,13 +381,38 @@ async function replyfetch (event) {
         headers: {
         'Content-type': 'application/json; charset=UTF-8',
         },
-    }).then(res => {console.log(res);
+    }).then(async res => {console.log(res);
             switch (res.status) {
-                case 200: res.json().then(he => showReply (event, he)) ; break;
+                case 200: 
+                res.json().then(he => 
+            
+                showReply (event, he)) ; 
+                    
+                let recipientUserId
+                if (revID) {
+                    recipientUserId = await findTheUser (revID, "review")
+                    postId = revID
+                } else{ 
+                    recipientUserId = await findTheUser (parID, "reply")
+                    postId = parID
+                }
+                
+                sendReplyNotif (recipientUserId, postId)
+                break;
                 default:  statusResp(res.status);
             }
     }).catch((err) => console.log(err))
 }
+
+function sendReplyNotif (userId, postId) {
+    const notifTitle = `your post has a new reply.`;
+    sender = localStorage.getItem('savedUsername')
+    let establishment = document.querySelector('.estabNamez').innerHTML;
+    
+    const notifContent = `<a class="text-secondary" href="/users/${sender}">${sender}</a> replied to your <a class="text-secondary"href="/${establishment}#${postId}">post</a> in 
+    <a class="text-secondary" href="/${establishment}">${establishment}</a>`
+    sendNotif (userId, notifTitle, notifContent);
+  }
 
 function editReply(event) {
     parent = event.target.closest('.REVIEW')

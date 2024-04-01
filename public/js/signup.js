@@ -69,7 +69,7 @@ form.addEventListener("submit", async (e) => {
         passwordError.textContent = data.errors.password;
       }
       if (data.user) {
-        // localStorage.setItem('savedUsername', data.user.username);
+        localStorage.setItem('savedUsername', username);
         // localStorage.setItem('descProf', data.user.description);
         // localStorage.setItem('pfp',  data.user.pfp);
         localStorage.setItem('currentLogin', 'true')
