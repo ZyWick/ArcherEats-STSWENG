@@ -15,6 +15,7 @@ import { checkUser, checkValidUser } from '../middleware/checkUser.js'
 const users_db = db.collection("users");
 const reviews_db = db.collection("reviews");
 const comments_db = db.collection("comments");
+const notifStatus_db = db.collection("notifStatus");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -59,6 +60,18 @@ const postReview = async (req, res) => {
       try {
       let resp = await reviews_db.insertOne(newReview);
       console.log(resp) 
+
+      const newNotifStatus = {
+        reviewID: resp.insertedId,
+        _1: false,
+        _10: false,
+        _100: false,
+        _1000: false,
+        _10000: false
+      }
+      resp = await notifStatus_db.insertOne(newNotifStatus)
+      console.log(resp) 
+
       } catch (err) {
         console.log("Error occurred:", err);
         res.sendStatus(500)

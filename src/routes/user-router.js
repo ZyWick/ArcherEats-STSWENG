@@ -15,6 +15,7 @@ const establishments_db = db.collection("establishments");
 const reviews_db = db.collection("reviews");
 const comments_db = db.collection("comments");
 const notif_db = db.collection("notifications");
+const notifStatus_db = db.collection("notifStatus");
 
 import {S3Client, GetObjectCommand} from "@aws-sdk/client-s3"
 import  { getSignedUrl } from  "@aws-sdk/s3-request-presigner"
@@ -144,6 +145,50 @@ userRouter.post("/findUser", checkValidUser, async function (req, res) {
   }
 })
 
+userRouter.post('/checkHelpful', async function (req,res) {
+  try {
+    let {postId, number} = req.body;
+    let theNotifStatus = await notifStatus_db.findOne({reviewID: new ObjectId(postId)});
+    
+    if (theNotifStatus) {
+      let achieved = true
+      let mile
+      switch (number) {
+        case 1: achieved = theNotifStatus._1 ; 
+                  if (achieved == false)  
+                  mile = await notifStatus_db.updateOne({ reviewID: new ObjectId(postId) },
+                    {$set: {_1: true}})
+                  break;
+        case 10: achieved = theNotifStatus._10 ;
+                  if (achieved == false)  
+                  mile = await notifStatus_db.updateOne({ reviewID: new ObjectId(postId) },
+                    {$set: {_10: true}})
+                  break;
+        case 100: achieved = theNotifStatus._100 ;
+                    if (achieved == false)  
+                    mile = await notifStatus_db.updateOne({ reviewID: new ObjectId(postId) },
+                      {$set: {_100: true}})
+                    break;
+        case 1000: achieved = theNotifStatus._1000 ;
+                    if (achieved == false)  
+                    mile = await notifStatus_db.updateOne({ reviewID: new ObjectId(postId) },
+                      {$set: {_1000: true}})
+                    break;
+        case 10000: achieved = theNotifStatus._10000 ;
+                    if (achieved == false)  
+                    mile = await notifStatus_db.updateOne({ reviewID: new ObjectId(postId) },
+                      {$set: {_10000: true}})
+                    break;
+      }
+      
+      res.status(200).send(achieved)
+    } else {
+      res.status(200).send(true)
+    }
+  } catch (err) {
+    console.log("error checking milestone: " + err);
+  }
+})
 
 
 const createNotify = async function (req, res) {
