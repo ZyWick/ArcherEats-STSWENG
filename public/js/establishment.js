@@ -392,25 +392,29 @@ async function replyfetch (event) {
                 if (revID) {
                     recipientUserId = await findTheUser (revID, "review")
                     postId = revID
+                    sendReplyNotif (recipientUserId, postId, false)
                 } else{ 
                     recipientUserId = await findTheUser (parID, "reply")
-                    postId = parID
+                    postId = parent.parentElement.closest('.REVIEW').id
+                    sendReplyNotif (recipientUserId, postId, true)
                 }
                 
-                sendReplyNotif (recipientUserId, postId)
                 break;
                 default:  statusResp(res.status);
             }
     }).catch((err) => console.log(err))
 }
 
-function sendReplyNotif (userId, postId) {
+function sendReplyNotif (userId, postId, isComment) {
     const notifTitle = `your post has a new reply.`;
     sender = localStorage.getItem('savedUsername')
     let establishment = document.querySelector('.estabNamez').innerHTML;
-    
-    const notifContent = `<a class="text-secondary" href="/users/${sender}">${sender}</a> replied to your <a class="text-secondary"href="/${establishment}#${postId}">post</a> in 
-    <a class="text-secondary" href="/${establishment}">${establishment}</a>`
+    let commentNotif = ''
+    if (isComment) commentNotif = `comment to a `
+
+    const notifContent = `<a class="text-secondary" href="/users/${sender}">${sender}</a> replied to your ${commentNotif}<a class="text-secondary"href="/${establishment}#${postId}">review</a> in 
+    <a class="text-secondary" href="/${establishment}">${establishment}</a>`;
+
     sendNotif (userId, notifTitle, notifContent);
   }
 
