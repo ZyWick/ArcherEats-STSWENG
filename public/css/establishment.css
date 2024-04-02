@@ -484,7 +484,6 @@ span.del-reply:hover {
     padding-left: 0;
 }
 
-
 .btn-outline-secondary:hover {
     color: #fff !important;
     background-color: #6c757d !important;
@@ -495,6 +494,7 @@ span.del-reply:hover {
     background-color: #198754;
     border-color: #198754;
 }
+
 
 .dropdown-item.active {
     background-color: #198754;
