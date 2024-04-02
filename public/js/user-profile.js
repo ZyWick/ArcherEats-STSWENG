@@ -147,3 +147,26 @@ $('#showNotifButton').on({
         case 500: console.log("500: Internal Server Error");break;
     }
 }
+
+const toggle = document.getElementById('userPrivacy')
+
+toggle.addEventListener('change', function() {
+    const isChecked = toggle.checked;
+    updateUserPrivacy(isChecked);
+});
+
+async function updateUserPrivacy(isPrivate) {
+    controlForm = new FormData(document.forms.userControls)
+    await fetch("/user/changePrivacy", {
+        method: "PATCH",
+        body: JSON.stringify({
+            togglePrivacy: isPrivate
+        }),
+        headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+        },
+    }).then(res => {console.log(res);
+        if (res.status == 200)
+            location.reload(); 
+    }).catch((err) => console.log(err))
+}

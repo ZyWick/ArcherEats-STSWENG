@@ -21,24 +21,29 @@
             <div class="row">
                 <p class="fw-light mb-3">All Reviews and Comments</p>
             </div>
-            {{#if topReviews}}
-            {{#each topReviews}}
-            {{> review this}}
-            {{/each}}
-            <!-- Truncated reviews -->
-            {{#if truncatedReviews}}
-                    <div class="row mb-3">
-                        <button class="moreRev moreRevText">see more</button>
-                    </div>
-                    <div class="moreRev collapse">
-                    {{#each truncatedReviews}}
-                    {{> review this}}
-                    {{/each}}
-                    </div>
+            {{#unless isUserPrivate}}
+                {{#if topReviews}}
+                {{#each topReviews}}
+                {{> review this}}
+                {{/each}}
+
+                <!-- Truncated reviews -->
+                {{#if truncatedReviews}}
+                        <div class="row mb-3">
+                            <button class="moreRev moreRevText">see more</button>
+                        </div>
+                        <div class="moreRev collapse">
+                        {{#each truncatedReviews}}
+                        {{> review this}}
+                        {{/each}}
+                        </div>
+                    {{/if}}
+                {{else}}
+                    <p class="fw-light flex-center flex-center justify-content-center pt-5 mt-5">No more reviews</p>
                 {{/if}}
             {{else}}
-                <p class="fw-light flex-center flex-center justify-content-center pt-5 mt-5">No more reviews</p>
-            {{/if}}
+                <p class="fw-light flex-center flex-center justify-content-center pt-5 mt-5">This user's reviews are private</p>
+            {{/unless}}
         </div>
     </div>
 </div>
