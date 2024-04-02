@@ -63,6 +63,8 @@ document.querySelector("#searchForm button").addEventListener("click", (event) =
 })
 
 async function updateHelp (_id, potch) {
+    let achievedMilestone = null
+    try {
     await fetch('/', {
         method: 'PATCH',
         body: JSON.stringify({
@@ -72,12 +74,21 @@ async function updateHelp (_id, potch) {
         headers: {
         'Content-type': 'application/json; charset=UTF-8',
         },
-        }).then(res => {
+        }).then(async res => {
             switch (res.status) {
-                case 200: ; break;
+                case 200: 
+                let data = await res.json()
+                if (data.milestone)
+                    achievedMilestone = data.milestone
+                ; break;
                 default:  statusResp(res.status);
             }
         }).catch((err) => console.log(err))
+    } catch (err) {
+        console.log(err)
+    }
+    
+    return achievedMilestone
 }
 
 async function markUp (event) {
@@ -101,7 +112,20 @@ async function markUp (event) {
         $(upvote).text(votes - 1);
         potch = "up_";
     }
-    updateHelp (parent.id, potch)
+    
+    res = await updateHelp (parent.id, potch) 
+    if (res) {
+        recipientUserId = await findTheUser (parent.id, "review")
+        sendHelpfulNotif (recipientUserId, parent.id, res)
+    }
+    
+}
+
+function sendHelpfulNotif (userId, postId, number) {
+    let establishment = document.querySelector('.estabNamez').innerHTML;
+    const notifTitle = `look who's cooking.`;
+    const notifContent = `${number} users has marked your <a class="text-secondary"href="/${establishment}#${postId}">review</a> helpful`
+    sendNotif (userId, notifTitle, notifContent);
 }
 
 function markDown (event) {
@@ -151,9 +175,68 @@ function showEstabResponse (event) {
 }
 
 async function remove(event) {
+    parent = event.target.closest('.REVIEW')
+    let establishment = document.querySelector('.estabNamez').innerHTML;
+    let userId 
+    let deleteReason = ''
+
+    try {
+    if (!parent.classList.contains('list-group-item')){
+        if (parent.classList.contains('estab')) {
+            //estabresponse
+            userPoster = parent.parentElement.closest(".REVIEW").querySelector(".user-link").innerHTML;
+            deleteReason = `response to <a class="text-secondary"href="/${establishment}#${parent.id}">${userPoster}'s review</a>`
+            
+            estabID = document.querySelector('.estabIDholder').id
+            userId = await findTheUser (estabID, "estabRespo")
+        } else {
+        //review
+        deleteReason = `review to the establishment <a class="text-secondary"href="/${establishment}">${establishment}</a>`
+        userId = await findTheUser (parent.id, "review")
+        }
+    } else {
+        //reply
+        realParent = parent.parentElement.closest('.REVIEW')
+        userPoster = realParent.querySelector(".user-link").innerHTML;
+        deleteReason = `reply to <a class="text-secondary"href="/${establishment}#${realParent.id}">${userPoster}'s post</a> in 
+        <a class="text-secondary" href="/${establishment}">${establishment}</a>`
+        userId = await findTheUser (parent.id, "reply")
+    }
+    } catch (err) {
+        console.log(err)
+    }
+    
     deleteCommit (event);
-    let notif = 'the admin has removed your post.'
+    sendDeleteNotif (userId, deleteReason)
 }
+
+async function findTheUser (id, type) {
+    let userId
+    await fetch("/findUser", {
+        method: "POST",
+        body: JSON.stringify({postId: id, postType: type}),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+            },
+    }).then(async res => {
+        switch (res.status) {
+            case 200: 
+            let data = await res.json()
+            if (data.userId) userId = data.userId;
+
+            break;
+            default:  statusResp(res.status); break;
+        }
+    }).catch((err) => console.log(err))
+
+    return userId
+}
+
+function sendDeleteNotif (userId, deleteReason) {
+    const notifTitle = `your post has been removed.`;
+    const notifContent = `An administrator has removed your ${deleteReason} as it violates guidelines. If you wish to appeal, contact our wonderful QA, Carlos Guanzon`
+    sendNotif (userId, notifTitle, notifContent);
+  }
 
 async function deleteCommit (event) {
     parent = event.target.closest('.REVIEW')
@@ -232,13 +315,25 @@ $('button.moreRev').on({
         headers: {
         'Content-type': 'application/json; charset=UTF-8',
         },
-    }).then(res => {console.log(res);
+    }).then(async res => {console.log(res);
         switch (res.status) {
-            case 200: location.reload(); break;
+            case 200: 
+            recipientUserId = await findTheUser (parent.id, "review")
+            sendEstabResponseNotif (recipientUserId, parent.id)
+            location.reload(); 
+            break;
             default:  statusResp(res.status);
         }
     }).catch((err) => console.log(err))
 }
+
+function sendEstabResponseNotif (userId, postId) {
+    let establishment = document.querySelector('.estabNamez').innerHTML;
+    const notifTitle = `an establishment responded to your review.`;
+    const notifContent = `<a class="text-secondary" href="/${establishment}">${establishment}</a> has a new response to your <a class="text-secondary"href="/${establishment}#${postId}">review</a>`
+    sendNotif (userId, notifTitle, notifContent);
+  }
+
 
 async function editRespoEstab (event) {
     parent = event.target.closest('.REVIEW')
@@ -297,11 +392,11 @@ function statusResp (status) {
 }
 
 async function replyfetch (event) {
+    event.preventDefault();
     parent = event.target.closest('.REVIEW')
     formm = new FormData(parent.querySelector('form'));
     revID = parent.id;
     parID = null;
-    event.preventDefault();
 
     if (parent.classList.contains('list-group-item')) {
         parID = revID;
@@ -322,13 +417,66 @@ async function replyfetch (event) {
         headers: {
         'Content-type': 'application/json; charset=UTF-8',
         },
-    }).then(res => {console.log(res);
+    }).then(async res => {console.log(res);
             switch (res.status) {
-                case 200: res.json().then(he => showReply (event, he)) ; break;
+                case 200: 
+                res.json().then(he => 
+            
+                showReply (event, he)) ; 
+                    
+                let recipientUserId
+                if (revID) {
+                    recipientUserId = await findTheUser (revID, "review")
+                    postId = revID
+                    if (checkLock(postId)) sendReplyNotif (recipientUserId, postId, false)
+                } else{ 
+                    recipientUserId = await findTheUser (parID, "reply")
+                    postId = parent.parentElement.closest('.REVIEW').id
+                    if (checkLock(parID)) sendReplyNotif (recipientUserId, postId, true)
+                }
+                
+                break;
                 default:  statusResp(res.status);
             }
     }).catch((err) => console.log(err))
 }
+
+
+function checkLock (id) {
+    replyNotifLocks = JSON.parse(localStorage.getItem("replyNotifLocks"));
+    // console.log(replyNotifLocks)
+    if (replyNotifLocks[id]) {
+        // console.log(new Date () )
+        // console.log(new Date(replyNotifLocks[id]))
+        if (new Date () > new Date(replyNotifLocks[id]))
+            return lock(id);
+        else {
+            console.log("nono")
+            return false;
+        }
+    } else
+        return lock(id)
+}
+
+function lock(id) {
+    replyNotifLocks = JSON.parse(localStorage.getItem("replyNotifLocks"));
+    replyNotifLocks[id] = new Date().getTime() + (5 * 60 * 1000); // adding  5 minutes in milliseconds
+    localStorage.setItem('replyNotifLocks', JSON.stringify(replyNotifLocks));
+    return true;
+}
+
+function sendReplyNotif (userId, postId, isComment) {
+    const notifTitle = `your post has a new reply.`;
+    sender = sessionStorage.getItem('savedUsername')
+    let establishment = document.querySelector('.estabNamez').innerHTML;
+    let commentNotif = ''
+    if (isComment) commentNotif = `comment to a `
+
+    const notifContent = `<a class="text-secondary" href="/users/${sender}">${sender}</a> replied to your ${commentNotif}<a class="text-secondary"href="/${establishment}#${postId}">review</a> in 
+    <a class="text-secondary" href="/${establishment}">${establishment}</a>`;
+
+    sendNotif (userId, notifTitle, notifContent);
+  }
 
 function editReply(event) {
     parent = event.target.closest('.REVIEW')

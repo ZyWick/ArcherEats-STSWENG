@@ -29,36 +29,56 @@
                 </div>
                 <form method="post" name="userControls" id="userControls">
                 <div class="form-check form-switch pt-3">
-                    <input class="form-check-input switch-success" type="checkbox" role="switch" id="userPrivacy" name="userPrivacy">
+
+                    <input class="form-check-input switch-success" type="checkbox" role="switch" id="userPrivacy" name="userPrivacy" {{#if isUserPrivate}}checked{{/if}}>
 
                     <label class="form-check-label" for="userPrivacy">Toggle Privacy</label>
                 </div>
                 </form>
             </div>
 
-        <div class="col ms-4 mt-5">
+        <div class="col ms-4 mt-5 px-4">
             <div class="row">
-                <p class="fw-light mb-2">All Reviews and Comments</p>
+                <ul class="nav nav-tabs fw-light mb-4">
+                <li class="nav-item">
+                    <a id="showAllPostsButton" class="nav-link active text-reset" data-bs-toggle="collapse" href="#allPosts">
+                        All Reviews and Comments</a>
+                </li>
+                <li class="nav-item">
+                    <a id="showNotifButton" class="nav-link text-reset" data-bs-toggle="collapse"
+                        href="#notifsTab"><i class="bi bi-envelope{{mailIcon}}"></i>
+                    </a>
+                </li>
+                </ul>
             </div>
-            {{#if topReviews}}
-            {{#each topReviews}}
-            {{> review this}}
-            {{/each}}
+            <div class="collapse show" id="allPosts">
+                {{#if topReviews}}
+                {{#each topReviews}}
+                {{> review this}}
+                {{/each}}
 
-            <!-- Truncated reviews -->
-            {{#if truncatedReviews}}
-                    <div class="row mb-3">
-                        <button class="moreRev moreRevText">see more</button>
-                    </div>
-                    <div class="row moreRev collapse">
-                    {{#each truncatedReviews}}
-                    {{> review this}}
-                    {{/each}}
-                    </div>
+                <!-- Truncated reviews -->
+                {{#if truncatedReviews}}
+                        <div class="row mb-3">
+                            <button class="moreRev moreRevText">see more</button>
+                        </div>
+                        <div class="moreRev collapse">
+                        {{#each truncatedReviews}}
+                        {{> review this}}
+                        {{/each}}
+                        </div>
+                    {{/if}}
+                {{else}}
+                    <p class="fw-light flex-center flex-center justify-content-center pt-5 mt-5">No more reviews</p>
                 {{/if}}
-            {{else}}
-                <p class="fw-light flex-center flex-center justify-content-center pt-5 mt-5">No more reviews</p>
-            {{/if}}
+            </div>
+            <div class="collapse" id="notifsTab">
+                {{#if allNotifs}}
+                {{#each allNotifs}}
+                {{> notif this}}
+                {{/each}}
+                {{/if}}
+            </div>
         </div>
     </div>
 </div>
