@@ -43,15 +43,7 @@
                     <label for="c00001xctext" class="form-label writeReply">Write a
                         Reply</label>
                     <textarea class="form-control refly" required id="{{this._id}}text" name="text" rows="3"></textarea>
-                    <div class="d-flex justify-content-between">
-                    <span class="d-flex align-items-center">
-                        <label type="button" class="btn btn-sm btn-outline-secondary postAnonymously" data-bs-toggle="button">
-                            <input type="checkbox" class="btn-check" name="postAnonymously"  autocomplete="off">
-                            Post Anonymously
-                        </label>         
-                    </span>
-                    <button type="submit" class="{{#if @root.isEstab}}estab{{/if}} postReply btn btn-success">Post</button>
-                </div>
+                    <button type="submit" class="postReply btn btn-success">Post</button>
                 </div>
             </form>
         </div>
