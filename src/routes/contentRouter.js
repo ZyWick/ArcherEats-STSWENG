@@ -10,11 +10,12 @@ import { dirname, relative } from "path";
 import { fileURLToPath } from 'url';
 const db = getDb();
 import { getDb } from '../model/conn.js';
-import { checkUser } from '../middleware/checkUser.js'
+import { checkUser, checkValidUser } from '../middleware/checkUser.js'
 
 const users_db = db.collection("users");
 const reviews_db = db.collection("reviews");
 const comments_db = db.collection("comments");
+const notifStatus_db = db.collection("notifStatus");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -60,6 +61,18 @@ const postReview = async (req, res) => {
       try {
       let resp = await reviews_db.insertOne(newReview);
       console.log(resp) 
+
+      const newNotifStatus = {
+        reviewID: resp.insertedId,
+        _1: false,
+        _10: false,
+        _100: false,
+        _1000: false,
+        _10000: false
+      }
+      resp = await notifStatus_db.insertOne(newNotifStatus)
+      console.log(resp) 
+
       } catch (err) {
         console.log("Error occurred:", err);
         res.sendStatus(500)
@@ -166,6 +179,58 @@ const deleteReview = async (req, res) => {
   }
 }
 
+async function checkMilestone (postId, number) {
+  try {
+    switch (number) {
+    case 1: case 10: case 100: case 1000: case 10000:
+      console.log("es")
+      let theNotifStatus = await notifStatus_db.findOne({reviewID: new ObjectId(postId)});
+      
+      if (theNotifStatus) {
+        let achieved = null
+        let mile
+        switch (number) {
+          case 1: achieved = theNotifStatus._1 ; 
+                    if (achieved == false)  
+                    mile = await notifStatus_db.updateOne({ reviewID: new ObjectId(postId) },
+                      {$set: {_1: true}})
+                    break;
+          case 10: achieved = theNotifStatus._10 ;
+                    if (achieved == false)  
+                    mile = await notifStatus_db.updateOne({ reviewID: new ObjectId(postId) },
+                      {$set: {_10: true}})
+                    break;
+          case 100: achieved = theNotifStatus._100 ;
+                      if (achieved == false)  
+                      mile = await notifStatus_db.updateOne({ reviewID: new ObjectId(postId) },
+                        {$set: {_100: true}})
+                      break;
+          case 1000: achieved = theNotifStatus._1000 ;
+                      if (achieved == false)  
+                      mile = await notifStatus_db.updateOne({ reviewID: new ObjectId(postId) },
+                        {$set: {_1000: true}})
+                      break;
+          case 10000: achieved = theNotifStatus._10000 ;
+                      if (achieved == false)  
+                      mile = await notifStatus_db.updateOne({ reviewID: new ObjectId(postId) },
+                        {$set: {_10000: true}})
+                      break;
+        }
+        
+        if (achieved == false)
+          return  number
+        else 
+          return null
+      } else {
+        return null
+      }
+    default: return null
+    }
+  } catch (err) {
+    console.log("error checking milestone: " + err);
+  }
+}
+
 const toggleLikes = async (req, res) => {
   let userID = req.userID;
 
@@ -182,7 +247,7 @@ const toggleLikes = async (req, res) => {
       usedDb = comments_db;
     }
     let xsa =await usedDb.findOne({ _id: __iod });
-    let resp
+    let resp, reached = null
   switch (updateH) {
     case "up":
       if(xsa.likes.includes(userID) == false)
@@ -191,7 +256,11 @@ const toggleLikes = async (req, res) => {
         {
           $push: { likes: userID },
           $pull: { dislikes: userID },
-        }); break;
+        }); 
+
+        reached = await checkMilestone (reviewId, xsa.likes.length + 1)
+        break;
+
     case "up_":
       resp = await usedDb.updateOne(
         { _id: __iod },
@@ -215,7 +284,7 @@ const toggleLikes = async (req, res) => {
   }
   console.log(resp)
   res.status(200)
-  res.send("done")
+  res.send({milestone: reached})
 }
 
 const postComment = async (req, res) => {
@@ -368,7 +437,7 @@ const deleteEstabRespo = async (req, res) => {
   .patch(checkUser, upload.array('mediaInput'), patchReview)
   .delete(deleteReview)
 
-  contentRouter.patch('/', toggleLikes)
+  contentRouter.route('/').patch(checkValidUser, toggleLikes)
 
   contentRouter.route('/comment')
   .post(checkUser, postComment)

@@ -2,6 +2,9 @@ const form = document.querySelector("form");
 const usernameError = document.querySelector(".username.error");
 const passwordError = document.querySelector(".password.error");
 
+let replyNotifLocks = {};
+localStorage.setItem('replyNotifLocks', JSON.stringify(replyNotifLocks));
+
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
  
@@ -32,6 +35,8 @@ form.addEventListener("submit", async (e) => {
             //change
             console.log(data.user.name)
             localStorage.setItem('currentLogin', 'true')
+            sessionStorage.setItem('savedUsername', username);
+            localStorage.setItem('replyNotifLocks', JSON.stringify({}));
             const redirect = "/users/" + username;
             location.assign(redirect);
         }
@@ -45,6 +50,8 @@ document.addEventListener("click", event => {
   if (classlist.contains("logout")) {
     rememberMe = false;
     localStorage.removeItem("rememberMe"); // Clear the value from Local Storage
+    sessionStorage.removeItem('savedUsername');
+    localStorage.setItem('replyNotifLocks', JSON.stringify({}))
   }
 });
 
@@ -82,6 +89,8 @@ function checkJWTOnLoad() {
     } else {
       // JWT has expired, handle the expiration as needed
       console.log('JWT has expired.');
+      sessionStorage.removeItem('savedUsername');
+      localStorage.setItem('replyNotifLocks', JSON.stringify({}))
     }
   } else {
     // JWT cookie does not exist, handle the absence as needed

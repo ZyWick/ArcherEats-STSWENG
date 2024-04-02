@@ -74,6 +74,80 @@ document.addEventListener ("change", async events=>{
     console.log("yo")
 })
 
+$('#showNotifButton').on({
+    click: function (event) {
+      $(this).attr('data-bs-toggle', 'none');
+      $("#showAllPostsButton").attr('data-bs-toggle', 'collapse');
+      $('#showAllPostsButton').removeClass('active')
+  
+      $('#allPosts').collapse('hide')
+      $('#showNotifButton').addClass('active')
+    }
+  })
+  
+  $('#showAllPostsButton').on({
+    click: function (event) {
+      $(this).attr('data-bs-toggle', 'none');
+      $("#showNotifButton").attr('data-bs-toggle', 'collapse');
+      $('#showNotifButton').removeClass('active')
+  
+      $('#notifsTab').collapse('hide')
+      $('#showAllPostsButton').addClass('active')
+    }
+  })
+
+  const notifs = document.querySelector("#notifsTab")
+
+  notifs.addEventListener("click", (event) => {
+    theCARD = event.target.closest('.notifCard')
+    if (event.target.classList.contains("delNotif")) {
+        deleteNotif(theCARD)
+    }
+    else if(theCARD.classList.contains("read") == false) {
+        readNotif(theCARD)
+    }
+  })
+
+  async function readNotif (theCARD) {
+    await fetch("/user/notif", {
+        method: "PATCH",
+        body: JSON.stringify({notifId: theCARD.id}),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+            },
+    }).then(res => {console.log(res);
+        switch (res.status) {
+            case 200: theCARD.classList.add("read"); break;
+            default:  statusResp(res.status); break;
+        }
+    }).catch((err) => console.log(err))
+  }
+
+  async function deleteNotif (theCARD) {
+    console.log("whad")
+    await fetch("/user/notif", {
+        method: "DELETE",
+        body: JSON.stringify({notifId: theCARD.id}),
+        headers: {
+            'Content-type': 'application/json; charset=UTF-8',
+            },
+    }).then(res => {console.log(res);
+        switch (res.status) {
+            case 200: theCARD.style.display = "none"; break;
+            default:  statusResp(res.status); break;
+        }
+    }).catch((err) => console.log(err))
+  }
+
+  function statusResp (status) {
+    switch (status) {
+        case 401: console.log("401: no user credentials");window.location.replace("/login"); break;
+        case 402: console.log("402: user banned"); break;
+        case 400: console.log("400: Bad Request");break;
+        case 500: console.log("500: Internal Server Error");break;
+    }
+}
+
 const toggle = document.getElementById('userPrivacy')
 
 toggle.addEventListener('change', function() {

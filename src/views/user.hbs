@@ -17,9 +17,9 @@
             </div>
         </div>
 
-        <div class="col ms-4 mt-5">
+        <div class="col ms-4 mt-5 px-4">
             <div class="row">
-                <p class="fw-light mb-2">All Reviews and Comments</p>
+                <p class="fw-light mb-3">All Reviews and Comments</p>
             </div>
             {{#unless isUserPrivate}}
                 {{#if topReviews}}
@@ -32,7 +32,7 @@
                         <div class="row mb-3">
                             <button class="moreRev moreRevText">see more</button>
                         </div>
-                        <div class="row moreRev collapse">
+                        <div class="moreRev collapse">
                         {{#each truncatedReviews}}
                         {{> review this}}
                         {{/each}}
